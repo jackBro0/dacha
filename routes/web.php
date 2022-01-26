@@ -27,6 +27,9 @@ Route::middleware('auth')->group(function () {
 
 
     Route::get('/admin-panel', [MainController::class, 'index'])->name('adminPanel');
+
     Route::resource('/category', CategoryController::class);
+
+    Route::get('category-delete/{category}', [CategoryController::class, 'destroy'])->name('categoryDelete');
 
 });

@@ -48,7 +48,7 @@
                                 <a href="{{ route('category.edit', $category->id) }}">
                                     <ion-icon name="pencil-outline"></ion-icon>
                                 </a>
-                                <a href="#">
+                                <a href="{{ route('categoryDelete', $category->id) }}">
                                     <ion-icon name="trash-outline"></ion-icon>
                                 </a>
                             </td>
