@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Category extends Model
 {
     protected $guarded = [];
+    protected $hidden = ['updated_at', 'deleted_at'];
     use SoftDeletes;
 
     use HasFactory;
