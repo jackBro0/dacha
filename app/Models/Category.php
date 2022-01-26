@@ -13,4 +13,9 @@ class Category extends Model
     use SoftDeletes;
 
     use HasFactory;
+
+    public function dacha()
+    {
+        return $this->hasMany(Dacha::class, 'category_id', 'id')->with('images');
+    }
 }

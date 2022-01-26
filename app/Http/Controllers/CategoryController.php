@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index(): JsonResponse
     {
-        $categories = Category::query()->paginate(10);
+        $categories = Category::paginate(10);
         try {
             return response()->json([
                 'data' => $categories
@@ -69,11 +69,21 @@ class CategoryController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function show($id)
     {
-        //
+        $categories = Category::with('dacha')->findOrFail($id);
+        try {
+            return response()->json([
+                'data' => $categories
+            ], 200);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'error' => $exception,
+                'message' => 'Something went wrong'
+            ]);
+        }
     }
 
     /**

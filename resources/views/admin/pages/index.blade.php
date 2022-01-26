@@ -105,7 +105,7 @@
                     <tr>
                         <td>
                             <div class="imgBx">
-                                <img src="./img/img8.jpg" alt="">
+                                <img src="/assets/img/img8.jpg" alt="">
                             </div>
                         </td>
                         <td><h4>Rustam <br><span>Qorasuv</span></h4></td>
@@ -113,7 +113,7 @@
                     <tr>
                         <td>
                             <div class="imgBx">
-                                <img src="./img/img8.jpg" alt="">
+                                <img src="/assets/img/img8.jpg" alt="">
                             </div>
                         </td>
                         <td><h4>Rustam <br><span>Qorasuv</span></h4></td>
@@ -121,7 +121,7 @@
                     <tr>
                         <td>
                             <div class="imgBx">
-                                <img src="./img/img8.jpg" alt="">
+                                <img src="/assets/img/img8.jpg" alt="">
                             </div>
                         </td>
                         <td><h4>Rustam <br><span>Qorasuv</span></h4></td>
@@ -129,7 +129,7 @@
                     <tr>
                         <td>
                             <div class="imgBx">
-                                <img src="./img/img8.jpg" alt="">
+                                <img src="/assets/img/img8.jpg" alt="">
                             </div>
                         </td>
                         <td><h4>Rustam <br><span>Qorasuv</span></h4></td>
@@ -137,7 +137,7 @@
                     <tr>
                         <td>
                             <div class="imgBx">
-                                <img src="./img/img8.jpg" alt="">
+                                <img src="/assets/img/img8.jpg" alt="">
                             </div>
                         </td>
                         <td><h4>Rustam <br><span>Qorasuv</span></h4></td>
@@ -145,7 +145,7 @@
                     <tr>
                         <td>
                             <div class="imgBx">
-                                <img src="./img/img8.jpg" alt="">
+                                <img src="/assets/img/img8.jpg" alt="">
                             </div>
                         </td>
                         <td><h4>Rustam <br><span>Qorasuv</span></h4></td>

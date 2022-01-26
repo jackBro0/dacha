@@ -24,7 +24,6 @@ class DachaRequest extends FormRequest
     public function rules()
     {
         return [
-            'image_path' => 'required',
             'category_id' => 'required',
             'name' => 'required',
             'bathroom_count' => 'required',

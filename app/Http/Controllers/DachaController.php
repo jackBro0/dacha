@@ -17,7 +17,7 @@ class DachaController extends Controller
      */
     public function index(): JsonResponse
     {
-        $dacha = Dacha::with('category')->paginate(10);
+        $dacha = Dacha::with('images', 'category')->paginate(10);
         try {
             return response()->json([
                 'data' => $dacha
@@ -73,11 +73,21 @@ class DachaController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return JsonResponse
      */
     public function show($id)
     {
-        //
+        $dacha = Dacha::with('images', 'category')->findOrFail($id);
+        try {
+            return response()->json([
+                'data' => $dacha
+            ], 200);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'error' => $exception,
+                'message' => 'Something went wrong'
+            ]);
+        }
     }
 
     /**

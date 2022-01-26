@@ -2,32 +2,26 @@
     <ul>
         <li>
             <a href="#">
-                <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+{{--                <span class="icon"><ion-icon name="home-outline"></ion-icon></span>--}}
                 <span class="title">Dacha Bor</span>
             </a>
         </li>
         <li class="{{ (request()->is('admin-panel')) ? 'active' : '' }}">
             <a href="{{ route('adminPanel') }}">
-                <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                <span class="icon"><ion-icon name="bar-chart-outline"></ion-icon></span>
                 <span class="title">Dashboard</span>
             </a>
         </li>
         <li class="{{ (request()->is('category*')) ? 'active' : '' }}" >
             <a href="{{ route('category.index') }}">
-                <span class="icon"><ion-icon name="bookmarks-outline"></ion-icon></span>
-                <span class="title">Categories</span>
+                <span class="icon"><ion-icon name="location-outline"></ion-icon></span>
+                <span class="title">Locations</span>
             </a>
         </li>
-        <li>
-            <a href="#">
-                <span class="icon"><ion-icon name="chatbox-ellipses-outline"></ion-icon></span>
-                <span class="title">Message</span>
-            </a>
-        </li>
-        <li>
-            <a href="#">
-                <span class="icon"><ion-icon name="information-circle-outline"></ion-icon></span>
-                <span class="title">Help</span>
+        <li class="{{ (request()->is('dacha*')) ? 'active' : '' }}" >
+            <a href="{{ route('dacha.index') }}">
+                <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                <span class="title">Dacha</span>
             </a>
         </li>
         <li>

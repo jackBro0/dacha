@@ -19,10 +19,10 @@ class CreateDachasTable extends Migration
             $table->foreign('category_id')
                 ->references('id')->on('categories');
             $table->string('name');
+            $table->text('comforts'); // qulayliklari
             $table->integer('room_count');
             $table->integer('bathroom_count');
             $table->integer('capacity'); //odamlar soni
-            $table->string('image_path');
             $table->bigInteger('cost');
             $table->timestamps();
             $table->softDeletes();
