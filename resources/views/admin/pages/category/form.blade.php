@@ -2,7 +2,14 @@
     <label>
         Name
     </label>
-    <input name="name" type="text" @if(!empty(old('name'))) value="{{ old('name') }}" @elseif(!empty($category->name)) value="{{ $category->name }}"  @endif >
+    <input name="name" type="text" @if(!empty(old('name'))) value="{{ old('name') }}"
+           @elseif(!empty($category->name)) value="{{ $category->name }}" @endif >
+</div>
+<div class="form__input">
+    <label>
+        Description
+    </label>
+    <textarea rows="8" cols="80">@if(!empty(old('description'))){{ old('description') }}@elseif(!empty($category->description)){{ $category->description }}@endif</textarea>
 </div>
 <div class="form__input fileInput">
     <label for="fileInput">

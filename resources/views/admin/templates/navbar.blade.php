@@ -2,8 +2,8 @@
     <ul>
         <li>
             <a href="#">
-                <span class="icon"><ion-icon name="logo-apple"></ion-icon></span>
-                <span class="title">Brand Name</span>
+                <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                <span class="title">Dacha Bor</span>
             </a>
         </li>
         <li class="{{ (request()->is('admin-panel')) ? 'active' : '' }}">

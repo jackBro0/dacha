@@ -33,6 +33,7 @@ class CategoryController extends Controller
             $file = $request->file('image_path');
             $file_path = "storage/" . Storage::disk('public')->put("categories", $file);
             $category->name = $request->name;
+            $category->description = $request->description;
             $category->image_path = $file_path;
             $category->save();
             return redirect()->route('category.index');
@@ -64,6 +65,7 @@ class CategoryController extends Controller
                 $file_path = "storage/" . Storage::disk('public')->put("categories", $file);
                 $category->update([
                     'name' => $request->name,
+                    'description' => $request->name,
                     'image_path' => $file_path,
                 ]);
             }else{
