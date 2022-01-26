@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class CategoryRequest extends FormRequest
 {
@@ -23,8 +24,13 @@ class CategoryRequest extends FormRequest
      */
     public function rules(): array
     {
+        $image_path = 'required';
+        if ($this->method() == 'PUT' or $this->method() == 'PATCH')
+        {
+            $image_path = '';
+        }
         return [
-            'image_path' => 'required',
+            'image_path' => $image_path,
             'name' => 'required'
         ];
     }
