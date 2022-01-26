@@ -11,7 +11,7 @@ Route::post('login', [AuthController::class, 'postLogin'])->name('postLogin');
 
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
-        return redirect()->route('adminPanel');
+        return redirect()->route('category.index');
     });
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 

@@ -7,7 +7,8 @@
             </a>
         </li>
         <li class="{{ (request()->is('admin-panel')) ? 'active' : '' }}">
-            <a href="{{ route('adminPanel') }}">
+{{--            <a href="{{ route('adminPanel') }}">--}}
+            <a href="#">
                 <span class="icon"><ion-icon name="bar-chart-outline"></ion-icon></span>
                 <span class="title">Dashboard</span>
             </a>

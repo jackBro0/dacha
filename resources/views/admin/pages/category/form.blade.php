@@ -6,10 +6,10 @@
            @elseif(!empty($category->name)) value="{{ $category->name }}" @endif >
 </div>
 <div class="form__input">
-    <label>
+    <label for="description">
         Description
     </label>
-    <textarea rows="8" cols="80">@if(!empty(old('description'))){{ old('description') }}@elseif(!empty($category->description)){{ $category->description }}@endif</textarea>
+    <textarea id="description" name="description" rows="8" cols="80">@if(!empty(old('description'))){{ old('description') }}@elseif(!empty($category->description)){{ $category->description }}@endif</textarea>
 </div>
 <div class="form__input fileInput">
     <label for="fileInput">
