@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DachaController;
+use App\Http\Controllers\RentDachaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +23,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::resource('/category', CategoryController::class);
 Route::resource('/dacha', DachaController::class);
+Route::post('rent-dacha', [RentDachaController::class, 'rentDacha']);
