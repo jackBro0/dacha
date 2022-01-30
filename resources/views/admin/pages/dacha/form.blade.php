@@ -81,37 +81,34 @@
            @elseif(!empty($dacha->comforts)) value="{{ $dacha->comforts }}" @endif >
 </div>
 
-<div class="form__input fileInput">
-    <label for="fileInput">
-        <ion-icon name="cloud-upload-outline"></ion-icon>
-        <span>upload</span>
-    </label>
-    <input id="fileInput" name="image_path[]" type="file">
-</div>
+@if(!empty($dacha->images))
+    @foreach($dacha->images as $images)
+        <div class="uploadImage">
+            <img id="output" @if(!empty($images->image_path)) src="/{{ $images->image_path }}"
+                 @else src="/assets/img/default.png" @endif>
+        </div>
 
-<div class="form__input fileInput">
-    <label for="fileInput2">
-        <ion-icon name="cloud-upload-outline"></ion-icon>
-        <span>upload</span>
-    </label>
-    <input id="fileInput2" name="image_path[]" type="file">
-</div>
+        <div class="form__input fileInput">
+            <label for="fileInput">
+                <ion-icon name="cloud-upload-outline"></ion-icon>
+                <span>upload</span>
+            </label>
+            <input id="fileInput" name="image_path[]" type="file">
+        </div>
+    @endforeach
+@else
+    <div class="uploadImage">
+        <img id="output" src="/assets/img/default.png">
+    </div>
 
-<div class="form__input fileInput">
-    <label for="fileInput3">
-        <ion-icon name="cloud-upload-outline"></ion-icon>
-        <span>upload</span>
-    </label>
-    <input id="fileInput3" name="image_path[]" type="file">
-</div>
-
-<div class="form__input fileInput">
-    <label for="fileInput4">
-        <ion-icon name="cloud-upload-outline"></ion-icon>
-        <span>upload</span>
-    </label>
-    <input id="fileInput4" name="image_path[]" type="file">
-</div>
+    <div class="form__input fileInput">
+        <label for="fileInput">
+            <ion-icon name="cloud-upload-outline"></ion-icon>
+            <span>upload</span>
+        </label>
+        <input id="fileInput" name="image_path[]" type="file">
+    </div>
+@endif
 
 <div class="form__btn">
     <button type="submit">submit</button>

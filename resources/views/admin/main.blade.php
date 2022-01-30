@@ -30,5 +30,6 @@
         main.classList.toggle('active')
     }
 </script>
+@yield('js')
 </body>
 </html>
