@@ -49,17 +49,17 @@
                                     <ion-icon name="pencil-outline"></ion-icon>
                                 </a>
 {{--                                <a href="{{ route('categoryDelete', $category->id) }}">--}}
-                                <a onclick="openModal({{ $category->id }})" href="#">
+                                <a onclick="openModal({{ $category->id }})" >
                                     <ion-icon name="trash-outline"></ion-icon>
                                 </a>
                             </td>
                         </tr>
                         <!-- Modal content -->
-                        <div id="modal_container" class="modal-container">
+                        <div id="modal_container{{ $category->id }}" class="modal-container">
                             <div class="modal">
                                 <div class="modal__header">
                                     <h2>Пожалуйста подтвердите действие</h2>
-                                    <a class="modal__close" href="#" onclick="closeModal()" id="close">
+                                    <a class="modal__close" href="#" onclick="closeModal({{ $category->id }})" id="close{{ $category->id }}">
                                         <ion-icon name="close-outline"></ion-icon>
                                     </a>
                                 </div>
@@ -117,14 +117,12 @@
 
 @section('js')
     <script>
-        const open = document.getElementById('open');
-        const modal_container = document.getElementById('modal_container');
-        const close = document.getElementById('close');
-
         function openModal(id) {
+            let modal_container = document.getElementById('modal_container'+id);
             modal_container.classList.add('show')
         }
-        function closeModal() {
+        function closeModal(id) {
+            let modal_container = document.getElementById('modal_container'+id);
             modal_container.classList.remove('show')
         }
 

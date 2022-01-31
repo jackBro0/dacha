@@ -16,7 +16,7 @@ class DachaController extends Controller
 {
     public function index()
     {
-        $dacha = Dacha::with('images')->paginate(10);
+        $dacha = Dacha::with('images', 'category')->paginate(10);
         return view('admin.pages.dacha.index', compact('dacha'));
     }
 

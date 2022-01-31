@@ -516,12 +516,16 @@ body {
     outline: none;
 }
 
+.form__input.fileInput {
+    display: flex;
+}
 
 .form__input.fileInput input {
     display: none;
 }
 
 .form__input.fileInput label {
+    margin: 0;
     font-size: 20px;
     color: var(--black2);
     border: 1px solid var(--black2);
@@ -651,6 +655,31 @@ body {
     text-align: center;
     border-radius: 5px;
     align-items: center;
+}
+
+.addButton{
+    position: relative;
+    padding: 5px 8px;
+    background: #8de02c;
+    text-decoration: none;
+    color: var(--white);
+    border: none;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.removeButton{
+    position: relative;
+    padding: 0 8px;
+    background: red;
+    text-decoration: none;
+    color: var(--white);
+    border: none;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 5px;
+    margin-left: 35px;
 }
 
 .delete button ion-icon{

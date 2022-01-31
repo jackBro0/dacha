@@ -97,19 +97,75 @@
         </div>
     @endforeach
 @else
-    <div class="uploadImage">
-        <img id="output" src="/assets/img/default.png">
-    </div>
+    <div id="reqs">
+        <div id="upload">
+            <div class="uploadImage">
+                <img id="output0" src="/assets/img/default.png">
+            </div>
 
-    <div class="form__input fileInput">
-        <label for="fileInput">
-            <ion-icon name="cloud-upload-outline"></ion-icon>
-            <span>upload</span>
-        </label>
-        <input id="fileInput" name="image_path[]" type="file">
+            <div class="form__input fileInput">
+                <label for="fileInput0">
+                    <ion-icon name="cloud-upload-outline"></ion-icon>
+                    <span>upload1</span>
+                </label>
+                <input onchange="uploadImg(0)" id="fileInput0" name="image_path[]" type="file">
+            </div>
+        </div>
     </div>
+    <button class="addButton" type="button" onclick="add()">
+        <ion-icon name="add-outline"></ion-icon>
+    </button>
 @endif
 
 <div class="form__btn">
     <button type="submit">submit</button>
 </div>
+
+@section('js')
+    <script>
+        var reqs_id = 0;
+
+        function uploadImg(id) {
+            var file = $("#fileInput" + id).get(0).files[0];
+            if (file) {
+                var reader = new FileReader();
+
+                reader.onload = function () {
+                    $("#output" + id).attr("src", reader.result);
+                }
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function removeElement(id) {
+            $( "#upload"+id ).remove();
+        }
+
+        function add() {
+            reqs_id++; // increment reqs_id to get a unique ID for the new element
+
+            //create textbox
+            var input = `<div id="upload` + reqs_id + `">
+            <div class="uploadImage">
+                <img id="output` + reqs_id + `" src="/assets/img/default.png">
+            </div>
+
+            <div class="form__input fileInput">
+                <label for="fileInput` + reqs_id + `">
+                    <ion-icon name="cloud-upload-outline"></ion-icon>
+                    <span>upload</span>
+                </label>
+                <input onchange="uploadImg(` + reqs_id + `)" id="fileInput` + reqs_id + `" name="image_path[]" type="file">
+                <button onclick="removeElement(` + reqs_id + `)" class="removeButton"><ion-icon name="remove-outline"></ion-icon></button>
+            </div>
+        </div>`;
+            var reqs = document.getElementById("reqs");
+            var remove = document.createElement('button');
+
+            //append elements
+            $("#reqs").append(input)
+
+        }
+
+    </script>
+@endsection
