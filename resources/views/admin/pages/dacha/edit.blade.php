@@ -21,13 +21,11 @@
                 <div class="cardHeader">
                     <h2>Location edit</h2>
                 </div>
-
                 <div class="form">
-                    <form method="post" action="{{ route('category.update', $category->id) }}" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('dacha.update', $dacha->id) }}" enctype="multipart/form-data">
                         @csrf
                         @method('put')
-
-                        @include('admin.pages.category.form')
+                        @include('admin.pages.dacha.form')
                     </form>
                 </div>
 

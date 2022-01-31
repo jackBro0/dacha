@@ -544,6 +544,7 @@ body {
     width: 200px;
     height: 200px;
     overflow: hidden;
+    margin-top: 40px;
 }
 
 .uploadImage img {
@@ -680,6 +681,12 @@ body {
     text-align: center;
     border-radius: 5px;
     margin-left: 35px;
+}
+
+.inputRemove{
+    padding: 8px;
+    margin-left: 5px;
+
 }
 
 .delete button ion-icon{

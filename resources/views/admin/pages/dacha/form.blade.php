@@ -48,54 +48,59 @@
     <input name="cost" type="number" @if(!empty(old('cost'))) value="{{ old('cost') }}"
            @elseif(!empty($dacha->cost)) value="{{ $dacha->cost }}" @endif >
 </div>
-
-<div class="form__input">
-    <label>
-        Comforts
-    </label>
-    <input name="comforts[]" type="text" @if(!empty(old('comforts'))) value="{{ old('comforts') }}"
-           @elseif(!empty($dacha->comforts)) value="{{ $dacha->comforts }}" @endif >
-</div>
-
-<div class="form__input">
-    <label>
-        Comforts
-    </label>
-    <input name="comforts[]" type="text" @if(!empty(old('comforts'))) value="{{ old('comforts') }}"
-           @elseif(!empty($dacha->comforts)) value="{{ $dacha->comforts }}" @endif >
-</div>
-
-<div class="form__input">
-    <label>
-        Comforts
-    </label>
-    <input name="comforts[]" type="text" @if(!empty(old('comforts'))) value="{{ old('comforts') }}"
-           @elseif(!empty($dacha->comforts)) value="{{ $dacha->comforts }}" @endif >
-</div>
-
-<div class="form__input">
-    <label>
-        Comforts
-    </label>
-    <input name="comforts[]" type="text" @if(!empty(old('comforts'))) value="{{ old('comforts') }}"
-           @elseif(!empty($dacha->comforts)) value="{{ $dacha->comforts }}" @endif >
-</div>
-
-@if(!empty($dacha->images))
-    @foreach($dacha->images as $images)
-        <div class="uploadImage">
-            <img id="output" @if(!empty($images->image_path)) src="/{{ $images->image_path }}"
-                 @else src="/assets/img/default.png" @endif>
-        </div>
-
-        <div class="form__input fileInput">
-            <label for="fileInput">
-                <ion-icon name="cloud-upload-outline"></ion-icon>
-                <span>upload</span>
+@if(!empty($dacha->comforts))
+    <div id="multipleInput" class="multipleInput">
+        @foreach($dacha->comforts as $comfort)
+            <div id="comports{{ $loop->index }}" class="form__input">
+                <label>
+                    Comforts
+                </label>
+                <input value="{{ $comfort }}" name="comforts[]" type="text">
+                @if (!$loop->first)
+                    <button type="button" onclick="removeInput('s'+{{ $loop->index }})" class="removeButton inputRemove">
+                        <ion-icon name="close-outline"></ion-icon>
+                    </button>
+                @endif
+            </div>
+        @endforeach
+    </div>
+@else
+    <div id="multipleInput" class="multipleInput">
+        <div class="form__input">
+            <label>
+                Comforts
             </label>
-            <input id="fileInput" name="image_path[]" type="file">
+            <input name="comforts[]" type="text" value="{{ old('comforts') }}">
         </div>
-    @endforeach
+    </div>
+@endif
+<button onclick="addInput()" class="addButton" type="button">
+    <ion-icon name="add-outline"></ion-icon>
+</button>
+@if(!empty($dacha->images))
+    <div id="reqs">
+        @foreach($dacha->images as $images)
+            <div id="uploads{{ $loop->index }}">
+                <input name="exist_image[]" type="hidden" value="{{ $images->id }}">
+                <div class="uploadImage">
+                    <img id="outputs{{ $loop->index }}" @if(!empty($images->image_path)) src="/{{ $images->image_path }}"
+                         @else src="/assets/img/default.png" @endif>
+                </div>
+                <div class="form__input fileInput">
+                    <label for="fileInputs{{ $loop->index }}">
+                        <ion-icon name="cloud-upload-outline"></ion-icon>
+                        <span>upload</span>
+                    </label>
+                    <input id="fileInputs{{ $loop->index }}" onchange="uploadImg('s'+{{ $loop->index  }})" name="exist_image_path[{{ $images->id }}]" type="file">
+                    @if (!$loop->first)
+                        <button type="button" onclick="removeElement('s'+{{ $loop->index }})" class="removeButton">
+                            <ion-icon name="close-outline"></ion-icon>
+                        </button>
+                    @endif
+                </div>
+            </div>
+        @endforeach
+    </div>
 @else
     <div id="reqs">
         <div id="upload">
@@ -112,10 +117,10 @@
             </div>
         </div>
     </div>
-    <button class="addButton" type="button" onclick="add()">
-        <ion-icon name="add-outline"></ion-icon>
-    </button>
 @endif
+<button class="addButton" type="button" onclick="add()">
+    <ion-icon name="add-outline"></ion-icon>
+</button>
 
 <div class="form__btn">
     <button type="submit">submit</button>
@@ -124,6 +129,27 @@
 @section('js')
     <script>
         var reqs_id = 0;
+        var addCount = 0;
+
+        function addInput() {
+            addCount++;
+            var element = `<div id="comport` + addCount + `" class="form__input">
+                                <label>
+                                    Comforts
+                                </label>
+                                <input name="comforts[]" type="text">
+                                <button type="button" onclick="removeInput(` + addCount + `)" class="removeButton inputRemove">
+                                    <ion-icon name="close-outline"></ion-icon>
+                                </button>
+                            </div>`
+
+            $("#multipleInput").append(element)
+        }
+
+        function removeInput(id) {
+            console.log("#comport" + id)
+            $("#comport" + id).remove();
+        }
 
         function uploadImg(id) {
             var file = $("#fileInput" + id).get(0).files[0];
@@ -138,7 +164,7 @@
         }
 
         function removeElement(id) {
-            $( "#upload"+id ).remove();
+            $("#upload" + id).remove();
         }
 
         function add() {
@@ -156,16 +182,12 @@
                     <span>upload</span>
                 </label>
                 <input onchange="uploadImg(` + reqs_id + `)" id="fileInput` + reqs_id + `" name="image_path[]" type="file">
-                <button onclick="removeElement(` + reqs_id + `)" class="removeButton"><ion-icon name="remove-outline"></ion-icon></button>
+                <button type="button" onclick="removeElement(` + reqs_id + `)" class="removeButton"><ion-icon name="close-outline"></ion-icon></button>
             </div>
         </div>`;
-            var reqs = document.getElementById("reqs");
-            var remove = document.createElement('button');
-
             //append elements
             $("#reqs").append(input)
 
         }
-
     </script>
 @endsection

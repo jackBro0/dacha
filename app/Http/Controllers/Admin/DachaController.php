@@ -31,7 +31,7 @@ class DachaController extends Controller
     public function store(DachaRequest $request)
     {
         try {
-            $dacha= new Dacha();
+            $dacha = new Dacha();
             $dacha->name = $request->name;
             $dacha->bathroom_count = $request->bathroom_count;
             $dacha->capacity = $request->capacity;
@@ -58,7 +58,7 @@ class DachaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -69,45 +69,65 @@ class DachaController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
      */
     public function edit($id)
     {
-        //
+        $categories = Category::query()->get();
+        $dacha = Dacha::query()->findOrFail($id);
+        return view('admin.pages.dacha.edit', compact('categories', 'dacha'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param DachaRequest $request
      * @param int $id
-     * @return JsonResponse
      */
-    public function update(DachaRequest $request, int $id): JsonResponse
+    public function update(DachaRequest $request, int $id)
     {
         try {
             $dacha = Dacha::findOrFail($id);
-            $file = $request->file('image_path');
-            $file_path = "storage/" . Storage::disk('public')->put("dachas", $file);
-            $dacha->update([
-                'name' => $request->name,
-                'category_id' => $request->category_id,
-                'room_count' => $request->room_count,
-                'bathroom_count' => $request->bathroom_count,
-                'capacity' => $request->capacity,
-                'cost' => $request->cost,
-                'image_path' => $file_path,
-            ]);
-            return response()->json([
-                'message' => 'Success',
-                'status' => 200
-            ]);
+            $dacha->name = $request->name;
+            $dacha->bathroom_count = $request->bathroom_count;
+            $dacha->capacity = $request->capacity;
+            $dacha->room_count = $request->room_count;
+            $dacha->cost = $request->cost;
+            $dacha->comforts = $request->comforts;
+            $dacha->category_id = $request->category_id;
+
+            if ($dacha->update()) {
+                if (!empty($request->exist_image)) {
+                    $exist_image_path = DachaImage::query()->where('dacha_id', $dacha->id)->pluck('id')->toArray();
+                    foreach ($exist_image_path as $image) {
+                        if (!in_array($image, $request->exist_image)) {
+                            DachaImage::query()->findOrFail($image)->delete();
+                        }
+                    }
+                }
+
+                if (!empty($request->image_path)) {
+                    foreach ($request->image_path as $image) {
+                        $dacha_image = new DachaImage();
+                        $file_path = "storage/" . Storage::disk('public')->put("dachas", $image);
+                        $dacha_image->image_path = $file_path;
+                        $dacha_image->dacha_id = $dacha->id;
+                        $dacha_image->save();
+                    }
+                }
+
+                if (!empty($request->exist_image_path)) {
+                    foreach ($request->exist_image_path as $key=>$image) {
+                        $dacha_image = DachaImage::query()->findOrFail($key);
+                        $file_path = "storage/" . Storage::disk('public')->put("dachas", $image);
+                        $dacha_image->image_path = $file_path;
+                        $dacha_image->dacha_id = $dacha->id;
+                        $dacha_image->save();
+                    }
+                }
+            }
+            return redirect()->route('dacha.index');
         } catch (\Exception $e) {
-            return response()->json([
-                'message' => $e,
-                'status' => 404
-            ]);
+            return redirect()->back();
         }
     }
 
@@ -118,7 +138,7 @@ class DachaController extends Controller
             $dacha = Dacha::findOrFail($id);
             $dacha->delete();
             return redirect()->route('dacha.index');
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             return redirect()->back();
         }
     }
