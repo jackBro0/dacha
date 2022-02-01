@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DachaController;
+use App\Http\Controllers\Admin\RentDachaController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Admin\MainController;
 use \App\Http\Controllers\Admin\AuthController;
@@ -20,10 +21,15 @@ Route::middleware('auth')->group(function () {
 
     ////////////////////// Category \\\\\\\\\\\\\\\\\\\\\
     Route::resource('/category', CategoryController::class);
-    Route::get('category-delete/{category}', [CategoryController::class, 'destroy'])->name('categoryDelete');
 
     ////////////////////// Dacha \\\\\\\\\\\\\\\\\\\\\\\
     Route::resource('/dacha', DachaController::class);
-    Route::get('dacha-delete/{category}', [DachaController::class, 'destroy'])->name('dachaDelete');
+
+    ////////////////////Rent Dacha (Orders) \\\\\\\\\\\\\\
+    Route::resource('/order', RentDachaController::class);
+
+    /////////////////////Password\\\\\\\\\\\\\\\\\\\\\\\\\
+    Route::get('/password', [AuthController::class, 'password'])->name('password');
+    Route::put('/password-change', [AuthController::class, 'passwordChange'])->name('passwordChange');
 
 });

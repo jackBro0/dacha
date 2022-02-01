@@ -35,4 +35,18 @@ class AuthController extends Controller
         Auth::logout();
         return redirect()->route('login');
     }
+
+    public function password()
+    {
+        return view('admin.pages.password.index');
+    }
+
+    public function passwordChange(Request $request)
+    {
+        $request->validate([
+            'current_password' => 'required',
+            'password' => 'required',
+            'confirm' => 'required',
+        ]);
+    }
 }

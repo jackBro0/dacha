@@ -25,14 +25,20 @@
                 <span class="title">Dacha</span>
             </a>
         </li>
-        <li>
-            <a href="#">
-                <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
-                <span class="title">Settings</span>
+        <li class="{{ (request()->is('order*')) ? 'active' : '' }}" >
+            <a href="{{ route('order.index') }}">
+                <span class="icon"><ion-icon name="cart-outline"></ion-icon></span>
+                <span class="title">Orders</span>
             </a>
         </li>
-        <li>
-            <a href="#">
+{{--        <li>--}}
+{{--            <a href="#">--}}
+{{--                <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>--}}
+{{--                <span class="title">Settings</span>--}}
+{{--            </a>--}}
+{{--        </li>--}}
+        <li class="{{ (request()->is('password*')) ? 'active' : '' }}" >
+            <a href="{{ route('password') }}">
                 <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
                 <span class="title">Password</span>
             </a>
