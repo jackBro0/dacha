@@ -13,9 +13,13 @@ use Illuminate\Support\Facades\Storage;
 class CategoryController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $categories = Category::query()->paginate(10);
+        $categories = Category::query()
+            ->when(isset($request->name), function ($q) use ($request) {
+                return $q->where('name', 'like', '%' . $request->name . '%');
+            })
+            ->paginate(10);
         return view('admin.pages.category.index', compact('categories'));
     }
 

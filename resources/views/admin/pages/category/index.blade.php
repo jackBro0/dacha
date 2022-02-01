@@ -7,7 +7,6 @@
             <div class="toggle">
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
-        @include('admin.templates.topbar')
         <!--user image-->
             <div class="user">
                 <img src="/assets/img/user.png" alt="">
@@ -23,6 +22,16 @@
                     <h2>Locations</h2>
                     <a href="{{ route('category.create') }}" class="btn">Add new +</a>
                 </div>
+                <form method="get" action="{{ route('category.index') }}" class="filter">
+                    <div class="filter__input">
+                        <input placeholder="name..." name="name" type="text"
+                               @if(!empty(request()->get('name'))) value="{{ request()->get('name') }}"@endif >
+                    </div>
+                    <button class="filter__button" type="submit">
+                        <ion-icon name="search-outline"></ion-icon>
+                        search
+                    </button>
+                </form>
                 <table>
                     <thead>
                     <tr>
@@ -79,7 +88,7 @@
                 </table>
             </div>
             <div class="pagination">
-                @if(!empty($categories->previousPageUrl()))
+                @if(!empty($categories->appends(request()->except(['page', '_token']))->previousPageUrl()))
                     <a href="{{ $categories->previousPageUrl() }}">&laquo;</a>
                 @endif
                 @if($categories->currentPage() > 3)

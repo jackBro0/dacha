@@ -7,15 +7,13 @@
             <div class="toggle">
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
-        @include('admin.templates.topbar')
-        <!--user image-->
+            <!--user image-->
             <div class="user">
                 <img src="/assets/img/user.png" alt="">
             </div>
         </div>
 
         <!-- cards -->
-        {{--@include('admin.templates.cards')--}}
         <div class="details singleColumn">
             <!-- data list -->
             <div class="recentOrders">
@@ -23,6 +21,27 @@
                     <h2>Locations</h2>
                     <a href="{{ route('dacha.create') }}" class="btn">Add new +</a>
                 </div>
+                <form method="get" action="{{ route('dacha.index') }}" class="filter">
+                    <div class="filter__input">
+                        <input placeholder="name..." name="name" type="text"
+                               @if(!empty(request()->get('name'))) value="{{ request()->get('name') }}"@endif >
+                    </div>
+                    <div class="filter__select">
+                        <select name="category_id">
+                            <option></option>
+                            @foreach($categories as $category)
+                                    <option @if(!empty(request()->get('category_id')) and request()->get('category_id') == $category->id) selected @endif
+                                            value="{{ $category->id }}">
+                                        {{ $category->name }}
+                                    </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <button class="filter__button" type="submit">
+                        <ion-icon name="search-outline"></ion-icon>
+                        search
+                    </button>
+                </form>
                 <table>
                     <thead>
                     <tr>
@@ -95,7 +114,7 @@
                 </table>
             </div>
             <div class="pagination">
-                @if(!empty($dacha->previousPageUrl()))
+                @if(!empty($dacha->appends(request()->except(['page', '_token']))->previousPageUrl()))
                     <a href="{{ $dacha->previousPageUrl() }}">&laquo;</a>
                 @endif
                 @if($dacha->currentPage() > 3)

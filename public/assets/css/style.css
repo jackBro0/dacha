@@ -696,6 +696,52 @@ body {
 }
 /*end modal*/
 
+.filter{
+    display: flex;
+}
+
+.filter__input input{
+    width: 300px;
+    height: 40px;
+    border-radius: 10px;
+    padding: 5px 20px 5px 35px;
+    outline: none;
+    border: 1px solid var(--black2);
+    font-size: 18px;
+}
+
+.filter__select select {
+    width: 200px;
+    height: 40px;
+    border-radius: 10px;
+    padding: 5px 20px 5px 35px;
+    outline: none;
+    border: 1px solid var(--black2);
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+.filter__button{
+    height: 40px;
+    position: relative;
+    padding: 5px 8px 5px 28px;
+    background: #8de02c;
+    text-decoration: none;
+    color: var(--white);
+    border: none;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+.filter__button ion-icon{
+    top: 12px;
+    left: 8px;
+    position: absolute;
+    font-size: 14px;
+}
+
 @media (max-width: 991px) {
     .navigation {
         left: -300px;

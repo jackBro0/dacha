@@ -14,10 +14,23 @@ use Illuminate\Support\Facades\Storage;
 
 class DachaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $dacha = Dacha::with('images', 'category')->paginate(10);
-        return view('admin.pages.dacha.index', compact('dacha'));
+//        $name = null;
+//        $category_id = null;
+//        if (isset($request->name)){
+//            $name = $request->name;
+//        }
+        $dacha = Dacha::with('images', 'category')
+            ->when(isset($request->name), function ($q) use ($request) {
+                return $q->where('name', 'like', '%' . $request->name . '%');
+            })
+            ->when(isset($request->category_id), function ($query) use ($request) {
+                return $query->where('category_id', $request->category_id);
+            })
+            ->paginate(10);
+        $categories = Category::query()->get();
+        return view('admin.pages.dacha.index', compact('dacha', 'categories'));
     }
 
 
