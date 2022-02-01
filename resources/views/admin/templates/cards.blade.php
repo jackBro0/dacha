@@ -1,7 +1,7 @@
 <div class="cardBox">
     <div class="card">
         <div>
-            <div class="numbers">1,504</div>
+            <div class="numbers">{{ $dacha_count }}</div>
             <div class="cardName">Dacha</div>
         </div>
         <div class="iconBox">

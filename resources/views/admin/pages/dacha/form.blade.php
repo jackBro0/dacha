@@ -4,7 +4,7 @@
     </label>
     <select id="select1" name="category_id">
         @foreach($categories as $category)
-            <option value="{{ $category->id }}">{{ $category->name_ru }}</option>
+            <option @if(!empty($dacha->category_id) and $dacha->category_id == $category->id) selected @endif value="{{ $category->id }}">{{ $category->name_ru }}</option>
         @endforeach
     </select>
 </div>
