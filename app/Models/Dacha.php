@@ -11,7 +11,8 @@ class Dacha extends Model
     protected $guarded = [];
     protected $hidden = ['updated_at', 'deleted_at'];
     protected $casts = [
-        'comforts' => 'array'
+        'comforts_uz' => 'array',
+        'comforts_ru' => 'array',
     ];
     use SoftDeletes;
     use HasFactory;

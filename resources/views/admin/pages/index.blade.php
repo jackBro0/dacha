@@ -7,7 +7,7 @@
             <div class="toggle">
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
-        @include('admin.templates.topbar')
+{{--        @include('admin.templates.topbar')--}}
         <!--user image-->
             <div class="user">
                 <img src="/assets/img/user.png" alt="">

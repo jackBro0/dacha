@@ -1,20 +1,28 @@
 <div class="form__input">
     <label for="select1">
-        Name
+        Location
     </label>
     <select id="select1" name="category_id">
         @foreach($categories as $category)
-            <option value="{{ $category->id }}">{{ $category->name }}</option>
+            <option value="{{ $category->id }}">{{ $category->name_ru }}</option>
         @endforeach
     </select>
 </div>
 
 <div class="form__input">
     <label>
-        Name
+        Name Uz
     </label>
-    <input name="name" type="text" @if(!empty(old('name'))) value="{{ old('name') }}"
-           @elseif(!empty($dacha->name)) value="{{ $dacha->name }}" @endif >
+    <input name="name_uz" type="text" @if(!empty(old('name_uz'))) value="{{ old('name_uz') }}"
+           @elseif(!empty($dacha->name_uz)) value="{{ $dacha->name_uz }}" @endif >
+</div>
+
+<div class="form__input">
+    <label>
+        Name Ru
+    </label>
+    <input name="name_ru" type="text" @if(!empty(old('name_ru'))) value="{{ old('name_ru') }}"
+           @elseif(!empty($dacha->name_ru)) value="{{ $dacha->name_ru }}" @endif >
 </div>
 
 <div class="form__input">
@@ -48,14 +56,15 @@
     <input name="cost" type="number" @if(!empty(old('cost'))) value="{{ old('cost') }}"
            @elseif(!empty($dacha->cost)) value="{{ $dacha->cost }}" @endif >
 </div>
-@if(!empty($dacha->comforts))
+@if(!empty($dacha->comforts_ru))
     <div id="multipleInput" class="multipleInput">
-        @foreach($dacha->comforts as $comfort)
+        @foreach($dacha->comforts_uz as $comfort)
             <div id="comports{{ $loop->index }}" class="form__input">
                 <label>
                     Comforts
                 </label>
-                <input value="{{ $comfort }}" name="comforts[]" type="text">
+                <input placeholder="uz" value="{{ $comfort }}" name="comforts_uz[]" type="text">
+                <input placeholder="ru" value="{{ $dacha->comforts_ru[$loop->index] }}" name="comforts_ru[]" type="text">
                 @if (!$loop->first)
                     <button type="button" onclick="removeInput('s'+{{ $loop->index }})" class="removeButton inputRemove">
                         <ion-icon name="close-outline"></ion-icon>
@@ -70,7 +79,8 @@
             <label>
                 Comforts
             </label>
-            <input name="comforts[]" type="text" value="{{ old('comforts') }}">
+            <input placeholder="uz" name="comforts_uz[]" type="text" value="{{ old('comforts') }}">
+            <input placeholder="ru" name="comforts_ru[]" type="text" value="{{ old('comforts') }}">
         </div>
     </div>
 @endif
@@ -137,7 +147,8 @@
                                 <label>
                                     Comforts
                                 </label>
-                                <input name="comforts[]" type="text">
+                                <input placeholder="uz" name="comforts_uz[]" type="text">
+                                <input placeholder="ru" name="comforts_ru[]" type="text">
                                 <button type="button" onclick="removeInput(` + addCount + `)" class="removeButton inputRemove">
                                     <ion-icon name="close-outline"></ion-icon>
                                 </button>

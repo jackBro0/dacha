@@ -36,7 +36,7 @@
                     <thead>
                     <tr>
                         <td>#id</td>
-                        <td>Name</td>
+                        <td>Name Ru</td>
                         <td>image</td>
                         <td>created date</td>
                         <td>actions</td>
@@ -46,7 +46,7 @@
                     @foreach($categories as $category)
                         <tr>
                             <td>{{ $category->id }}</td>
-                            <td>{{ $category->name }}</td>
+                            <td>{{ $category->name_ru }}</td>
                             <td class="imageColumn">
                                 <div class="imgBx">
                                     <img src="/{{ $category->image_path }}">

@@ -32,7 +32,7 @@
                             @foreach($categories as $category)
                                     <option @if(!empty(request()->get('category_id')) and request()->get('category_id') == $category->id) selected @endif
                                             value="{{ $category->id }}">
-                                        {{ $category->name }}
+                                        {{ $category->name_ru }}
                                     </option>
                             @endforeach
                         </select>
@@ -57,7 +57,7 @@
                     @foreach($dacha as $item)
                         <tr>
                             <td>{{ $item->id }}</td>
-                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->name_ru }}</td>
                             <td class="imageColumn">
                                 <div class="imgBx">
                                     @if(!empty($item->images[0]->image_path))
@@ -69,8 +69,8 @@
                             </td>
 
                             <td>
-                                @if(!empty($item->category->name))
-                                    {{ $item->category->name }}
+                                @if(!empty($item->category->name_ru))
+                                    {{ $item->category->name_ru }}
                                 @else
                                     not found
                                 @endif

@@ -2,16 +2,16 @@
     <div class="card">
         <div>
             <div class="numbers">1,504</div>
-            <div class="cardName">Daily views</div>
+            <div class="cardName">Dacha</div>
         </div>
         <div class="iconBox">
-            <ion-icon name="eye-outline"></ion-icon>
+            <ion-icon name="home-outline"></ion-icon>
         </div>
     </div>
     <div class="card">
         <div>
             <div class="numbers">90</div>
-            <div class="cardName">Sales</div>
+            <div class="cardName">Orders</div>
         </div>
         <div class="iconBox">
             <ion-icon name="cart-outline"></ion-icon>
@@ -20,10 +20,10 @@
     <div class="card">
         <div>
             <div class="numbers">284</div>
-            <div class="cardName">Comments</div>
+            <div class="cardName">Locations</div>
         </div>
         <div class="iconBox">
-            <ion-icon name="chatbubbles-outline"></ion-icon>
+            <ion-icon name="location-outline"></ion-icon>
         </div>
     </div>
     <div class="card">

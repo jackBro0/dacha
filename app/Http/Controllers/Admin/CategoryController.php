@@ -17,7 +17,8 @@ class CategoryController extends Controller
     {
         $categories = Category::query()
             ->when(isset($request->name), function ($q) use ($request) {
-                return $q->where('name', 'like', '%' . $request->name . '%');
+                return $q->where('name_uz', 'like', '%' . $request->name . '%')
+                    ->orWhere('name_ru', 'like', '%' . $request->name . '%');
             })
             ->paginate(10);
         return view('admin.pages.category.index', compact('categories'));
@@ -36,8 +37,10 @@ class CategoryController extends Controller
             $category = new Category();
             $file = $request->file('image_path');
             $file_path = "storage/" . Storage::disk('public')->put("categories", $file);
-            $category->name = $request->name;
-            $category->description = $request->description;
+            $category->name_uz = $request->name_uz;
+            $category->name_ru = $request->name_ru;
+            $category->description_uz = $request->description_uz;
+            $category->description_ru = $request->description_ru;
             $category->image_path = $file_path;
             $category->save();
             return redirect()->route('category.index');
@@ -68,13 +71,18 @@ class CategoryController extends Controller
                 $file = $request->file('image_path');
                 $file_path = "storage/" . Storage::disk('public')->put("categories", $file);
                 $category->update([
-                    'name' => $request->name,
-                    'description' => $request->name,
+                    'name_uz' => $request->name_uz,
+                    'name_ru' => $request->name_ru,
+                    'description_uz' => $request->description_uz,
+                    'description_ru' => $request->description_ru,
                     'image_path' => $file_path,
                 ]);
             }else{
                 $category->update([
-                    'name' => $request->name
+                    'name_uz' => $request->name_uz,
+                    'name_ru' => $request->name_ru,
+                    'description_uz' => $request->description_uz,
+                    'description_ru' => $request->description_ru,
                 ]);
             }
             return redirect()->route('category.index');

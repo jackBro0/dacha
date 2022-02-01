@@ -31,8 +31,10 @@ class CategoryRequest extends FormRequest
         }
         return [
             'image_path' => $image_path,
-            'name' => 'required',
-            'description' => 'required'
+            'name_uz' => 'required',
+            'name_ru' => 'required',
+            'description_uz' => 'required',
+            'description_ru' => 'required',
         ];
     }
 }

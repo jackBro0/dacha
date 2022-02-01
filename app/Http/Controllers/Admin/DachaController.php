@@ -16,14 +16,10 @@ class DachaController extends Controller
 {
     public function index(Request $request)
     {
-//        $name = null;
-//        $category_id = null;
-//        if (isset($request->name)){
-//            $name = $request->name;
-//        }
         $dacha = Dacha::with('images', 'category')
             ->when(isset($request->name), function ($q) use ($request) {
-                return $q->where('name', 'like', '%' . $request->name . '%');
+                return $q->where('name_uz', 'like', '%' . $request->name . '%')
+                    ->orWhere('name_ru', 'like', '%' . $request->name . '%');
             })
             ->when(isset($request->category_id), function ($query) use ($request) {
                 return $query->where('category_id', $request->category_id);
@@ -45,12 +41,14 @@ class DachaController extends Controller
     {
         try {
             $dacha = new Dacha();
-            $dacha->name = $request->name;
+            $dacha->name_uz = $request->name_uz;
+            $dacha->name_ru = $request->name_ru;
             $dacha->bathroom_count = $request->bathroom_count;
             $dacha->capacity = $request->capacity;
             $dacha->room_count = $request->room_count;
             $dacha->cost = $request->cost;
-            $dacha->comforts = $request->comforts;
+            $dacha->comforts_uz = $request->comforts_uz;
+            $dacha->comforts_ru = $request->comforts_ru;
             $dacha->category_id = $request->category_id;
 
             if ($dacha->save()) {
@@ -100,12 +98,14 @@ class DachaController extends Controller
     {
         try {
             $dacha = Dacha::findOrFail($id);
-            $dacha->name = $request->name;
+            $dacha->name_uz = $request->name_uz;
+            $dacha->name_ru = $request->name_ru;
             $dacha->bathroom_count = $request->bathroom_count;
             $dacha->capacity = $request->capacity;
             $dacha->room_count = $request->room_count;
             $dacha->cost = $request->cost;
-            $dacha->comforts = $request->comforts;
+            $dacha->comforts_uz = $request->comforts_uz;
+            $dacha->comforts_ru = $request->comforts_ru;
             $dacha->category_id = $request->category_id;
 
             if ($dacha->update()) {
