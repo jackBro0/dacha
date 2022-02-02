@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');
-
+/*@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 * {
     margin: 0;
     padding: 0;
@@ -529,14 +529,23 @@ body {
     font-size: 20px;
     color: var(--black2);
     border: 1px solid var(--black2);
-    width: 135px;
     border-radius: 10px;
     cursor: pointer;
     padding: 5px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.form__input.fileInput label ion-icon{
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    font-size: 1.1em;
 }
 
 .form__input.fileInput label span {
-    padding: 0 0 0 10px;
+    padding: 0 15px 0 30px;
 }
 
 .uploadImage {
@@ -698,6 +707,7 @@ body {
 
 .filter{
     display: flex;
+    padding: 20px 0;
 }
 
 .filter__input input{

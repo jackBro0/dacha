@@ -19,7 +19,7 @@
             <!-- data list -->
             <div class="itemsCard">
                 <div class="cardHeader">
-                    <h2>Order create</h2>
+                    <h2>@lang('main.add_order')</h2>
                 </div>
                 <div class="form">
                     <form method="post" action="{{ route('order.store') }}" enctype="multipart/form-data">

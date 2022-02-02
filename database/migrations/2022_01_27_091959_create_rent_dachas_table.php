@@ -17,7 +17,7 @@ class CreateRentDachasTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('phone');
-            $table->string('description');
+            $table->text('description');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -19,7 +19,7 @@
             <!-- data list -->
             <div class="itemsCard">
                 <div class="cardHeader">
-                    <h2>Location edit</h2>
+                    <h2>@lang('main.edit_location')</h2>
                 </div>
 
                 <div class="form">

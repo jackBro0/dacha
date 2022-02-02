@@ -20,6 +20,7 @@ class CategoryController extends Controller
                 return $q->where('name_uz', 'like', '%' . $request->name . '%')
                     ->orWhere('name_ru', 'like', '%' . $request->name . '%');
             })
+            ->orderByDesc('id')
             ->paginate(10);
         return view('admin.pages.category.index', compact('categories'));
     }

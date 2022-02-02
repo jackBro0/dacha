@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index(): JsonResponse
     {
-        $categories = Category::paginate(10);
+        $categories = Category::query()->orderByDesc('id')->paginate(10);
         try {
             return response()->json([
                 'data' => $categories

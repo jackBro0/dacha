@@ -19,7 +19,7 @@
             <!-- data list -->
             <div class="itemsCard">
                 <div class="cardHeader">
-                    <h2>Location create</h2>
+                    <h2>@lang('main.add_dacha')</h2>
                 </div>
                 <div class="form">
                     <form method="post" action="{{ route('dacha.store') }}" enctype="multipart/form-data">

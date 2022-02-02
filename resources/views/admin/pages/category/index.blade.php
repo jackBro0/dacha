@@ -19,27 +19,27 @@
             <!-- data list -->
             <div class="recentOrders">
                 <div class="cardHeader">
-                    <h2>Locations</h2>
-                    <a href="{{ route('category.create') }}" class="btn">Add new +</a>
+                    <h2>@lang('main.locations')</h2>
+                    <a href="{{ route('category.create') }}" class="btn">@lang('main.add_new') +</a>
                 </div>
                 <form method="get" action="{{ route('category.index') }}" class="filter">
                     <div class="filter__input">
-                        <input placeholder="name..." name="name" type="text"
+                        <input placeholder="@lang('main.name')..." name="name" type="text"
                                @if(!empty(request()->get('name'))) value="{{ request()->get('name') }}"@endif >
                     </div>
                     <button class="filter__button" type="submit">
                         <ion-icon name="search-outline"></ion-icon>
-                        search
+                        @lang('main.search')
                     </button>
                 </form>
                 <table>
                     <thead>
                     <tr>
                         <td>#id</td>
-                        <td>Name Ru</td>
-                        <td>image</td>
-                        <td>created date</td>
-                        <td>actions</td>
+                        <td>@lang('main.name')</td>
+                        <td>@lang('main.image')</td>
+                        <td>@lang('main.created_date')</td>
+                        <td>@lang('main.actions')</td>
                     </tr>
                     </thead>
                     <tbody>

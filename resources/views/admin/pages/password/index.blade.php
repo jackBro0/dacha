@@ -15,31 +15,31 @@
             <!-- data list -->
             <div class="itemsCard">
                 <div class="cardHeader">
-                    <h2>Order create</h2>
+                    <h2>@lang('main.security')</h2>
                 </div>
                 <div class="form">
                     <form method="post" action="{{ route('passwordChange') }}" enctype="multipart/form-data">
                         @csrf
                         <div class="form__input">
                             <label>
-                                Current password
+                                @lang('main.current_password')
                             </label>
                             <input name="current_password" type="password">
                         </div>
                         <div class="form__input">
                             <label>
-                                New password
+                                @lang('main.new_password')
                             </label>
                             <input name="password" type="password">
                         </div>
                         <div class="form__input">
                             <label>
-                                Confirm new password
+                                @lang('main.confirm_new_password')
                             </label>
                             <input name="confirm" type="password">
                         </div>
                         <div class="form__btn">
-                            <button type="submit">submit</button>
+                            <button type="submit">@lang('main.save')</button>
                         </div>
                     </form>
                 </div>

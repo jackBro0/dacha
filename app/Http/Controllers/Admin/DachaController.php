@@ -24,6 +24,7 @@ class DachaController extends Controller
             ->when(isset($request->category_id), function ($query) use ($request) {
                 return $query->where('category_id', $request->category_id);
             })
+            ->orderByDesc('id')
             ->paginate(10);
         $categories = Category::query()->get();
         return view('admin.pages.dacha.index', compact('dacha', 'categories'));

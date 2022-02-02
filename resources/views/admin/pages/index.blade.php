@@ -7,7 +7,7 @@
             <div class="toggle">
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
-{{--        @include('admin.templates.topbar')--}}
+        {{--        @include('admin.templates.topbar')--}}
         <!--user image-->
             <div class="user">
                 <img src="/assets/img/user.png" alt="">
@@ -20,136 +20,60 @@
             <!-- data list -->
             <div class="recentOrders">
                 <div class="cardHeader">
-                    <h2>Recent Orders</h2>
-                    <a href="#" class="btn">View All</a>
+                    <h2>@lang('main.recent_orders')</h2>
+                    <a href="{{ route('order.index') }}" class="btn">@lang('main.view_all')</a>
                 </div>
                 <table>
                     <thead>
                     <tr>
-                        <td>Name</td>
-                        <td>Price</td>
-                        <td>Payment</td>
-                        <td>Status</td>
+                        <td>#id</td>
+                        <td>@lang('main.name')</td>
+                        <td>@lang('main.phone')</td>
+                        <td>@lang('main.created_date')</td>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Tony Stark</td>
-                        <td>$1,8970</td>
-                        <td>Paid</td>
-                        <td><span class="status delivered">Delivered</span></td>
-                    </tr>
-                    <tr>
-                        <td>Peter Parker</td>
-                        <td>$1,8970</td>
-                        <td>Paid</td>
-                        <td><span class="status inprogress">In Progress</span></td>
-                    </tr>
-                    <tr>
-                        <td>Dr Bruce Banner</td>
-                        <td>$1,8970</td>
-                        <td>Due</td>
-                        <td><span class="status return">Return</span></td>
-                    </tr>
-                    <tr>
-                        <td>Tony Stark</td>
-                        <td>$1,8970</td>
-                        <td>Paid</td>
-                        <td><span class="status delivered">Delivered</span></td>
-                    </tr>
-                    <tr>
-                        <td>Peter Parker</td>
-                        <td>$1,8970</td>
-                        <td>Paid</td>
-                        <td><span class="status inprogress">In Progress</span></td>
-                    </tr>
-                    <tr>
-                        <td>Dr Bruce Banner</td>
-                        <td>$1,8970</td>
-                        <td>Due</td>
-                        <td><span class="status pending">Pending</span></td>
-                    </tr>
-                    <tr>
-                        <td>Jeyms Bond</td>
-                        <td>$1,8970</td>
-                        <td>Due</td>
-                        <td><span class="status return">Return</span></td>
-                    </tr>
-                    <tr>
-                        <td>Tony Stark</td>
-                        <td>$1,8970</td>
-                        <td>Paid</td>
-                        <td><span class="status delivered">Delivered</span></td>
-                    </tr>
-                    <tr>
-                        <td>Dr Bruce Banner</td>
-                        <td>$1,8970</td>
-                        <td>Due</td>
-                        <td><span class="status pending">Pending</span></td>
-                    </tr>
-                    <tr>
-                        <td>Peter Parker</td>
-                        <td>$1,8970</td>
-                        <td>Paid</td>
-                        <td><span class="status inprogress">In Progress</span></td>
-                    </tr>
+                    @foreach($recent_orders as $item)
+                        <tr>
+                            <td>{{ $item->id }}</td>
+                            <td>{{ $item->name }}</td>
+                            <td>{{ $item->phone }}</td>
+                            <td>{{ $item->created_at }}</td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
             <!-- New Customers -->
             <div class="recentCustomers">
                 <div class="cardHeader">
-                    <h2>Recent Customers</h2>
+                    <h2>@lang('main.recent_added_dacha')</h2>
                 </div>
                 <table>
-                    <tr>
-                        <td>
-                            <div class="imgBx">
-                                <img src="/assets/img/img8.jpg" alt="">
-                            </div>
-                        </td>
-                        <td><h4>Rustam <br><span>Qorasuv</span></h4></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="imgBx">
-                                <img src="/assets/img/img8.jpg" alt="">
-                            </div>
-                        </td>
-                        <td><h4>Rustam <br><span>Qorasuv</span></h4></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="imgBx">
-                                <img src="/assets/img/img8.jpg" alt="">
-                            </div>
-                        </td>
-                        <td><h4>Rustam <br><span>Qorasuv</span></h4></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="imgBx">
-                                <img src="/assets/img/img8.jpg" alt="">
-                            </div>
-                        </td>
-                        <td><h4>Rustam <br><span>Qorasuv</span></h4></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="imgBx">
-                                <img src="/assets/img/img8.jpg" alt="">
-                            </div>
-                        </td>
-                        <td><h4>Rustam <br><span>Qorasuv</span></h4></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="imgBx">
-                                <img src="/assets/img/img8.jpg" alt="">
-                            </div>
-                        </td>
-                        <td><h4>Rustam <br><span>Qorasuv</span></h4></td>
-                    </tr>
+                    @foreach($recent_dacha as $dacha)
+                        <tr>
+                            <td>
+                                <div class="imgBx">
+                                    @if(!empty($dacha->images[0]->image_path))
+                                        <img src="/{{ $dacha->images[0]->image_path }}">
+                                    @else
+                                        <img src="/assets/img/default.png">
+                                    @endif
+                                </div>
+                            </td>
+                            <td>
+                                <h4>
+                                    {{ $dacha->name_ru }} <br>
+                                    <span>@if(!empty($dacha->category->name_ru))
+                                            {{ $dacha->category->name_ru }}
+                                            @else
+                                                not found
+                                            @endif
+                                    </span>
+                                </h4>
+                            </td>
+                        </tr>
+                    @endforeach
                 </table>
             </div>
         </div>

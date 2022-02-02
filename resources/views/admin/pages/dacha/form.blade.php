@@ -1,17 +1,18 @@
 <div class="form__input">
     <label for="select1">
-        Location
+        @lang('main.location')
     </label>
     <select id="select1" name="category_id">
         @foreach($categories as $category)
-            <option @if(!empty($dacha->category_id) and $dacha->category_id == $category->id) selected @endif value="{{ $category->id }}">{{ $category->name_ru }}</option>
+            <option @if(!empty($dacha->category_id) and $dacha->category_id == $category->id) selected
+                    @endif value="{{ $category->id }}">{{ $category->name_ru }}</option>
         @endforeach
     </select>
 </div>
 
 <div class="form__input">
     <label>
-        Name Uz
+        @lang('main.name_uz')
     </label>
     <input name="name_uz" type="text" @if(!empty(old('name_uz'))) value="{{ old('name_uz') }}"
            @elseif(!empty($dacha->name_uz)) value="{{ $dacha->name_uz }}" @endif >
@@ -19,7 +20,7 @@
 
 <div class="form__input">
     <label>
-        Name Ru
+        @lang('main.name_ru')
     </label>
     <input name="name_ru" type="text" @if(!empty(old('name_ru'))) value="{{ old('name_ru') }}"
            @elseif(!empty($dacha->name_ru)) value="{{ $dacha->name_ru }}" @endif >
@@ -27,7 +28,7 @@
 
 <div class="form__input">
     <label>
-        Bathroom count
+        @lang('main.bathroom_count')
     </label>
     <input name="bathroom_count" type="number" @if(!empty(old('bathroom_count'))) value="{{ old('bathroom_count') }}"
            @elseif(!empty($dacha->bathroom_count)) value="{{ $dacha->bathroom_count }}" @endif >
@@ -35,7 +36,7 @@
 
 <div class="form__input">
     <label>
-        Capacity
+        @lang('main.capacity')
     </label>
     <input name="capacity" type="number" @if(!empty(old('capacity'))) value="{{ old('capacity') }}"
            @elseif(!empty($dacha->capacity)) value="{{ $dacha->capacity }}" @endif >
@@ -43,7 +44,7 @@
 
 <div class="form__input">
     <label>
-        Room count
+        @lang('main.room_count')
     </label>
     <input name="room_count" type="number" @if(!empty(old('room_count'))) value="{{ old('room_count') }}"
            @elseif(!empty($dacha->room_count)) value="{{ $dacha->room_count }}" @endif >
@@ -51,7 +52,7 @@
 
 <div class="form__input">
     <label>
-        Price
+        @lang('main.price')
     </label>
     <input name="cost" type="number" @if(!empty(old('cost'))) value="{{ old('cost') }}"
            @elseif(!empty($dacha->cost)) value="{{ $dacha->cost }}" @endif >
@@ -61,12 +62,14 @@
         @foreach($dacha->comforts_uz as $comfort)
             <div id="comports{{ $loop->index }}" class="form__input">
                 <label>
-                    Comforts
+                    @lang('main.comforts')
                 </label>
-                <input placeholder="uz" value="{{ $comfort }}" name="comforts_uz[]" type="text">
-                <input placeholder="ru" value="{{ $dacha->comforts_ru[$loop->index] }}" name="comforts_ru[]" type="text">
+                <input placeholder="@lang('main.uz')" value="{{ $comfort }}" name="comforts_uz[]" type="text">
+                <input placeholder="@lang('main.ru')" value="{{ $dacha->comforts_ru[$loop->index] }}" name="comforts_ru[]"
+                       type="text">
                 @if (!$loop->first)
-                    <button type="button" onclick="removeInput('s'+{{ $loop->index }})" class="removeButton inputRemove">
+                    <button type="button" onclick="removeInput('s'+{{ $loop->index }})"
+                            class="removeButton inputRemove">
                         <ion-icon name="close-outline"></ion-icon>
                     </button>
                 @endif
@@ -77,7 +80,7 @@
     <div id="multipleInput" class="multipleInput">
         <div class="form__input">
             <label>
-                Comforts
+                @lang('main.comforts')
             </label>
             <input placeholder="uz" name="comforts_uz[]" type="text" value="{{ old('comforts') }}">
             <input placeholder="ru" name="comforts_ru[]" type="text" value="{{ old('comforts') }}">
@@ -93,15 +96,17 @@
             <div id="uploads{{ $loop->index }}">
                 <input name="exist_image[]" type="hidden" value="{{ $images->id }}">
                 <div class="uploadImage">
-                    <img id="outputs{{ $loop->index }}" @if(!empty($images->image_path)) src="/{{ $images->image_path }}"
+                    <img id="outputs{{ $loop->index }}"
+                         @if(!empty($images->image_path)) src="/{{ $images->image_path }}"
                          @else src="/assets/img/default.png" @endif>
                 </div>
                 <div class="form__input fileInput">
                     <label for="fileInputs{{ $loop->index }}">
-                        <ion-icon name="cloud-upload-outline"></ion-icon>
-                        <span>upload</span>
+                        <ion-icon name="arrow-down-outline"></ion-icon>
+                        <span>@lang('main.upload')</span>
                     </label>
-                    <input id="fileInputs{{ $loop->index }}" onchange="uploadImg('s'+{{ $loop->index  }})" name="exist_image_path[{{ $images->id }}]" type="file">
+                    <input id="fileInputs{{ $loop->index }}" onchange="uploadImg('s'+{{ $loop->index  }})"
+                           name="exist_image_path[{{ $images->id }}]" type="file">
                     @if (!$loop->first)
                         <button type="button" onclick="removeElement('s'+{{ $loop->index }})" class="removeButton">
                             <ion-icon name="close-outline"></ion-icon>
@@ -120,8 +125,8 @@
 
             <div class="form__input fileInput">
                 <label for="fileInput0">
-                    <ion-icon name="cloud-upload-outline"></ion-icon>
-                    <span>upload1</span>
+                    <ion-icon name="arrow-down-outline"></ion-icon>
+                    <span>@lang('main.upload')</span>
                 </label>
                 <input onchange="uploadImg(0)" id="fileInput0" name="image_path[]" type="file">
             </div>
@@ -133,7 +138,7 @@
 </button>
 
 <div class="form__btn">
-    <button type="submit">submit</button>
+    <button type="submit">@lang('main.save')</button>
 </div>
 
 @section('js')
@@ -145,10 +150,10 @@
             addCount++;
             var element = `<div id="comport` + addCount + `" class="form__input">
                                 <label>
-                                    Comforts
+                                    {{ __('main.comforts') }}
                                 </label>
-                                <input placeholder="uz" name="comforts_uz[]" type="text">
-                                <input placeholder="ru" name="comforts_ru[]" type="text">
+                                <input placeholder="{{ __('main.uz') }}" name="comforts_uz[]" type="text">
+                                <input placeholder="{{ __('main.ru') }}" name="comforts_ru[]" type="text">
                                 <button type="button" onclick="removeInput(` + addCount + `)" class="removeButton inputRemove">
                                     <ion-icon name="close-outline"></ion-icon>
                                 </button>
@@ -189,8 +194,8 @@
 
             <div class="form__input fileInput">
                 <label for="fileInput` + reqs_id + `">
-                    <ion-icon name="cloud-upload-outline"></ion-icon>
-                    <span>upload</span>
+                    <ion-icon name="arrow-down-outline"></ion-icon>
+        <span>{{__("main.upload")}}</span>
                 </label>
                 <input onchange="uploadImg(` + reqs_id + `)" id="fileInput` + reqs_id + `" name="image_path[]" type="file">
                 <button type="button" onclick="removeElement(` + reqs_id + `)" class="removeButton"><ion-icon name="close-outline"></ion-icon></button>

@@ -17,7 +17,7 @@ class DachaController extends Controller
      */
     public function index(): JsonResponse
     {
-        $dacha = Dacha::with('images', 'category')->paginate(10);
+        $dacha = Dacha::with('images', 'category')->orderByDesc('id')->paginate(10);
         try {
             return response()->json([
                 'data' => $dacha

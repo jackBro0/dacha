@@ -19,7 +19,7 @@
             <!-- data list -->
             <div class="itemsCard">
                 <div class="cardHeader">
-                    <h2>Location create</h2>
+                    <h2>@lang('main.add_location')</h2>
                 </div>
                 <div class="form">
                     <form method="post" action="{{ route('category.store') }}" enctype="multipart/form-data">

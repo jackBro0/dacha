@@ -19,7 +19,7 @@
             <!-- data list -->
             <div class="itemsCard">
                 <div class="cardHeader">
-                    <h2>Order edit</h2>
+                    <h2>@lang('main.edit_order')</h2>
                 </div>
                 <div class="form">
                     <form method="post" action="{{ route('order.update', $orders->id) }}" enctype="multipart/form-data">
