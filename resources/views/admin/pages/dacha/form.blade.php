@@ -25,7 +25,12 @@
     <input name="name_ru" type="text" @if(!empty(old('name_ru'))) value="{{ old('name_ru') }}"
            @elseif(!empty($dacha->name_ru)) value="{{ $dacha->name_ru }}" @endif >
 </div>
-
+<div class="form__input">
+    <label>
+        @lang('main.top_rated')
+    </label>
+    <input type="checkbox" name="top_rated" class="form__checkbox" value="1" @if(!empty($dacha->top_rated) and $dacha->top_rated == "1") checked @endif>
+</div>
 <div class="form__input">
     <label>
         @lang('main.bathroom_count')

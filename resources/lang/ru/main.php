@@ -49,6 +49,7 @@ return [
     'room_count' => 'Кол-во комнат',
     'price' => 'Цена',
     'comforts' => 'Удобства',
+    'top_rated' => 'Топ',
     // <<<<<<<<<<<<<<< Dacha end
 
     // Order start >>>>>>>>>>>>>>>

@@ -752,6 +752,11 @@ body {
     font-size: 14px;
 }
 
+.form__input .form__checkbox {
+    width: 2.79%;
+    height: 25px;
+}
+
 @media (max-width: 991px) {
     .navigation {
         left: -300px;

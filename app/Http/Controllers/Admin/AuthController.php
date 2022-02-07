@@ -24,7 +24,7 @@ class AuthController extends Controller
         $data = $request->only('email', 'password');
 
         if (Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
-            return redirect()->route('category.index');
+            return redirect()->route('adminPanel');
         } else {
             return redirect()->back()->withErrors(['fail' => 'login or password invalid']);
         }

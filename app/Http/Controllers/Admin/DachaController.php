@@ -48,6 +48,11 @@ class DachaController extends Controller
             $dacha->capacity = $request->capacity;
             $dacha->room_count = $request->room_count;
             $dacha->cost = $request->cost;
+            if ($request->top_rated == null){
+                $dacha->top_rated = 0;
+            }else{
+                $dacha->top_rated = $request->top_rated;
+            }
             $dacha->comforts_uz = $request->comforts_uz;
             $dacha->comforts_ru = $request->comforts_ru;
             $dacha->category_id = $request->category_id;
@@ -105,6 +110,11 @@ class DachaController extends Controller
             $dacha->capacity = $request->capacity;
             $dacha->room_count = $request->room_count;
             $dacha->cost = $request->cost;
+            if ($request->top_rated == null){
+                $dacha->top_rated = 0;
+            }else{
+                $dacha->top_rated = $request->top_rated;
+            }
             $dacha->comforts_uz = $request->comforts_uz;
             $dacha->comforts_ru = $request->comforts_ru;
             $dacha->category_id = $request->category_id;

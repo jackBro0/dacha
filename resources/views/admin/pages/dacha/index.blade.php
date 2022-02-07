@@ -19,7 +19,7 @@
             <div class="recentOrders">
                 <div class="cardHeader">
                     <h2>@lang('main.dacha')</h2>
-                    <a href="{{ route('dacha.create') }}" class="btn">@lang('main.add_new')</a>
+                    <a href="{{ route('dacha.create') }}" class="btn">@lang('main.add_new') +</a>
                 </div>
                 <form method="get" action="{{ route('dacha.index') }}" class="filter">
                     <div class="filter__input">
