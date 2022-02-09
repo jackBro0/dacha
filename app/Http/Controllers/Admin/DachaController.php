@@ -21,8 +21,11 @@ class DachaController extends Controller
                 return $q->where('name_uz', 'like', '%' . $request->name . '%')
                     ->orWhere('name_ru', 'like', '%' . $request->name . '%');
             })
-            ->when(isset($request->category_id), function ($query) use ($request) {
-                return $query->where('category_id', $request->category_id);
+            ->when(isset($request->category_id) and $request->category_id != 0, function ($query) use ($request) {
+                return $query->where('category_id', (int)$request->category_id);
+            })
+            ->when(isset($request->top_rated) and $request->top_rated == 1, function ($query) use ($request) {
+                return $query->where('top_rated', true);
             })
             ->orderByDesc('id')
             ->paginate(10);

@@ -24,3 +24,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('/category', CategoryController::class);
 Route::resource('/dacha', DachaController::class);
 Route::post('rent-dacha', [RentDachaController::class, 'rentDacha']);
+Route::get('top-rated', [DachaController::class, 'topRated']);

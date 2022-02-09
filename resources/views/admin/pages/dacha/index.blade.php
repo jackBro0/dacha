@@ -28,13 +28,25 @@
                     </div>
                     <div class="filter__select">
                         <select name="category_id">
-                            <option></option>
+                            <option value="0">Все</option>
                             @foreach($categories as $category)
-                                    <option @if(!empty(request()->get('category_id')) and request()->get('category_id') == $category->id) selected @endif
-                                            value="{{ $category->id }}">
-                                        {{ $category->name_ru }}
-                                    </option>
+                                <option
+                                    @if(!empty(request()->get('category_id')) and request()->get('category_id') == $category->id) selected
+                                    @endif
+                                    value="{{ $category->id }}">
+                                    {{ $category->name_ru }}
+                                </option>
                             @endforeach
+                        </select>
+                    </div>
+                    <div class="filter__select">
+                        <select name="top_rated">
+                            <option>Все</option>
+                            <option
+                                @if(!empty(request()->get('top_rated')) and request()->get('top_rated') == 1) selected
+                                @endif value="1">
+                                Топ дачи
+                            </option>
                         </select>
                     </div>
                     <button class="filter__button" type="submit">

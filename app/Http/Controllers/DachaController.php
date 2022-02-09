@@ -156,4 +156,25 @@ class DachaController extends Controller
             ], 404);
         }
     }
+
+    /**
+     * Display a top rated dacha.
+     *
+     * @return JsonResponse
+     */
+    public function topRated(): JsonResponse
+    {
+        $dacha = Dacha::with('images', 'category')->
+            where('top_rated', true)->orderByDesc('id')->paginate(10);
+        try {
+            return response()->json([
+                'data' => $dacha
+            ], 200);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'error' => $exception,
+                'message' => 'Something went wrong'
+            ]);
+        }
+    }
 }
