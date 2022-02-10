@@ -32,7 +32,7 @@ class DachaController extends Controller
                 return $query->where('top_rated', true);
             })
             ->orderByDesc('id')
-            ->paginate(10);
+            ->paginate($per_page);
         $categories = Category::query()->get();
         return view('admin.pages.dacha.index', compact('dacha', 'categories'));
     }

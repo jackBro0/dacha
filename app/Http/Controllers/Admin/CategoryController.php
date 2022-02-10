@@ -15,13 +15,17 @@ class CategoryController extends Controller
 
     public function index(Request $request)
     {
+        $per_page = 10;
+        if (isset($request->per_page)) {
+            $per_page = (int) $request->per_page;
+        }
         $categories = Category::query()
             ->when(isset($request->name), function ($q) use ($request) {
                 return $q->where('name_uz', 'like', '%' . $request->name . '%')
                     ->orWhere('name_ru', 'like', '%' . $request->name . '%');
             })
             ->orderByDesc('id')
-            ->paginate(10);
+            ->paginate($per_page);
         return view('admin.pages.category.index', compact('categories'));
     }
 
