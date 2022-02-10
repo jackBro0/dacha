@@ -16,12 +16,16 @@ class RentDachaController extends Controller
      */
     public function index(Request $request)
     {
+        $per_page = 10;
+        if (isset($request->per_page)) {
+            $per_page = (int) $request->per_page;
+        }
         $orders = RentDacha::query()
             ->when(isset($request->name), function ($q) use ($request) {
                 return $q->where('name', 'like', '%' . $request->name . '%');
             })
             ->orderByDesc('id')
-            ->paginate(10);
+            ->paginate($per_page);
         return view('admin.pages.rent-dacha.index', compact('orders'));
     }
 
