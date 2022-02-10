@@ -329,6 +329,7 @@ body {
 
 .details .recentOrders table tbody tr:hover {
     background: var(--blue);
+    color: var(--white);
 }
 
 .details .recentOrders table tr td {
@@ -356,6 +357,11 @@ body {
 
 .details .recentOrders table tr td a{
     font-size: 20px;
+}
+
+.details .recentOrders table tr:hover td a:first-child,
+.details .recentOrders table tr:hover td a:last-child{
+    color: var(--white);
 }
 
 .details .recentOrders table tr td a:first-child {
@@ -646,8 +652,8 @@ body {
     color: var(--white);
     border: none;
     text-align: center;
-    width: 40px;
     border-radius: 5px;
+    padding: 5px;
 }
 
 

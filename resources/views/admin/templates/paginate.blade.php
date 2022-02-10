@@ -31,13 +31,13 @@
         <a href="{{ $items->nextPageUrl() }}">&raquo;</a>
     @endif
     <form method="get" action="{{ route(Route::currentRouteName()) }}">
-        <input value="{{ $items->currentPage() }}" class="pagination pagination__pageInput" name="page" type="text">
+        <input data-mask="00000" value="{{ $items->currentPage() }}" class="pagination pagination__pageInput" name="page" type="text">
         <select class="pagination pagination__perPage" name="per_page">
             <option @if(!empty(request()->get('per_page')) and request()->get('per_page') == 10) selected @endif>10</option>
             <option @if(!empty(request()->get('per_page')) and request()->get('per_page') == 50) selected @endif>50</option>
             <option @if(!empty(request()->get('per_page')) and request()->get('per_page') == 100) selected @endif>100</option>
         </select>
-        <button class="pagination pagination__button" type="submit">Go</button>
+        <button class="pagination pagination__button" type="submit">Впред</button>
     </form>
 </div>
 

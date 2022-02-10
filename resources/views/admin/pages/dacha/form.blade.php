@@ -35,7 +35,7 @@
     <label>
         @lang('main.bathroom_count')
     </label>
-    <input name="bathroom_count" type="number" @if(!empty(old('bathroom_count'))) value="{{ old('bathroom_count') }}"
+    <input name="bathroom_count" type="text" data-mask="000" @if(!empty(old('bathroom_count'))) value="{{ old('bathroom_count') }}"
            @elseif(!empty($dacha->bathroom_count)) value="{{ $dacha->bathroom_count }}" @endif >
 </div>
 
@@ -43,7 +43,7 @@
     <label>
         @lang('main.capacity')
     </label>
-    <input name="capacity" type="number" @if(!empty(old('capacity'))) value="{{ old('capacity') }}"
+    <input name="capacity" type="text" data-mask="0000" @if(!empty(old('capacity'))) value="{{ old('capacity') }}"
            @elseif(!empty($dacha->capacity)) value="{{ $dacha->capacity }}" @endif >
 </div>
 
@@ -51,7 +51,7 @@
     <label>
         @lang('main.room_count')
     </label>
-    <input name="room_count" type="number" @if(!empty(old('room_count'))) value="{{ old('room_count') }}"
+    <input name="room_count" type="text" data-mask="000" @if(!empty(old('room_count'))) value="{{ old('room_count') }}"
            @elseif(!empty($dacha->room_count)) value="{{ $dacha->room_count }}" @endif >
 </div>
 
@@ -59,7 +59,7 @@
     <label>
         @lang('main.price')
     </label>
-    <input name="cost" type="number" @if(!empty(old('cost'))) value="{{ old('cost') }}"
+    <input name="cost" type="text" data-mask="0000000000000000" @if(!empty(old('cost'))) value="{{ old('cost') }}"
            @elseif(!empty($dacha->cost)) value="{{ $dacha->cost }}" @endif >
 </div>
 @if(!empty($dacha->comforts_ru))
