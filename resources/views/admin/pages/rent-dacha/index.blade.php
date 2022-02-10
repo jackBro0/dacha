@@ -84,39 +84,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="pagination">
-                @if(!empty($orders->appends(request()->except(['page', '_token']))->previousPageUrl()))
-                    <a href="{{ $orders->previousPageUrl() }}">&laquo;</a>
-                @endif
-                @if($orders->currentPage() > 3)
-                    <a href="{{ $orders->url(1) }}">1</a>
-                @endif
-                @if($orders->currentPage() > 4)
-                    <a>...</a>
-                @endif
-                @if($orders->currentPage() > 2)
-                    <a href="{{ $orders->url($orders->currentPage() - 2) }}">{{ $orders->currentPage() - 2 }}</a>
-                @endif
-                @if(!empty($orders->previousPageUrl()))
-                    <a href="{{ $orders->previousPageUrl() }}">{{ $orders->currentPage() - 1 }}</a>
-                @endif
-                <a href="#" class="active">{{ $orders->currentPage() }}</a>
-                @if($orders->hasMorePages())
-                    <a href="{{ $orders->nextPageUrl() }}">{{ $orders->currentPage() + 1 }}</a>
-                @endif
-                @if(($orders->lastPage() - $orders->currentPage()) > 2)
-                    <a href="{{ $orders->url($orders->currentPage() + 2) }}">{{ $orders->currentPage() + 2 }}</a>
-                @endif
-                @if(($orders->lastPage() - $orders->currentPage()) > 3)
-                    <a>...</a>
-                @endif
-                @if(!($orders->lastPage() == $orders->currentPage()) and ($orders->lastPage() - $orders->currentPage()) > 1)
-                    <a href="{{ $orders->url($orders->lastPage()) }}">{{ $orders->lastPage() }}</a>
-                @endif
-                @if($orders->hasMorePages())
-                    <a href="{{ $orders->nextPageUrl() }}">&raquo;</a>
-                @endif
-            </div>
+            @include('admin.templates.paginate', ['items' => $orders])
         </div>
     </div>
 @endsection
