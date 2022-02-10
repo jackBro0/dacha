@@ -16,6 +16,10 @@ class DachaController extends Controller
 {
     public function index(Request $request)
     {
+        $per_page = 10;
+        if (isset($request->per_page)) {
+            $per_page = (int) $request->per_page;
+        }
         $dacha = Dacha::with('images', 'category')
             ->when(isset($request->name), function ($q) use ($request) {
                 return $q->where('name_uz', 'like', '%' . $request->name . '%')

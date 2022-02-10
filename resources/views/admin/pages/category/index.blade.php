@@ -87,39 +87,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="pagination">
-                @if(!empty($categories->appends(request()->except(['page', '_token']))->previousPageUrl()))
-                    <a href="{{ $categories->previousPageUrl() }}">&laquo;</a>
-                @endif
-                @if($categories->currentPage() > 3)
-                    <a href="{{ $categories->url(1) }}">1</a>
-                @endif
-                @if($categories->currentPage() > 4)
-                    <a>...</a>
-                @endif
-                @if($categories->currentPage() > 2)
-                    <a href="{{ $categories->url($categories->currentPage() - 2) }}">{{ $categories->currentPage() - 2 }}</a>
-                @endif
-                @if(!empty($categories->previousPageUrl()))
-                    <a href="{{ $categories->previousPageUrl() }}">{{ $categories->currentPage() - 1 }}</a>
-                @endif
-                <a href="#" class="active">{{ $categories->currentPage() }}</a>
-                @if($categories->hasMorePages())
-                    <a href="{{ $categories->nextPageUrl() }}">{{ $categories->currentPage() + 1 }}</a>
-                @endif
-                @if(($categories->lastPage() - $categories->currentPage()) > 2)
-                    <a href="{{ $categories->url($categories->currentPage() + 2) }}">{{ $categories->currentPage() + 2 }}</a>
-                @endif
-                @if(($categories->lastPage() - $categories->currentPage()) > 3)
-                    <a>...</a>
-                @endif
-                @if(!($categories->lastPage() == $categories->currentPage()) and ($categories->lastPage() - $categories->currentPage()) > 1)
-                    <a href="{{ $categories->url($categories->lastPage()) }}">{{ $categories->lastPage() }}</a>
-                @endif
-                @if($categories->hasMorePages())
-                    <a href="{{ $categories->nextPageUrl() }}">&raquo;</a>
-                @endif
-            </div>
+            @include('admin.templates.paginate', ['items' => $categories])
         </div>
     </div>
 @endsection

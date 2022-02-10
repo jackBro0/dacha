@@ -125,39 +125,7 @@
                     </tbody>
                 </table>
             </div>
-            <div class="pagination">
-                @if(!empty($dacha->appends(request()->except(['page', '_token']))->previousPageUrl()))
-                    <a href="{{ $dacha->previousPageUrl() }}">&laquo;</a>
-                @endif
-                @if($dacha->currentPage() > 3)
-                    <a href="{{ $dacha->url(1) }}">1</a>
-                @endif
-                @if($dacha->currentPage() > 4)
-                    <a>...</a>
-                @endif
-                @if($dacha->currentPage() > 2)
-                    <a href="{{ $dacha->url($dacha->currentPage() - 2) }}">{{ $dacha->currentPage() - 2 }}</a>
-                @endif
-                @if(!empty($dacha->previousPageUrl()))
-                    <a href="{{ $dacha->previousPageUrl() }}">{{ $dacha->currentPage() - 1 }}</a>
-                @endif
-                <a href="#" class="active">{{ $dacha->currentPage() }}</a>
-                @if($dacha->hasMorePages())
-                    <a href="{{ $dacha->nextPageUrl() }}">{{ $dacha->currentPage() + 1 }}</a>
-                @endif
-                @if(($dacha->lastPage() - $dacha->currentPage()) > 2)
-                    <a href="{{ $dacha->url($dacha->currentPage() + 2) }}">{{ $dacha->currentPage() + 2 }}</a>
-                @endif
-                @if(($dacha->lastPage() - $dacha->currentPage()) > 3)
-                    <a>...</a>
-                @endif
-                @if(!($dacha->lastPage() == $dacha->currentPage()) and ($dacha->lastPage() - $dacha->currentPage()) > 1)
-                    <a href="{{ $dacha->url($dacha->lastPage()) }}">{{ $dacha->lastPage() }}</a>
-                @endif
-                @if($dacha->hasMorePages())
-                    <a href="{{ $dacha->nextPageUrl() }}">&raquo;</a>
-                @endif
-            </div>
+            @include('admin.templates.paginate', ['items' => $dacha])
         </div>
     </div>
 @endsection
