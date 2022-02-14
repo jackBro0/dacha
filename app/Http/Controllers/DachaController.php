@@ -186,6 +186,7 @@ class DachaController extends Controller
             ]
         );
         $dacha = Dacha::query()
+            ->with('images', 'category')
             ->whereIn('id', $request->ids_array)
             ->get();
 
