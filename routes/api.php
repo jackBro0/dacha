@@ -25,4 +25,4 @@ Route::resource('/category', CategoryController::class);
 Route::resource('/dacha', DachaController::class);
 Route::post('rent-dacha', [RentDachaController::class, 'rentDacha']);
 Route::get('top-rated', [DachaController::class, 'topRated']);
-Route::post('/favourites', [DachaController::class, 'dachaByArray']);
+Route::get('/favourites', [DachaController::class, 'dachaByArray']);
