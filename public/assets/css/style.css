@@ -1,5 +1,6 @@
 /*@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap');*/
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -355,12 +356,12 @@ body {
     align-items: center;
 }
 
-.details .recentOrders table tr td a{
+.details .recentOrders table tr td a {
     font-size: 20px;
 }
 
 .details .recentOrders table tr:hover td a:first-child,
-.details .recentOrders table tr:hover td a:last-child{
+.details .recentOrders table tr:hover td a:last-child {
     color: var(--white);
 }
 
@@ -474,6 +475,7 @@ body {
 
 .form {
     padding: 40px 0 0 0;
+    width: 60%;
 }
 
 .form__input {
@@ -543,7 +545,7 @@ body {
     position: relative;
 }
 
-.form__input.fileInput label ion-icon{
+.form__input.fileInput label ion-icon {
     position: absolute;
     top: 5px;
     left: 10px;
@@ -554,12 +556,16 @@ body {
     padding: 0 15px 0 30px;
 }
 
+.upload{
+    padding: 20px 0;
+}
+
 .uploadImage {
     position: relative;
     width: 200px;
     height: 200px;
     overflow: hidden;
-    margin-top: 40px;
+    /*margin-top: 20px;*/
 }
 
 .uploadImage img {
@@ -603,7 +609,7 @@ body {
     border: 1px solid #ddd;
 }
 
-.pagination form{
+.pagination form {
     height: 100%;
     display: flex;
     justify-content: end;
@@ -629,7 +635,7 @@ body {
     text-align: center;
 }
 
-.pagination select{
+.pagination select {
     margin-right: 10px;
     border: 1px solid #ddd;
     text-align: center;
@@ -637,12 +643,12 @@ body {
     font-size: 18px;
 }
 
-.pagination select option{
+.pagination select option {
     text-align: center;
     border: 1px solid #ddd;
 }
 
-.pagination__button{
+.pagination__button {
     float: left;
     text-decoration: none;
     transition: background-color .3s;
@@ -657,16 +663,18 @@ body {
 }
 
 
-.pagination a:hover:not(.active) {background-color: #ddd;}
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
 
 /*modal*/
-.modal-container{
+.modal-container {
     display: flex;
     opacity: 0;
     pointer-events: none;
     align-items: center;
     justify-content: center;
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0, 0, 0, 0.3);
     position: fixed;
     top: 0;
     left: 0;
@@ -676,39 +684,40 @@ body {
     z-index: 1002;
 }
 
-.modal-container.show{
+.modal-container.show {
     opacity: 1;
     pointer-events: auto;
 }
 
-.modal__header{
+.modal__header {
     display: flex;
     position: relative;
 }
 
-.modal__close{
+.modal__close {
     position: absolute;
     top: 0;
     right: 0;
     font-size: 24px
 }
 
-.modal{
+.modal {
     background-color: #fff;
     width: 600px;
     max-width: 100%;
     padding: 30px 50px;
     border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     border: 2px solid red;
 }
 
-.delete{
+.delete {
     display: flex;
     justify-content: center;
     padding: 20px 0 0 10px;
 }
-.modal__delete{
+
+.modal__delete {
     position: relative;
     padding: 12px 35px 12px 20px;
     background: red;
@@ -721,7 +730,7 @@ body {
     align-items: center;
 }
 
-.addButton{
+.addButton {
     position: relative;
     padding: 5px 8px;
     background: #8de02c;
@@ -733,7 +742,7 @@ body {
     border-radius: 5px;
 }
 
-.removeButton{
+.removeButton {
     position: relative;
     padding: 0 8px;
     background: red;
@@ -746,25 +755,26 @@ body {
     margin-left: 35px;
 }
 
-.inputRemove{
+.inputRemove {
     padding: 8px;
     margin-left: 5px;
 
 }
 
-.delete button ion-icon{
+.delete button ion-icon {
     position: absolute;
     margin: 1px 6px;
     font-size: 16px;
 }
+
 /*end modal*/
 
-.filter{
+.filter {
     display: flex;
     padding: 20px 0;
 }
 
-.filter__input input{
+.filter__input input {
     width: 300px;
     height: 40px;
     border-radius: 10px;
@@ -785,7 +795,7 @@ body {
     margin-left: 10px;
 }
 
-.filter__button{
+.filter__button {
     height: 40px;
     position: relative;
     padding: 5px 8px 5px 28px;
@@ -799,7 +809,7 @@ body {
     margin-left: 10px;
 }
 
-.filter__button ion-icon{
+.filter__button ion-icon {
     top: 12px;
     left: 8px;
     position: absolute;
@@ -809,6 +819,13 @@ body {
 .form__input .form__checkbox {
     width: 2.79%;
     height: 25px;
+}
+
+.validationError {
+    color: red;
+    display: block;
+    padding: 8px 0 8px 5px;
+    font-size: 14px;
 }
 
 @media (max-width: 991px) {

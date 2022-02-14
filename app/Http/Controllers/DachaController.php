@@ -177,4 +177,20 @@ class DachaController extends Controller
             ]);
         }
     }
+
+    public function dachaByArray(Request $request)
+    {
+        $request->validate(
+            [
+                'ids_array' => 'required | array'
+            ]
+        );
+        $dacha = Dacha::query()
+            ->whereIn('id', $request->ids_array)
+            ->get();
+
+        return response()->json([
+            'data' => $dacha
+        ]);
+    }
 }

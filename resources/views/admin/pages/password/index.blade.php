@@ -24,18 +24,27 @@
                             <label>
                                 @lang('main.current_password')
                             </label>
+                            @error('current_password')
+                            <span class="validationError">{{ $message  }}</span>
+                            @enderror
                             <input name="current_password" type="password">
                         </div>
                         <div class="form__input">
                             <label>
                                 @lang('main.new_password')
                             </label>
+                            @error('password')
+                            <span class="validationError">{{ $message  }}</span>
+                            @enderror
                             <input name="password" type="password">
                         </div>
                         <div class="form__input">
                             <label>
                                 @lang('main.confirm_new_password')
                             </label>
+                            @error('confirm')
+                            <span class="validationError">{{ $message  }}</span>
+                            @enderror
                             <input name="confirm" type="password">
                         </div>
                         <div class="form__btn">

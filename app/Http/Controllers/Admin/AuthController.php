@@ -46,7 +46,8 @@ class AuthController extends Controller
         $request->validate([
             'current_password' => 'required',
             'password' => 'required',
-            'confirm' => 'required',
+            'confirm' => 'required | same:password',
         ]);
+        return redirect()->back();
     }
 }

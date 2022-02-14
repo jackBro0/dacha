@@ -23,6 +23,11 @@ class DachaRequest extends FormRequest
      */
     public function rules()
     {
+        $image_path = 'required';
+        if ($this->method() == 'PUT' or $this->method() == 'PATCH')
+        {
+            $image_path = '';
+        }
         return [
             'category_id' => 'required',
             'name_uz' => 'required',
@@ -30,7 +35,8 @@ class DachaRequest extends FormRequest
             'bathroom_count' => 'required',
             'capacity' => 'required',
             'room_count' => 'required',
-            'cost' => 'required'
+            'cost' => 'required',
+            'image_path' => $image_path
         ];
     }
 }

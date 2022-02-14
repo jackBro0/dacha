@@ -30,6 +30,6 @@ Route::middleware('auth')->group(function () {
 
     /////////////////////Password\\\\\\\\\\\\\\\\\\\\\\\\\
     Route::get('/password', [AuthController::class, 'password'])->name('password');
-    Route::put('/password-change', [AuthController::class, 'passwordChange'])->name('passwordChange');
+    Route::post('/password-change', [AuthController::class, 'passwordChange'])->name('passwordChange');
 
 });
