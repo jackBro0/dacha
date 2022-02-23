@@ -816,8 +816,13 @@ body {
     font-size: 14px;
 }
 
+.checkboxInput{
+    display: flex;
+}
+
 .form__input .form__checkbox {
-    width: 2.79%;
+    margin: 5px 0 0 0;
+    width: 7%;
     height: 25px;
 }
 

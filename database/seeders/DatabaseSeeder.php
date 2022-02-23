@@ -51,8 +51,8 @@ class DatabaseSeeder extends Seeder
                     'bathroom_count' => $item['bathroom_count'],
                     'capacity' => $item['capacity'],
                     'cost' => $item['cost'],
-                    'comforts_uz' => $item['comforts_uz'],
-                    'comforts_ru' => $item['comforts_ru']
+//                    'comforts_uz' => $item['comforts_uz'],
+//                    'comforts_ru' => $item['comforts_ru']
                 ]);
                 DachaImage::query()->create([
                     'dacha_id' => $d->id,

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DachaController;
 use App\Http\Controllers\Admin\RentDachaController;
+use App\Http\Controllers\Admin\ComfortController;
 use Illuminate\Support\Facades\Route;
 use \App\Http\Controllers\Admin\MainController;
 use \App\Http\Controllers\Admin\AuthController;
@@ -27,6 +28,9 @@ Route::middleware('auth')->group(function () {
 
     ////////////////////Rent Dacha (Orders) \\\\\\\\\\\\\\
     Route::resource('/order', RentDachaController::class);
+
+    //////////////////// Comforts \\\\\\\\\\\\\\
+    Route::resource('/comfort', ComfortController::class);
 
     /////////////////////Password\\\\\\\\\\\\\\\\\\\\\\\\\
     Route::get('/password', [AuthController::class, 'password'])->name('password');

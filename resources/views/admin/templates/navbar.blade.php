@@ -30,12 +30,12 @@
                 <span class="title">@lang('main.orders')</span>
             </a>
         </li>
-{{--        <li>--}}
-{{--            <a href="#">--}}
-{{--                <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>--}}
-{{--                <span class="title">Settings</span>--}}
-{{--            </a>--}}
-{{--        </li>--}}
+        <li class="{{ (request()->is('comfort*')) ? 'active' : '' }}" >
+            <a href="{{ route('comfort.index') }}">
+                <span class="icon"><ion-icon name="game-controller-outline"></ion-icon></span>
+                <span class="title">@lang('main.comforts')</span>
+            </a>
+        </li>
         <li class="{{ (request()->is('password*')) ? 'active' : '' }}" >
             <a href="{{ route('password') }}">
                 <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>

@@ -20,8 +20,8 @@ class CreateDachasTable extends Migration
                 ->references('id')->on('categories');
             $table->string('name_uz');
             $table->string('name_ru');
-            $table->text('comforts_uz'); // qulayliklari
-            $table->text('comforts_ru'); // qulayliklari
+//            $table->text('comforts_uz'); // qulayliklari
+//            $table->text('comforts_ru'); // qulayliklari
             $table->integer('room_count');
             $table->integer('bathroom_count');
             $table->integer('capacity'); //odamlar soni

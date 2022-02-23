@@ -34,13 +34,13 @@
     <input name="name_ru" type="text" @if(!empty(old('name_ru'))) value="{{ old('name_ru') }}"
            @elseif(!empty($dacha->name_ru)) value="{{ $dacha->name_ru }}" @endif >
 </div>
-<div class="form__input">
-    <label>
-        @lang('main.top_rated')
-    </label>
+<div class="form__input checkboxInput">
     @error('top_rated')
     <span class="validationError">{{ $message  }}</span>
     @enderror
+    <label>
+        @lang('main.top_rated')
+    </label>
     <input type="checkbox" name="top_rated" class="form__checkbox" value="1"
            @if(!empty($dacha->top_rated) and $dacha->top_rated == "1") checked @endif>
 </div>
@@ -88,43 +88,49 @@
     <input name="cost" type="text" data-mask="0000000000000000" @if(!empty(old('cost'))) value="{{ old('cost') }}"
            @elseif(!empty($dacha->cost)) value="{{ $dacha->cost }}" @endif >
 </div>
-@if(!empty($dacha->comforts_ru))
-    <div id="multipleInput" class="multipleInput">
-        @foreach($dacha->comforts_uz as $comfort)
-            <div id="comports{{ $loop->index }}" class="form__input">
-                <label>
-                    @lang('main.comforts')
-                </label>
-                <input placeholder="@lang('main.uz')" value="{{ $comfort }}" name="comforts_uz[]" type="text">
-                <input placeholder="@lang('main.ru')" value="{{ $dacha->comforts_ru[$loop->index] }}"
-                       name="comforts_ru[]"
-                       type="text">
-                @if (!$loop->first)
-                    <button type="button" onclick="removeInput('s'+{{ $loop->index }})"
-                            class="removeButton inputRemove">
-                        <ion-icon name="close-outline"></ion-icon>
-                    </button>
-                @endif
-            </div>
-        @endforeach
+@foreach($comforts as $comfort)
+    <div class="form__input checkboxInput">
+        <label>
+            {{ $comfort->name_ru }}
+        </label>
+        <input type="checkbox" @if(!empty($dacha) and $dacha->comforts->where('id', $comfort->id)->count()) checked @endif
+               name="comforts[]" class="form__checkbox" value="{{$comfort->id}}">
     </div>
-@else
-    <div id="multipleInput" class="multipleInput">
-        <div class="form__input">
-            <label>
-                @lang('main.comforts')
-            </label>
-            @error('comforts_uz')
-            <span class="validationError">{{ $message  }}</span>
-            @enderror
-            <input placeholder="uz" name="comforts_uz[]" type="text" value="{{ old('comforts') }}">
-            <input placeholder="ru" name="comforts_ru[]" type="text" value="{{ old('comforts') }}">
-        </div>
-    </div>
-@endif
-<button onclick="addInput()" class="addButton" type="button">
-    <ion-icon name="add-outline"></ion-icon>
-</button>
+@endforeach
+{{--@if(!empty($dacha->comforts_ru))--}}
+{{--    <div id="multipleInput" class="multipleInput">--}}
+{{--        @foreach($dacha->comforts_uz as $comfort)--}}
+{{--            <div id="comports{{ $loop->index }}" class="form__input">--}}
+{{--                <label>--}}
+{{--                    @lang('main.comforts')--}}
+{{--                </label>--}}
+{{--                <input placeholder="@lang('main.uz')" value="{{ $comfort }}" name="comforts_uz[]" type="text">--}}
+{{--                <input placeholder="@lang('main.ru')" value="{{ $dacha->comforts_ru[$loop->index] }}"--}}
+{{--                       name="comforts_ru[]"--}}
+{{--                       type="text">--}}
+{{--                @if (!$loop->first)--}}
+{{--                    <button type="button" onclick="removeInput('s'+{{ $loop->index }})"--}}
+{{--                            class="removeButton inputRemove">--}}
+{{--                        <ion-icon name="close-outline"></ion-icon>--}}
+{{--                    </button>--}}
+{{--                @endif--}}
+{{--            </div>--}}
+{{--        @endforeach--}}
+{{--    </div>--}}
+{{--@else--}}
+{{--    <div id="multipleInput" class="multipleInput">--}}
+{{--        <div class="form__input">--}}
+{{--            <label>--}}
+{{--                @lang('main.comforts')--}}
+{{--            </label>--}}
+{{--            @error('comforts_uz')--}}
+{{--            <span class="validationError">{{ $message  }}</span>--}}
+{{--            @enderror--}}
+{{--            <input placeholder="uz" name="comforts_uz[]" type="text" value="{{ old('comforts') }}">--}}
+{{--            <input placeholder="ru" name="comforts_ru[]" type="text" value="{{ old('comforts') }}">--}}
+{{--        </div>--}}
+{{--    </div>--}}
+{{--@endif--}}
 @if(!empty($dacha->images))
     <div id="reqs">
         @foreach($dacha->images as $images)

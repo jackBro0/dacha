@@ -6,6 +6,7 @@ return [
     'locations' => 'Локации',
     'dacha' => 'Дачи',
     'orders' => 'Заказы',
+    'comforts' => 'Удобства',
     'security' => 'Безопасность',
     'sign_out' => 'Выйти',
     // <<<<<< end navbar
@@ -48,7 +49,6 @@ return [
     'capacity' => 'Кол-во гостей',
     'room_count' => 'Кол-во комнат',
     'price' => 'Цена',
-    'comforts' => 'Удобства',
     'top_rated' => 'Топ',
     // <<<<<<<<<<<<<<< Dacha end
 
@@ -57,6 +57,11 @@ return [
     'edit_order' => 'Изменит заказ',
     'user_name' => 'Имя',
     'description' => 'Описание',
+    // <<<<<<<<<<<<<<< Order end
+
+    // Comfort start >>>>>>>>>>>>>>>
+    'add_comfort' => 'Добавить удобства',
+    'edit_comfort' => 'Изменит удобства',
     // <<<<<<<<<<<<<<< Order end
 
     // Security start >>>>>>>>>>>>>>>
