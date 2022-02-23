@@ -16,7 +16,7 @@ class Category extends Model
 
     public function dacha()
     {
-        return $this->hasMany(Dacha::class, 'category_id', 'id')->with('images');
+        return $this->hasMany(Dacha::class, 'category_id', 'id')->with(['images', 'comforts']);
     }
 
     public static function initialCategories()

@@ -17,7 +17,7 @@ class DachaController extends Controller
      */
     public function index(): JsonResponse
     {
-        $dacha = Dacha::with('images', 'category')->orderByDesc('id')->paginate(10);
+        $dacha = Dacha::with('images', 'category', 'comforts')->orderByDesc('id')->paginate(10);
         try {
             return response()->json([
                 'data' => $dacha
@@ -77,7 +77,7 @@ class DachaController extends Controller
      */
     public function show($id)
     {
-        $dacha = Dacha::with('images', 'category')->findOrFail($id);
+        $dacha = Dacha::with('images', 'category', 'comforts')->findOrFail($id);
         try {
             return response()->json([
                 'data' => $dacha
@@ -164,7 +164,7 @@ class DachaController extends Controller
      */
     public function topRated(): JsonResponse
     {
-        $dacha = Dacha::with('images', 'category')->
+        $dacha = Dacha::with('images', 'category', 'comforts')->
             where('top_rated', true)->orderByDesc('id')->paginate(10);
         try {
             return response()->json([
