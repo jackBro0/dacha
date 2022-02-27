@@ -165,7 +165,7 @@ class DachaController extends Controller
     public function topRated(): JsonResponse
     {
         $dacha = Dacha::with('images', 'category', 'comforts')->
-            where('top_rated', true)->orderByDesc('id')->paginate(10);
+            where('top_rated', true)->orderByDesc('id')->get();
         try {
             return response()->json([
                 'data' => $dacha

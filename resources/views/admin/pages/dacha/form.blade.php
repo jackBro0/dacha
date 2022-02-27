@@ -88,6 +88,17 @@
     <input name="cost" type="text" data-mask="0000000000000000" @if(!empty(old('cost'))) value="{{ old('cost') }}"
            @elseif(!empty($dacha->cost)) value="{{ $dacha->cost }}" @endif >
 </div>
+
+<div class="form__input">
+    <label>
+        @lang('main.phone') (998901234567)
+    </label>
+    @error('phone')
+    <span class="validationError">{{ $message  }}</span>
+    @enderror
+    <input name="phone" type="text" data-mask="000000000000" @if(!empty(old('phone'))) value="{{ old('phone') }}"
+           @elseif(!empty($dacha->phone)) value="{{ $dacha->phone }}" @endif >
+</div>
 @foreach($comforts as $comfort)
     <div class="form__input checkboxInput">
         <label>

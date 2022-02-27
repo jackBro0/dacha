@@ -59,6 +59,7 @@ class DachaController extends Controller
         $dacha->capacity = $request->capacity;
         $dacha->room_count = $request->room_count;
         $dacha->cost = $request->cost;
+        $dacha->phone = $request->phone;
         if ($request->top_rated == null) {
             $dacha->top_rated = 0;
         } else {
@@ -130,6 +131,7 @@ class DachaController extends Controller
         $dacha->capacity = $request->capacity;
         $dacha->room_count = $request->room_count;
         $dacha->cost = $request->cost;
+        $dacha->phone = $request->phone;
         if ($request->top_rated == null) {
             $dacha->top_rated = 0;
         } else {
