@@ -26,7 +26,7 @@ class CreateDachasTable extends Migration
             $table->integer('bathroom_count');
             $table->integer('capacity'); //odamlar soni
             $table->bigInteger('cost');
-            $table->bigInteger('phone');
+            $table->bigInteger('phone')->nullable();
             $table->boolean('top_rated')->default(false);
             $table->timestamps();
             $table->softDeletes();
