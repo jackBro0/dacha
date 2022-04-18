@@ -12,6 +12,7 @@ use App\Models\DachaImage;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
@@ -53,6 +54,7 @@ class DachaController extends Controller
     {
         DB::beginTransaction();
         $dacha = new Dacha();
+        $dacha->created_by = Auth::id();
         $dacha->name_uz = $request->name_uz;
         $dacha->name_ru = $request->name_ru;
         $dacha->bathroom_count = $request->bathroom_count;

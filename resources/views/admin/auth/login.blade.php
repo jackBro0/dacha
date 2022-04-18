@@ -20,7 +20,7 @@
                 @csrf
                 <div class="login__field">
                     <i class="login__icon fas fa-user"></i>
-                    <input name="email" type="text" class="login__input" value="{{ old('email') }}" placeholder="User name / Email">
+                    <input name="phone" type="tel" class="login__input" value="{{ old('phone') }}" placeholder="Phone">
                 </div>
                 <div class="login__field">
                     <i class="login__icon fas fa-lock"></i>

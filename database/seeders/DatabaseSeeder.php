@@ -21,8 +21,10 @@ class DatabaseSeeder extends Seeder
     {
         User::query()->create(
             [
+                'role_id' => User::role_admin,
                 'name' => 'admin',
-                'email' => 'admin@admin.admin',
+                'phone' => '123456789012',
+//                'email' => 'admin@admin.admin',
                 'email_verified_at' => now(),
                 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
 //                'remember_token' => Str::random(10),
@@ -45,6 +47,7 @@ class DatabaseSeeder extends Seeder
             foreach ($dacha as $item) {
                 $d = Dacha::query()->create([
                     'category_id' => $cat->id,
+                    'created_by' => $item['created_by'],
                     'name_uz' => $item['name_uz'],
                     'name_ru' => $item['name_ru'],
                     'room_count' => $item['room_count'],

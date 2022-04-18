@@ -11,7 +11,7 @@ use \App\Http\Controllers\Admin\AuthController;
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'postLogin'])->name('postLogin');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/', function () {
         return redirect()->route('adminPanel');
     });

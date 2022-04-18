@@ -30,7 +30,7 @@ return [
     'actions' => 'Действия',
 
     'add_location' => 'Добавить локацию',
-    'edit_location' => 'Изменит локацию',
+    'edit_location' => 'Изменить локацию',
     'name_uz' => 'Название (Уз)',
     'name_ru' => 'Название (Ру)',
     'description_uz' => 'Описание (Уз)',
@@ -44,7 +44,7 @@ return [
     // Dacha start >>>>>>>>>>>>>>>
     'location' => 'Локация',
     'add_dacha' => 'Добавить дачу',
-    'edit_dacha' => 'Изменит дачу',
+    'edit_dacha' => 'Изменить дачу',
     'bathroom_count' => 'Кол-во ван',
     'capacity' => 'Кол-во гостей',
     'room_count' => 'Кол-во комнат',
@@ -54,14 +54,14 @@ return [
 
     // Order start >>>>>>>>>>>>>>>
     'add_order' => 'Добавить заказ',
-    'edit_order' => 'Изменит заказ',
+    'edit_order' => 'Изменить заказ',
     'user_name' => 'Имя',
     'description' => 'Описание',
     // <<<<<<<<<<<<<<< Order end
 
     // Comfort start >>>>>>>>>>>>>>>
     'add_comfort' => 'Добавить удобства',
-    'edit_comfort' => 'Изменит удобства',
+    'edit_comfort' => 'Изменить удобства',
     // <<<<<<<<<<<<<<< Order end
 
     // Security start >>>>>>>>>>>>>>>

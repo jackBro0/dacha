@@ -18,12 +18,12 @@ class AuthController extends Controller
     public function postLogin(Request $request)
     {
         $request->validate([
-            'email' => 'required',
+            'phone' => 'required',
             'password' => 'required',
         ]);
-        $data = $request->only('email', 'password');
+        $data = $request->only('phone', 'password');
 
-        if (Auth::attempt(['email' => $data['email'], 'password' => $data['password']])) {
+        if (Auth::attempt(['phone' => $data['phone'], 'password' => $data['password']]) and Auth::user()->role_id == User::role_admin) {
             return redirect()->route('adminPanel');
         } else {
             return redirect()->back()->withErrors(['fail' => 'login or password invalid']);

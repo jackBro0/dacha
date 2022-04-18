@@ -31,6 +31,7 @@ class Dacha extends Model
     {
         return [
             [
+                'created_by' => 1,
                 'name_uz' => 'Dacha #'.rand(111, 999),
                 'name_ru' => 'Дача #'.rand(111, 999),
                 'room_count' => 5,
@@ -42,6 +43,7 @@ class Dacha extends Model
             ],
 
             [
+                'created_by' => 1,
                 'name_uz' => 'Dacha #'.rand(111, 999),
                 'name_ru' => 'Дача #'.rand(111, 999),
                 'room_count' => 5,
@@ -53,6 +55,7 @@ class Dacha extends Model
             ],
 
             [
+                'created_by' => 1,
                 'name_uz' => 'Dacha #'.rand(111, 999),
                 'name_ru' => 'Дача #'.rand(111, 999),
                 'room_count' => 5,
@@ -64,6 +67,7 @@ class Dacha extends Model
             ],
 
             [
+                'created_by' => 1,
                 'name_uz' => 'Dacha #'.rand(111, 999),
                 'name_ru' => 'Дача #'.rand(111, 999),
                 'room_count' => 5,

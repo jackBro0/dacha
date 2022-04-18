@@ -15,6 +15,7 @@ class CreateDachasTable extends Migration
     {
         Schema::create('dachas', function (Blueprint $table) {
             $table->id();
+            $table->bigInteger('created_by');
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')
                 ->references('id')->on('categories');

@@ -6,6 +6,7 @@ use App\Http\Requests\DachaRequest;
 use App\Models\Dacha;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class DachaController extends Controller
@@ -50,6 +51,7 @@ class DachaController extends Controller
     {
         try {
             $dacha= new Dacha();
+            $dacha->created_by = Auth::id();
             $file = $request->file('image_path');
             $file_path = "storage/" . Storage::disk('public')->put("dachas", $file);
             $dacha->name = $request->name;
