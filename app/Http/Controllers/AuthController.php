@@ -19,7 +19,7 @@ class AuthController extends Controller
 
         if (Auth::attempt(['phone' => $data['phone'], 'password' => $data['password']])) {
             $token = $request->user()->createToken('user-token', ['user']);
-            return ['token' => $token->plainTextToken];
+            return ['token' => $token->plainTextToken, 'user' => Auth::user()];
         } else {
             return response('Authentication failed', 401);
         }

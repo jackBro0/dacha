@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
 
 class Dacha extends Model
 {
@@ -14,6 +15,7 @@ class Dacha extends Model
 
     public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
+        Auth::user();
         return $this->belongsTo(Category::class, 'category_id', 'id');
     }
 
