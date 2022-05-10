@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\DachaRequest;
+use App\Models\Comfort;
 use App\Models\ComfortDacha;
 use App\Models\Dacha;
 use App\Models\DachaImage;
@@ -327,6 +328,21 @@ class DachaController extends Controller
         try {
             return response()->json([
                 'data' => $dacha
+            ], 200);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'error' => $exception,
+                'message' => 'Something went wrong'
+            ]);
+        }
+    }
+
+    public function comfortList()
+    {
+        $com = Comfort::query()->get();
+        try {
+            return response()->json([
+                'data' => $com
             ], 200);
         } catch (\Exception $exception) {
             return response()->json([

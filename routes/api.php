@@ -38,3 +38,4 @@ Route::resource('/dacha', DachaController::class)->except('store', 'destroy', 'u
 Route::post('rent-dacha', [RentDachaController::class, 'rentDacha']);
 Route::get('top-rated', [DachaController::class, 'topRated']);
 Route::get('/favourites', [DachaController::class, 'dachaByArray']);
+Route::get('/comfort', [DachaController::class, 'comfortList']);
