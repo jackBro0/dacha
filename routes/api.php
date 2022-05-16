@@ -29,6 +29,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('favourite-delete/{dacha_id}', [FavouriteController::class, 'deleteFavourite']);
     Route::get('user/dacha', [DachaController::class, 'userDachaList']);
     Route::resource('/dacha', DachaController::class)->only('store', 'destroy', 'update');
+    Route::put('user-update', [AuthController::class, 'user']);
 });
 
 Route::post('login', [AuthController::class, 'apiLogin'])->name('api.login');
@@ -36,6 +37,7 @@ Route::post('register', [AuthController::class, 'register'])->name('api.register
 Route::resource('/category', CategoryController::class);
 Route::resource('/dacha', DachaController::class)->except('store', 'destroy', 'update');
 Route::post('rent-dacha', [RentDachaController::class, 'rentDacha']);
+Route::put('user', [AuthController::class, '/user']);
 Route::get('top-rated', [DachaController::class, 'topRated']);
 Route::get('/favourites', [DachaController::class, 'dachaByArray']);
 Route::get('/comfort', [DachaController::class, 'comfortList']);

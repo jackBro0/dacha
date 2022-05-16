@@ -58,4 +58,20 @@ class AuthController extends Controller
         $request->user()->currentAccessToken()->delete();
         return true;
     }
+
+    public function user(Request $request)
+    {
+        $request->validate([
+            'phone' => 'required|numeric|digits:12',
+            'name' => 'required',
+        ]);
+
+        $user = Auth::user();
+        $user->phone = $request->phone;
+        $user->name = $request->name;
+        $user->update();
+        return response()->json([
+            'user' => Auth::user()
+        ]);
+    }
 }
