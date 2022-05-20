@@ -86,6 +86,13 @@ class DachaController extends Controller
      */
     public function store(DachaRequest $request): JsonResponse
     {
+        if (!Auth::user()->payment_status and Dacha::query()->where('created_by', Auth::id())->count() > 0) {
+            return response()->json(
+                [
+                    'Please make payment'
+                ], 403
+            );
+        }
         DB::beginTransaction();
         try {
             $dacha = new Dacha();
@@ -123,6 +130,8 @@ class DachaController extends Controller
                 }
             }
             DB::commit();
+            $user = Auth::user()->payment_status = 0;
+            $user->update();
             return response()->json([
                 'message' => 'success',
                 'status' => 200
