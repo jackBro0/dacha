@@ -32,8 +32,7 @@ class DachaRequest extends FormRequest
         }
         return [
             'category_id' => 'required',
-            'name_uz' => 'required',
-            'name_ru' => 'required',
+            'name' => 'required',
             'bathroom_count' => 'required',
             'capacity' => 'required',
             'room_count' => 'required',
