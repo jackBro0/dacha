@@ -90,8 +90,7 @@ class DachaController extends Controller
         try {
             $dacha = new Dacha();
             $dacha->created_by = Auth::id();
-            $dacha->name_uz = $request->name_uz;
-            $dacha->name_ru = $request->name_ru;
+            $dacha->name = $request->name;
             $dacha->bathroom_count = $request->bathroom_count;
             $dacha->capacity = $request->capacity;
             $dacha->room_count = $request->room_count;
@@ -181,8 +180,7 @@ class DachaController extends Controller
             if ($dacha->created_by != Auth::id()) {
                 return response()->json('permission denied', 403);
             }
-            $dacha->name_uz = $request->name_uz;
-            $dacha->name_ru = $request->name_ru;
+            $dacha->name = $request->name;
             $dacha->bathroom_count = $request->bathroom_count;
             $dacha->capacity = $request->capacity;
             $dacha->room_count = $request->room_count;
