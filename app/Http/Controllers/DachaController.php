@@ -129,9 +129,10 @@ class DachaController extends Controller
                     }
                 }
             }
-            DB::commit();
-            $user = Auth::user()->payment_status = 0;
+            $user = Auth::user();
+            $user->payment_status = 0;
             $user->update();
+            DB::commit();
             return response()->json([
                 'message' => 'success',
                 'status' => 200
