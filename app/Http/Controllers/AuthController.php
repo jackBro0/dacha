@@ -30,8 +30,7 @@ class AuthController extends Controller
         $request->validate([
             'phone' => 'required|numeric|digits:12',
             'name' => 'required',
-            'password' => 'required|min:6',
-            'very_password' => 'required|same:password|min:6',
+            'password' => 'required|min:6'
         ]);
 
         User::query()->create(
