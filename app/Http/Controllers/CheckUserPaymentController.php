@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -24,5 +25,20 @@ class CheckUserPaymentController extends Controller
                     'payment_status' => true,
                 ]);
         }
+    }
+
+    public function createInvoice(Request $request)
+    {
+        $request->validate(
+            [
+                'trans_id' => 'required'
+            ]
+        );
+        Invoice::query()->create(
+            [
+                'user_id' => Auth::id(),
+                'trans_id' => $request->trans_id
+            ]
+        );
     }
 }

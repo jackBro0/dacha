@@ -22,4 +22,17 @@ class MainController extends Controller
         return view('admin.pages.index',
             compact('dacha_count', 'location_count', 'orders_count', 'admins_count', 'recent_dacha', 'recent_orders'));
     }
+
+    public function test()
+    {
+        $dacha_count = Dacha::query()->count();
+        $location_count = Category::query()->count();
+        $orders_count = RentDacha::query()->count();
+        $admins_count = User::query()->count();
+
+        $recent_dacha = Dacha::query()->orderByDesc('id')->take(8)->get();
+        $recent_orders = RentDacha::query()->orderByDesc('id')->take(10)->get();
+        return view('admin.pages.test',
+            compact('dacha_count', 'location_count', 'orders_count', 'admins_count', 'recent_dacha', 'recent_orders'));
+    }
 }

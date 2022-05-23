@@ -37,3 +37,5 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/password-change', [AuthController::class, 'passwordChange'])->name('passwordChange');
 
 });
+
+Route::get('test', [MainController::class, 'test'])->name('test');

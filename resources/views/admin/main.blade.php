@@ -7,6 +7,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Dacha Bor</title>
     <link type="text/css" rel="stylesheet" href="/assets/css/style.css">
+    <style>
+        @yield('css')
+    </style>
 </head>
 <body>
 <div class="container">
