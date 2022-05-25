@@ -20,6 +20,9 @@ class CreateDachasTable extends Migration
             $table->foreign('category_id')
                 ->references('id')->on('categories');
             $table->string('name');
+            $table->string('advertiser_name');
+            $table->string('currency');
+            $table->text('comment');
 //            $table->text('comforts_uz'); // qulayliklari
 //            $table->text('comforts_ru'); // qulayliklari
             $table->integer('room_count');

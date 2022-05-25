@@ -41,3 +41,6 @@ Route::put('user', [AuthController::class, '/user']);
 Route::get('top-rated', [DachaController::class, 'topRated']);
 Route::get('/favourites', [DachaController::class, 'dachaByArray']);
 Route::get('/comfort', [DachaController::class, 'comfortList']);
+
+Route::post('click/return', [\App\Http\Controllers\Admin\MainController::class, 'clickComplete']);
+Route::post('click/prepare', [\App\Http\Controllers\Admin\MainController::class, 'clickPrepare']);
