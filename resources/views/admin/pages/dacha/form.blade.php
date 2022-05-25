@@ -20,20 +20,20 @@
     @error('name_uz')
     <span class="validationError">{{ $message  }}</span>
     @enderror
-    <input name="name_uz" type="text" @if(!empty(old('name_uz'))) value="{{ old('name_uz') }}"
-           @elseif(!empty($dacha->name_uz)) value="{{ $dacha->name_uz }}" @endif >
+    <input name="name" type="text" @if(!empty(old('name_uz'))) value="{{ old('name') }}"
+           @elseif(!empty($dacha->name)) value="{{ $dacha->name }}" @endif >
 </div>
 
-<div class="form__input">
-    <label>
-        @lang('main.name_ru')
-    </label>
-    @error('name_ru')
-    <span class="validationError">{{ $message  }}</span>
-    @enderror
-    <input name="name_ru" type="text" @if(!empty(old('name_ru'))) value="{{ old('name_ru') }}"
-           @elseif(!empty($dacha->name_ru)) value="{{ $dacha->name_ru }}" @endif >
-</div>
+{{--<div class="form__input">--}}
+{{--    <label>--}}
+{{--        @lang('main.name_ru')--}}
+{{--    </label>--}}
+{{--    @error('name_ru')--}}
+{{--    <span class="validationError">{{ $message  }}</span>--}}
+{{--    @enderror--}}
+{{--    <input name="name_ru" type="text" @if(!empty(old('name_ru'))) value="{{ old('name_ru') }}"--}}
+{{--           @elseif(!empty($dacha->name_ru)) value="{{ $dacha->name_ru }}" @endif >--}}
+{{--</div>--}}
 <div class="form__input checkboxInput">
     @error('top_rated')
     <span class="validationError">{{ $message  }}</span>
@@ -87,6 +87,39 @@
     @enderror
     <input name="cost" type="text" data-mask="0000000000000000" @if(!empty(old('cost'))) value="{{ old('cost') }}"
            @elseif(!empty($dacha->cost)) value="{{ $dacha->cost }}" @endif >
+</div>
+
+<div class="form__input">
+    <label>
+        @lang('main.currency')
+    </label>
+    @error('currency')
+    <span class="validationError">{{ $message  }}</span>
+    @enderror
+    <input name="currency" type="text" placeholder="Доллар или сум" @if(!empty(old('cost'))) value="{{ old('currency') }}"
+           @elseif(!empty($dacha->currency)) value="{{ $dacha->currency }}" @endif >
+</div>
+
+<div class="form__input">
+    <label>
+        @lang('main.advertiser_name')
+    </label>
+    @error('advertiser_name')
+    <span class="validationError">{{ $message  }}</span>
+    @enderror
+    <input name="advertiser_name" type="text" @if(!empty(old('advertiser_name'))) value="{{ old('advertiser_name') }}"
+           @elseif(!empty($dacha->advertiser_name)) value="{{ $dacha->advertiser_name }}" @endif >
+</div>
+
+<div class="form__input">
+    <label>
+        @lang('main.comment')
+    </label>
+    @error('comment')
+    <span class="validationError">{{ $message  }}</span>
+    @enderror
+    <input name="comment" type="text" @if(!empty(old('comment'))) value="{{ old('comment') }}"
+           @elseif(!empty($dacha->comment)) value="{{ $dacha->comment }}" @endif >
 </div>
 
 <div class="form__input">

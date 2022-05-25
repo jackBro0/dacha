@@ -31,7 +31,7 @@ return [
 
     'add_location' => 'Добавить локацию',
     'edit_location' => 'Изменить локацию',
-    'name_uz' => 'Название (Уз)',
+    'name_uz' => 'Название',
     'name_ru' => 'Название (Ру)',
     'description_uz' => 'Описание (Уз)',
     'description_ru' => 'Описание (Ру)',
@@ -43,6 +43,9 @@ return [
 
     // Dacha start >>>>>>>>>>>>>>>
     'location' => 'Локация',
+    'advertiser_name' => 'Имя рекламодателя',
+    'currency' => 'Валюта',
+    'comment' => 'Комментарии',
     'add_dacha' => 'Добавить дачу',
     'edit_dacha' => 'Изменить дачу',
     'bathroom_count' => 'Кол-во ван',

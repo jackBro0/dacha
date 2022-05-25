@@ -52,11 +52,14 @@ class DachaController extends Controller
 
     public function store(DachaRequest $request)
     {
+//        dd($request->name);
         DB::beginTransaction();
         $dacha = new Dacha();
         $dacha->created_by = Auth::id();
-        $dacha->name_uz = $request->name_uz;
-        $dacha->name_ru = $request->name_ru;
+        $dacha->name = $request->name;
+        $dacha->advertiser_name = $request->advertiser_name;
+        $dacha->currency = $request->currency;
+        $dacha->comment = !empty($request->comment)? $request->comment : null;
         $dacha->bathroom_count = $request->bathroom_count;
         $dacha->capacity = $request->capacity;
         $dacha->room_count = $request->room_count;
@@ -127,8 +130,10 @@ class DachaController extends Controller
     {
         DB::beginTransaction();
         $dacha = Dacha::findOrFail($id);
-        $dacha->name_uz = $request->name_uz;
-        $dacha->name_ru = $request->name_ru;
+        $dacha->name = $request->name;
+        $dacha->advertiser_name = $request->advertiser_name;
+        $dacha->currency = $request->currency;
+        $dacha->comment = !empty($request->comment)? $request->comment : null;
         $dacha->bathroom_count = $request->bathroom_count;
         $dacha->capacity = $request->capacity;
         $dacha->room_count = $request->room_count;
