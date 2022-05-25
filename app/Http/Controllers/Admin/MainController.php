@@ -62,7 +62,7 @@ class MainController extends Controller
         $click_trans_id = $request->click_trans_id;
 //        $service_id = $request->service_id;
 //        $click_paydoc_id = $request->click_paydoc_id;
-        $merchant_trans_id = $request->merchant_trans_id;
+        $merchant_trans_id = $request->transaction_param;
 //        $payment = Click::query()
 //            ->where('merchant_trans_id', $merchant_trans_id)
 //            ->where('status', Click::NEW_INVOICE)
@@ -80,7 +80,7 @@ class MainController extends Controller
         return response()->json(
             [
                 'click_trans_id' => $click_trans_id,
-                'merchant_trans_id' => $merchant_trans_id,
+                'transaction_param' => $merchant_trans_id,
                 'merchant_prepare_id' => $merchant_trans_id,
                 'error' => 0,
                 'error_note' => '',
@@ -113,8 +113,8 @@ class MainController extends Controller
         $click_trans_id = $request->click_trans_id;
 //        $service_id = $request->service_id;
 //        $click_paydoc_id = $request->click_paydoc_id;
-        $merchant_trans_id = $request->merchant_trans_id;
-        $user = Auth::user();
+        $merchant_trans_id = $request->transaction_param;
+        $user = User::query()->findOrFail($merchant_trans_id);
         $user->payment_status = 1;
         $user->update();
 //        $payment = Click::query()
@@ -140,7 +140,7 @@ class MainController extends Controller
         return response()->json(
             [
                 'click_trans_id' => $click_trans_id,
-                'merchant_trans_id' => $merchant_trans_id,
+                'transaction_param' => $merchant_trans_id,
                 'merchant_confirm_id' => null,
                 'error' => $error_code,
                 'error_note' => $return_error_note,

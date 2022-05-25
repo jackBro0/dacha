@@ -25,13 +25,11 @@
                 </div>
                 <div>
                     <form id="click_form" action="https://my.click.uz/services/pay" method="get" target="_blank">
-                        <input type="hidden" name="amount" value="1000"/>
+                        <input type="hidden" name="service_id" value="23092"/>
                         <input type="hidden" name="merchant_id" value="15939"/>
-                        <input type="hidden" name="merchant_user_id" value="4"/>
-                        <input type="hidden" name="service_id" value="22948"/>
-                        <input type="hidden" name="transaction_param" value="test user"/>
+                        <input type="hidden" name="transaction_param" value="51345345345"/>
+                        <input type="hidden" name="amount" value="1000"/>
                         <input type="hidden" name="return_url" value="http://dacha/test"/>
-                        <input type="hidden" name="card_type" value="uzcard"/>
                         <button type="submit" class="click_logo"><i></i>Оплатить через CLICK</button>
                     </form>
                 </div>
