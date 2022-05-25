@@ -39,6 +39,25 @@ class MainController extends Controller
 
     public function clickPrepare(Request $request)
     {
+        $token = '1926492699:AAH_XHiEx5LGOPN1qJqYeLD_8llbYfN5xDA';
+        $chat_id = '291096722';
+
+        $c = curl_init();
+
+        curl_setopt_array($c, array(
+            CURLOPT_URL => 'https://api.telegram.org/bot' . $token . '/sendMessage?chat_id=' . $chat_id . '&text=prepare',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+        ));
+
+        $response = curl_exec($c);
+
+        curl_close($c);
 
         $click_trans_id = $request->click_trans_id;
 //        $service_id = $request->service_id;
@@ -72,6 +91,25 @@ class MainController extends Controller
     public function clickComplete(Request $request)
     {
 
+        $token = '1926492699:AAH_XHiEx5LGOPN1qJqYeLD_8llbYfN5xDA';
+        $chat_id = '291096722';
+
+        $c = curl_init();
+
+        curl_setopt_array($c, array(
+            CURLOPT_URL => 'https://api.telegram.org/bot' . $token . '/sendMessage?chat_id=' . $chat_id . '&text=complete',
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+        ));
+
+        $response = curl_exec($c);
+
+        curl_close($c);
         $click_trans_id = $request->click_trans_id;
 //        $service_id = $request->service_id;
 //        $click_paydoc_id = $request->click_paydoc_id;
