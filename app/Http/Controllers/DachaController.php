@@ -99,6 +99,9 @@ class DachaController extends Controller
             $dacha->created_by = Auth::id();
             $dacha->name = $request->name;
             $dacha->bathroom_count = $request->bathroom_count;
+            $dacha->advertiser_name = $request->advertiser_name;
+            $dacha->currency = $request->currency;
+            $dacha->comment = !empty($request->comment)? $request->comment : null;
             $dacha->capacity = $request->capacity;
             $dacha->room_count = $request->room_count;
             $dacha->cost = $request->cost;
@@ -200,7 +203,6 @@ class DachaController extends Controller
             $dacha->room_count = $request->room_count;
             $dacha->cost = $request->cost;
             $dacha->phone = $request->phone;
-
             $dacha->advertiser_name = $request->advertiser_name;
             $dacha->currency = $request->currency;
             $dacha->comment = $request->comment;

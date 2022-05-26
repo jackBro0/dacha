@@ -48,8 +48,7 @@ class DatabaseSeeder extends Seeder
                 $d = Dacha::query()->create([
                     'category_id' => $cat->id,
                     'created_by' => $item['created_by'],
-                    'name_uz' => $item['name_uz'],
-                    'name_ru' => $item['name_ru'],
+                    'name' => $item['name_ru'],
                     'room_count' => $item['room_count'],
                     'bathroom_count' => $item['bathroom_count'],
                     'capacity' => $item['capacity'],
