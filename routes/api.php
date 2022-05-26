@@ -27,7 +27,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('favourite-add/{dacha_id}', [FavouriteController::class, 'addToFavourite']);
     Route::get('favourite-list', [FavouriteController::class, 'favouriteList']);
     Route::delete('favourite-delete/{dacha_id}', [FavouriteController::class, 'deleteFavourite']);
-    Route::delete('user/dacha/delete/{id}', [DachaController::class, 'userDachaDelete']);
+//    Route::delete('user/dacha/delete/{id}', [DachaController::class, 'userDachaDelete']);
+    Route::delete('user-dacha/delete/{id}', [DachaController::class, 'userDachaDelete']);
     Route::get('user/dacha', [DachaController::class, 'userDachaList']);
     Route::resource('/dacha', DachaController::class)->only('store', 'destroy', 'update');
     Route::put('user-update', [AuthController::class, 'user']);
