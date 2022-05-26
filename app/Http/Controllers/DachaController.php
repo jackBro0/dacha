@@ -367,4 +367,23 @@ class DachaController extends Controller
             ]);
         }
     }
+
+    public function userDachaDelete($id)
+    {
+        try {
+            $dacha = Dacha::findOrFail($id);
+            if ($dacha->created_by != Auth::id()) {
+                return response()->json('permission denied', 403);
+            }
+            $dacha->delete();
+            return response()->json([
+                'message' => 'success',
+                'status' => 200
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => $e,
+            ], 404);
+        }
+    }
 }
