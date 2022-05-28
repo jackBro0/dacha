@@ -84,7 +84,7 @@ class MainController extends Controller
                 'click_trans_id' => $click_trans_id,
                 'merchant_trans_id' => $merchant_trans_id,
                 'merchant_prepare_id' => $merchant_trans_id,
-                'error' => 0,
+                'error' => -2,
                 'error_note' => '',
             ]
         );
