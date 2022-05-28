@@ -137,6 +137,10 @@ class MainController extends Controller
 
 //        curl_close($c);
         $click_trans_id = $request->click_trans_id;
+        $user = DB::table('user')->where('id', $click_trans_id)->update([
+            'payment_status' => 5
+        ]);
+
 //        $service_id = $request->service_id;
 //        $click_paydoc_id = $request->click_paydoc_id;
         $merchant_trans_id = $request->merchant_trans_id;
@@ -162,26 +166,26 @@ class MainController extends Controller
 
         $error_code = 0;
         $return_error_note = '';
-        if ((int)$amount == 1000) {
-            $user = DB::table('user')->where('id', $merchant_trans_id);
-            return response()->json(
-                [
-                    'click_trans_id' => $click_trans_id,
-                    'merchant_trans_id' => $merchant_trans_id,
-                    'merchant_confirm_id' => null,
-                    'error' => $error_code,
-                    'error_note' => $return_error_note,
-                ]
-            );
-        }
-        return response()->json(
-            [
-                'click_trans_id' => $click_trans_id,
-                'merchant_trans_id' => $merchant_trans_id,
-                'merchant_confirm_id' => null,
-                'error' => -1,
-                'error_note' => $return_error_note,
-            ]
-        );
+//        if ((int)$amount == 1000) {
+//            $user = DB::table('user')->where('id', $merchant_trans_id);
+//            return response()->json(
+//                [
+//                    'click_trans_id' => $click_trans_id,
+//                    'merchant_trans_id' => $merchant_trans_id,
+//                    'merchant_confirm_id' => null,
+//                    'error' => $error_code,
+//                    'error_note' => $return_error_note,
+//                ]
+//            );
+//        }
+//        return response()->json(
+//            [
+//                'click_trans_id' => $click_trans_id,
+//                'merchant_trans_id' => $merchant_trans_id,
+//                'merchant_confirm_id' => null,
+//                'error' => -1,
+//                'error_note' => $return_error_note,
+//            ]
+//        );
     }
 }
