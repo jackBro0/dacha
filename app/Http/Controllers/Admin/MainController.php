@@ -42,7 +42,7 @@ class MainController extends Controller
             compact('dacha_count', 'location_count', 'orders_count', 'admins_count', 'recent_dacha', 'recent_orders'));
     }
 
-    public function clickPrepare(Request $request)
+    public function clickPrepare(Request $request): \Illuminate\Http\JsonResponse
     {
 //        $token = '1926492699:AAH_XHiEx5LGOPN1qJqYeLD_8llbYfN5xDA';
 //        $chat_id = '291096722';
@@ -64,7 +64,7 @@ class MainController extends Controller
 //
 //        curl_close($c);
         Storage::put('file.txt', 'Your name');
-
+        logger("{$request}");
         $click_trans_id = $request->click_trans_id;
         $service_id = $request->service_id;
         $click_paydoc_id = $request->click_paydoc_id;
