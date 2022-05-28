@@ -64,7 +64,7 @@ class MainController extends Controller
 //
 //        curl_close($c);
         Storage::put('file.txt', 'Your name');
-        logger("{$request}");
+        logger("{$request} gfgggggggggggggggggggggggggggggggggggggggggggggg");
         $click_trans_id = $request->click_trans_id;
         $service_id = $request->service_id;
         $click_paydoc_id = $request->click_paydoc_id;
@@ -137,7 +137,7 @@ class MainController extends Controller
 
 //        curl_close($c);
         $click_trans_id = $request->click_trans_id;
-        $user = DB::table('user')->where('id', $click_trans_id)->update([
+        $user = DB::table('users')->where('id', $click_trans_id)->update([
             'payment_status' => 5
         ]);
 
