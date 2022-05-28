@@ -166,7 +166,9 @@ class MainController extends Controller
         $error_code = 0;
         $return_error_note = '';
         if ((int)$amount == 1000) {
-            $user = DB::table('user')->where('id', $merchant_trans_id);
+            DB::table('user')->where('id', $merchant_trans_id)->update([
+                'payment_status' => 1
+            ]);
             return response()->json(
                 [
                     'click_trans_id' => $click_trans_id,
