@@ -7,13 +7,17 @@ use App\Models\Category;
 use App\Models\Dacha;
 use App\Models\RentDacha;
 use App\Models\User;
+use App\Models\UserPaymentHistory;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class MainController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $dacha_count = Dacha::query()->count();
         $location_count = Category::query()->count();
         $orders_count = RentDacha::query()->count();
@@ -62,16 +66,16 @@ class MainController extends Controller
         Storage::put('file.txt', 'Your name');
 
         $click_trans_id = $request->click_trans_id;
-//        $service_id = $request->service_id;
-//        $click_paydoc_id = $request->click_paydoc_id;
+        $service_id = $request->service_id;
+        $click_paydoc_id = $request->click_paydoc_id;
         $merchant_trans_id = $request->merchant_trans_id;
 //        $payment = Click::query()
 //            ->where('merchant_trans_id', $merchant_trans_id)
 //            ->where('status', Click::NEW_INVOICE)
 //            ->first();
-//        $amount = $request->amount;
-//        $action = $request->action;
-//        $error = $request->error;
+        $amount = $request->amount;
+        $action = $request->action;
+        $error = $request->error;
 //        $error_note = $request->error_note;
 //        $sign_time = $request->sign_time;
         $sign_string = $request->sign_string;
@@ -79,13 +83,33 @@ class MainController extends Controller
         $error_code = 0;
         $return_error_note = '';
 
+        $payment_history = new UserPaymentHistory();
+        $payment_history->click_trans_id = $click_trans_id;
+        $payment_history->service_id = $service_id;
+        $payment_history->merchant_trans_id = $merchant_trans_id;
+        $payment_history->merchant_prepare_id = $merchant_trans_id;
+        $payment_history->click_paydoc_id = $click_paydoc_id;
+        $payment_history->status_error = $error;
+        $payment_history->action = $action;
+        $payment_history->amount = $amount;
+        if ((int)$amount == 1000) {
+            return response()->json(
+                [
+                    'click_trans_id' => $click_trans_id,
+                    'merchant_trans_id' => $merchant_trans_id,
+                    'merchant_prepare_id' => $merchant_trans_id,
+                    'error' => 0,
+                    'error_note' => '',
+                ]
+            );
+        }
         return response()->json(
             [
                 'click_trans_id' => $click_trans_id,
                 'merchant_trans_id' => $merchant_trans_id,
                 'merchant_prepare_id' => $merchant_trans_id,
                 'error' => -2,
-                'error_note' => '',
+                'error_note' => 'Amount of money is not correct!',
             ]
         );
     }
@@ -128,7 +152,7 @@ class MainController extends Controller
 //            $order->status = 2;
 //            $order->save();
 //        }
-//        $amount = $request->amount;
+        $amount = $request->amount;
 //        $action = $request->action;
 //        $error = $request->error;
 //        $error_note = $request->error_note;
@@ -136,15 +160,26 @@ class MainController extends Controller
 //        $sign_string = $request->sign_string;
 
 
-        $error_code = -2;
+        $error_code = 0;
         $return_error_note = '';
-
+        if ((int)$amount == 1000) {
+            $user = DB::table('user')->where('id', $merchant_trans_id);
+            return response()->json(
+                [
+                    'click_trans_id' => $click_trans_id,
+                    'merchant_trans_id' => $merchant_trans_id,
+                    'merchant_confirm_id' => null,
+                    'error' => $error_code,
+                    'error_note' => $return_error_note,
+                ]
+            );
+        }
         return response()->json(
             [
                 'click_trans_id' => $click_trans_id,
                 'merchant_trans_id' => $merchant_trans_id,
                 'merchant_confirm_id' => null,
-                'error' => $error_code,
+                'error' => -1,
                 'error_note' => $return_error_note,
             ]
         );

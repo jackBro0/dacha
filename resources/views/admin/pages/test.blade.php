@@ -28,6 +28,7 @@
                         <input type="hidden" name="service_id" value="23092"/>
                         <input type="hidden" name="merchant_id" value="15939"/>
                         <input type="hidden" name="transaction_param" value="51345345345"/>
+                        <input type="hidden" name="merchant_trans_id" value="1"/>
                         <input type="hidden" name="amount" value="1000"/>
                         <input type="hidden" name="return_url" value="http://dacha/test"/>
                         <button type="submit" class="click_logo"><i></i>Оплатить через CLICK</button>
