@@ -136,7 +136,8 @@ class MainController extends Controller
 //        $response = curl_exec($c);
 
 //        curl_close($c);
-        logger("{$request->click_trans_id}");
+        logger("{$request->click_trans_id},
+                           {$request->transaction_param} ");
         $click_trans_id = $request->click_trans_id;
         $user = DB::table('users')->where('id', $request->transaction_param)->update([
             'payment_status' => 5

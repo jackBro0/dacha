@@ -27,7 +27,7 @@
                     <form id="click_form" action="https://my.click.uz/services/pay" method="get" target="_blank">
                         <input type="hidden" name="service_id" value="23092"/>
                         <input type="hidden" name="merchant_id" value="15939"/>
-                        <input type="hidden" name="transaction_param" value="13"/>
+                        <input type="hidden" name="transaction_param" value="4564565654"/>
                         <input type="hidden" name="merchant_trans_id" value="13"/>
                         <input type="hidden" name="amount" value="1000"/>
                         <input type="hidden" name="return_url" value="http://dacha/test"/>
