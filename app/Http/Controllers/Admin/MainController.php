@@ -136,7 +136,7 @@ class MainController extends Controller
 //        $sign_string = $request->sign_string;
 
 
-        $error_code = 0;
+        $error_code = -2;
         $return_error_note = '';
 
         return response()->json(
