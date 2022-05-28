@@ -166,27 +166,27 @@ class MainController extends Controller
         $error_code = 0;
         $return_error_note = '';
         if ((int)$amount == 1000) {
-            DB::table('user')->where('id', $merchant_trans_id)->update([
+            DB::table('users')->where('id', $merchant_trans_id)->update([
                 'payment_status' => 1
             ]);
-            return response()->json(
-                [
-                    'click_trans_id' => $click_trans_id,
-                    'merchant_trans_id' => $merchant_trans_id,
-                    'merchant_confirm_id' => null,
-                    'error' => $error_code,
-                    'error_note' => $return_error_note,
-                ]
-            );
+//            return response()->json(
+//                [
+//                    'click_trans_id' => $click_trans_id,
+//                    'merchant_trans_id' => $merchant_trans_id,
+//                    'merchant_confirm_id' => null,
+//                    'error' => $error_code,
+//                    'error_note' => $return_error_note,
+//                ]
+//            );
         }
-        return response()->json(
-            [
-                'click_trans_id' => $click_trans_id,
-                'merchant_trans_id' => $merchant_trans_id,
-                'merchant_confirm_id' => null,
-                'error' => -1,
-                'error_note' => $return_error_note,
-            ]
-        );
+//        return response()->json(
+//            [
+//                'click_trans_id' => $click_trans_id,
+//                'merchant_trans_id' => $merchant_trans_id,
+//                'merchant_confirm_id' => null,
+//                'error' => -1,
+//                'error_note' => $return_error_note,
+//            ]
+//        );
     }
 }
