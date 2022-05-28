@@ -92,6 +92,7 @@ class MainController extends Controller
         $payment_history->status_error = $error;
         $payment_history->action = $action;
         $payment_history->amount = $amount;
+        $payment_history->save();
         if ((int)$amount == 1000) {
             return response()->json(
                 [
@@ -136,8 +137,7 @@ class MainController extends Controller
 //        $response = curl_exec($c);
 
 //        curl_close($c);
-        logger("{$request->click_trans_id},
-                           {$request->transaction_param} ");
+        logger("{$request}");
         $click_trans_id = $request->click_trans_id;
         $user = DB::table('users')->where('id', $request->transaction_param)->update([
             'payment_status' => 5
