@@ -370,10 +370,10 @@ class DachaController extends Controller
         }
     }
 
-    public function userDachaDelete($id)
+    public function userDachaDelete($id): JsonResponse
     {
         try {
-            $dacha = Dacha::findOrFail($id);
+            $dacha = Dacha::query()->findOrFail($id);
             if ($dacha->created_by != Auth::id()) {
                 return response()->json('permission denied', 403);
             }
