@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ComfortRequest;
 use App\Models\Comfort;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ComfortController extends Controller
 {
@@ -32,11 +33,13 @@ class ComfortController extends Controller
     }
 
 
-    public function store(ComfortRequest $request)
+    public function store(ComfortRequest $request): \Illuminate\Http\RedirectResponse
     {
         try {
+            $icon = "storage/" . Storage::disk('public')->put("icons", $request->icon);
             $comfort = new Comfort();
             $comfort->name_uz = $request->name_uz;
+            $comfort->icon = $icon;
             $comfort->name_ru = $request->name_ru;
             $comfort->save();
             return redirect()->route('comfort.index');
@@ -72,11 +75,13 @@ class ComfortController extends Controller
      *
      * @param int $id
      */
-    public function update(ComfortRequest $request, int $id)
+    public function update(ComfortRequest $request, int $id): \Illuminate\Http\RedirectResponse
     {
         try {
             $comfort = Comfort::findOrFail($id);
+            $icon = "storage/" . Storage::disk('public')->put("icons", $request->icon);
             $comfort->name_uz = $request->name_uz;
+            $comfort->icon = $icon;
             $comfort->name_ru = $request->name_ru;
             $comfort->update();
             return redirect()->route('comfort.index');

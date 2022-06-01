@@ -16,6 +16,7 @@ class CreateComfortsTable extends Migration
         Schema::create('comforts', function (Blueprint $table) {
             $table->id();
             $table->string('name_uz');
+            $table->text('icon');
             $table->string('name_ru');
             $table->softDeletes();
             $table->timestamps();
