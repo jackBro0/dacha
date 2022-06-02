@@ -38,7 +38,7 @@
                         {{--                    // Обязательные поля--}}
                         <input type="hidden" name="cash" value="f81c68ccf43c462e8334d22b2cb04ce9"/>
                         {{--                    // уникальный Cash ID (выдается Апельсином)--}}
-                        <input type="hidden" name="redirectUrl" value="http://dacha/test"/>
+                        <input type="hidden" name="redirectUrl" value="https://work.bingo99.uz/test"/>
                         {{--                    // URL для отправки на сайт после оплаты--}}
                         <input type="hidden" name="description" value="TEST"/>
                         {{--                    // фраза, который выйдет на экране оплаты у Пользователя, например «Пополнение--}}
