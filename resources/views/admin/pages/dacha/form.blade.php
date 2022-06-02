@@ -137,8 +137,13 @@
         <label>
             {{ $comfort->name_ru }}
         </label>
-        <input type="checkbox" @if(!empty($dacha) and $dacha->comforts->where('id', $comfort->id)->count()) checked @endif
-               name="comforts[]" class="form__checkbox" value="{{$comfort->id}}">
+            <input type="checkbox" @if(!empty($dacha) and $dacha->comforts->where('id', $comfort->id)->count()) checked @endif
+            name="comforts[]" class="form__checkbox" value="{{$comfort->id}}">
+            <div class="uploadImage">
+                {{--            @dd(empty($comfort->icon))--}}
+                <img @if(!empty($comfort->icon)) src="/{{ $comfort->icon }}"
+                    @endif>
+            </div>
     </div>
 @endforeach
 {{--@if(!empty($dacha->comforts_ru))--}}

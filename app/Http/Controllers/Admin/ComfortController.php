@@ -36,10 +36,12 @@ class ComfortController extends Controller
     public function store(ComfortRequest $request): \Illuminate\Http\RedirectResponse
     {
         try {
-            $icon = "storage/" . Storage::disk('public')->put("icons", $request->icon);
             $comfort = new Comfort();
             $comfort->name_uz = $request->name_uz;
-            $comfort->icon = $icon;
+            if(!empty($request->icon)){
+                $icon = "storage/" . Storage::disk('public')->put("icons", $request->icon);
+                $comfort->icon = $icon;
+            }
             $comfort->name_ru = $request->name_ru;
             $comfort->save();
             return redirect()->route('comfort.index');
@@ -78,10 +80,11 @@ class ComfortController extends Controller
     public function update(ComfortRequest $request, int $id): \Illuminate\Http\RedirectResponse
     {
         try {
-            $comfort = Comfort::findOrFail($id);
-            $icon = "storage/" . Storage::disk('public')->put("icons", $request->icon);
+            $comfort = Comfort::findOrFail($id);if(!empty($request->icon)){
+                $icon = "storage/" . Storage::disk('public')->put("icons", $request->icon);
+                $comfort->icon = $icon;
+            }
             $comfort->name_uz = $request->name_uz;
-            $comfort->icon = $icon;
             $comfort->name_ru = $request->name_ru;
             $comfort->update();
             return redirect()->route('comfort.index');
@@ -91,7 +94,7 @@ class ComfortController extends Controller
     }
 
 
-    public function destroy(int $id)
+    public function destroy(int $id): \Illuminate\Http\RedirectResponse
     {
         try {
             $dacha = Comfort::findOrFail($id);
