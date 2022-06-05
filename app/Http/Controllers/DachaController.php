@@ -49,8 +49,7 @@ class DachaController extends Controller
             })
             ->when(isset($request->name), function ($query) use ($request) {
                 $query->where(function ($q) use ($request) {
-                    $q->where('name_uz', 'LIKE', "%$request->name%")
-                        ->orWhere('name_ru', 'LIKE', "%$request->name%");
+                    $q->where('name', 'LIKE', "%$request->name%");
                 });
 
             })
