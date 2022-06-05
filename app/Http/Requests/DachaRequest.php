@@ -35,6 +35,8 @@ class DachaRequest extends FormRequest
             'advertiser_name' => 'required',
             'currency' => 'required',
             'name' => 'required',
+            'phone' => 'required',
+            'comment' => 'required',
             'bathroom_count' => 'required',
             'capacity' => 'required',
             'room_count' => 'required',

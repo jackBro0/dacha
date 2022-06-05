@@ -32,8 +32,8 @@ class DatabaseSeeder extends Seeder
         );
 
         $categories = Category::initialCategories();
-        $dacha = Dacha::initialDacha();
-        $dachaOrder = RentDacha::initialOrder();
+//        $dacha = Dacha::initialDacha();
+//        $dachaOrder = RentDacha::initialOrder();
 
         foreach ($categories as $category) {
             $cat = Category::query()->create([
@@ -44,31 +44,31 @@ class DatabaseSeeder extends Seeder
                 'image_path' => $category['image_path'],
             ]);
 
-            foreach ($dacha as $item) {
-                $d = Dacha::query()->create([
-                    'category_id' => $cat->id,
-                    'created_by' => $item['created_by'],
-                    'name' => $item['name_ru'],
-                    'room_count' => $item['room_count'],
-                    'bathroom_count' => $item['bathroom_count'],
-                    'capacity' => $item['capacity'],
-                    'cost' => $item['cost'],
-//                    'comforts_uz' => $item['comforts_uz'],
-//                    'comforts_ru' => $item['comforts_ru']
-                ]);
-                DachaImage::query()->create([
-                    'dacha_id' => $d->id,
-                    'image_path' => 'assets/img/dacha/dacha_'.rand(1, 3).'.png',
-                ]);
-            }
+//            foreach ($dacha as $item) {
+//                $d = Dacha::query()->create([
+//                    'category_id' => $cat->id,
+//                    'created_by' => $item['created_by'],
+//                    'name' => $item['name_ru'],
+//                    'room_count' => $item['room_count'],
+//                    'bathroom_count' => $item['bathroom_count'],
+//                    'capacity' => $item['capacity'],
+//                    'cost' => $item['cost'],
+////                    'comforts_uz' => $item['comforts_uz'],
+////                    'comforts_ru' => $item['comforts_ru']
+//                ]);
+//                DachaImage::query()->create([
+//                    'dacha_id' => $d->id,
+//                    'image_path' => 'assets/img/dacha/dacha_'.rand(1, 3).'.png',
+//                ]);
+//            }
         }
 
-        foreach ($dachaOrder as $order) {
-            RentDacha::query()->create([
-                'name' => $order['name'],
-                'phone' => $order['phone'],
-                'description' => $order['description'],
-            ]);
-        }
+//        foreach ($dachaOrder as $order) {
+//            RentDacha::query()->create([
+//                'name' => $order['name'],
+//                'phone' => $order['phone'],
+//                'description' => $order['description'],
+//            ]);
+//        }
     }
 }

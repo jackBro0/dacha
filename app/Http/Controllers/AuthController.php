@@ -3,17 +3,26 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
     public function apiLogin(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'phone' => 'required|numeric|digits:12',
             'password' => 'required|min:6',
         ]);
+        if ($validator->fails()) {
+            return response()->json($validator->messages(), 422);
+        }
+//        $request->validate([
+//            'phone' => 'required|numeric|digits:12',
+//            'password' => 'required|min:6',
+//        ]);
 
         $data = $request->only('phone', 'password');
 
@@ -27,11 +36,20 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $request->validate([
-            'phone' => 'required|numeric|digits:12',
+//        $request->validate([
+//            'phone' => 'required|numeric|digits:12|unique:users',
+//            'name' => 'required',
+//            'password' => 'required|min:6'
+//        ]);
+
+        $validator = Validator::make($request->all(), [
+            'phone' => 'required|numeric|digits:12|unique:users',
             'name' => 'required',
             'password' => 'required|min:6'
         ]);
+        if ($validator->fails()) {
+            return response()->json($validator->messages(), 422);
+        }
 
         User::query()->create(
             [
@@ -60,10 +78,17 @@ class AuthController extends Controller
 
     public function user(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'phone' => 'required|numeric|digits:12',
             'name' => 'required',
         ]);
+        if ($validator->fails()) {
+            return response()->json($validator->messages(), 422);
+        }
+//        $request->validate([
+//            'phone' => 'required|numeric|digits:12',
+//            'name' => 'required',
+//        ]);
 
         $user = Auth::user();
         $user->phone = $request->phone;
