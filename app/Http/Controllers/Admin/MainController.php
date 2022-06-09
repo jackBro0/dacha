@@ -196,7 +196,7 @@ class MainController extends Controller
         $amount = $request->params["amount"];
         $account = $request->params["account"]["user_id"];
         $account_phone = $request->params["account"];
-        $transaction_id = $request->params["id"];
+        $transaction_id = !empty($request->params["id"]) ? $request->params["id"]: null;
         $user = User::query()->where('id', (int)$account)->get()->pluck("id");
         if (empty($user[0])) {
             return response()->json([
