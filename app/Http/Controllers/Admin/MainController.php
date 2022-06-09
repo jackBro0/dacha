@@ -195,8 +195,9 @@ class MainController extends Controller
         $id = $request->id;
         $amount = $request->params["amount"];
         $account = $request->params["account"]["user_id"];
+        $transaction_id = $request->params["id"];
         $user = User::query()->where('id', (int)$account)->get()->pluck("id");
-        if (empty($user[0])){
+        if (empty($user[0])) {
             return response()->json([
                 'error' => [
                     "code" => -32504,
@@ -210,7 +211,7 @@ class MainController extends Controller
                 "id" => $id
             ]);
         }
-        if($amount != 1000){
+        if ($amount != 1000) {
             return response()->json([
                 'error' => [
                     "code" => -31001,
@@ -224,5 +225,20 @@ class MainController extends Controller
                 "id" => $id
             ]);
         }
-     }
+        if ($amount != 1000) {
+            return response()->json([
+                'error' => [
+                    "code" => -31099,
+                    "message" => [
+                        "ru" => "Номер телефона не найден",
+                        "uz" => "Raqam ro'yhatda yo'q",
+                        "en" => "Phone number not found"
+                    ],
+                    "data" => "amount",
+                    "transaction_id" => (int)$transaction_id,
+                ],
+                "id" => $id
+            ]);
+        }
+    }
 }
