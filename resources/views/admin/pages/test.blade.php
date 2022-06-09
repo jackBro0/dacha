@@ -63,6 +63,20 @@ align-items: center; justify-content: center;">
                         </button>
                     </form>
                 </div>
+                <div>
+                    <body onload="Paycom.Button('#form-payme', '#button-container')">
+                    <form id="form-payme" method="POST" action="https://checkout.paycom.uz/">
+                        <input type="hidden" name="merchant" value="62a046bdc14e3c99ddcfd770">
+                        <input type="hidden" name="account[order_id]" value="197">
+                        <input type="hidden" name="amount" value="1000">
+                        <input type="hidden" name="lang" value="ru">
+                        <input type="hidden" name="button" data-type="svg" value="colored">
+                        <div id="button-container"></div>
+                    </form>
+                    <!-- ... -->
+
+                    </body>
+                </div>
             </div>
         </div>
     </div>
@@ -102,5 +116,8 @@ align-items: center; justify-content: center;">
     display: block;
     float: left;
     }
+@endsection
+@section('js')
+    <script src="https://cdn.paycom.uz/integration/js/checkout.min.js"></script>
 @endsection
 
