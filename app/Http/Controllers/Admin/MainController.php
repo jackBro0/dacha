@@ -193,18 +193,35 @@ class MainController extends Controller
     public function paymeAuth(Request $request)
     {
         $id = $request->id;
-        $user = User::query()->where('id', $id);
-        return response()->json([
-            'error' => [
-                "code" => -32504,
-                "message" => [
-                    "uz" => "Ro'yxatdan o'ting",
-                    "ru" => "Ro'yxatdan o'ting",
-                    "en" => "Ro'yxatdan o'ting",
+        $amount = $request->params["amount"];
+        $user = User::query()->where('id', $id)->get()->pluck("id");
+        if (empty($user[0])){
+            return response()->json([
+                'error' => [
+                    "code" => -32504,
+                    "message" => [
+                        "uz" => "Ro'yxatdan o'ting",
+                        "ru" => "Ro'yxatdan o'ting",
+                        "en" => "Ro'yxatdan o'ting",
+                    ],
+                    "data" => "auth"
                 ],
-                "data" => "auth"
-            ],
-            "id" => $id
-        ]);
+                "id" => $id
+            ]);
+        }
+        if($amount != 1000){
+            return response()->json([
+                'error' => [
+                    "code" => -31001,
+                    "message" => [
+                        "uz" => "To'lov summasi xato kirirtildi",
+                        "ru" => "To'lov summasi xato kirirtildi",
+                        "en" => "To'lov summasi xato kirirtildi",
+                    ],
+                    "data" => "amount"
+                ],
+                "id" => $id
+            ]);
+        }
      }
 }
