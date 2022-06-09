@@ -189,4 +189,18 @@ class MainController extends Controller
             ]
         );
     }
+
+    public function paymeAuth(Request $request)
+    {
+        $id = $request->id;
+        $user = User::query()->where('id', $id);
+        return response()->json([
+            'error' => [
+                "code" => -32504,
+                "message" => [
+                    "uz" => "Ro'yxatdan o'ting"
+                ]
+            ]
+        ]);
+     }
 }
