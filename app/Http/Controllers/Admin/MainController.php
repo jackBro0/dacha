@@ -198,9 +198,13 @@ class MainController extends Controller
             'error' => [
                 "code" => -32504,
                 "message" => [
-                    "uz" => "Ro'yxatdan o'ting"
-                ]
-            ]
+                    "uz" => "Ro'yxatdan o'ting",
+                    "ru" => "Ro'yxatdan o'ting",
+                    "en" => "Ro'yxatdan o'ting",
+                ],
+                "data" => "auth"
+            ],
+            "id" => $id
         ]);
      }
 }
