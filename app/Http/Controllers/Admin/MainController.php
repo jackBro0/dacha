@@ -194,7 +194,8 @@ class MainController extends Controller
     {
         $id = $request->id;
         $amount = $request->params["amount"];
-        $user = User::query()->where('id', $id)->get()->pluck("id");
+        $account = $request->params["account"]["user_id"];
+        $user = User::query()->where('id', (int)$account)->get()->pluck("id");
         if (empty($user[0])){
             return response()->json([
                 'error' => [
