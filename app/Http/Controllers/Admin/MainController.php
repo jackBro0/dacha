@@ -195,6 +195,7 @@ class MainController extends Controller
         $id = $request->id;
         $amount = $request->params["amount"];
         $account = $request->params["account"]["user_id"];
+        $account_phone = $request->params["account"]["phone"];
         $transaction_id = $request->params["id"];
         $user = User::query()->where('id', (int)$account)->get()->pluck("id");
         if (empty($user[0])) {
@@ -225,7 +226,7 @@ class MainController extends Controller
                 "id" => $id
             ]);
         }
-        if ($amount != 1000) {
+        if (empty($account_phone)) {
             return response()->json([
                 'error' => [
                     "code" => -31099,
