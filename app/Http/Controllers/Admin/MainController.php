@@ -194,11 +194,10 @@ class MainController extends Controller
     {
         $id = $request->id;
         $amount = $request->params["amount"];
-        $account = $request->params["account"]["user_id"];
+        $user = !empty($request->params["account"])? User::query()->where('id', (int)$request->params["account"]["user_id"])->get()->pluck("id") : null;
         $account_phone = $request->params["account"];
         $transaction_id = !empty($request->params["id"]) ? $request->params["id"]: null;
-        $user = User::query()->where('id', (int)$account)->get()->pluck("id");
-        if (empty($user[0])) {
+        if (empty($user)) {
             return response()->json([
                 'error' => [
                     "code" => -32504,
