@@ -196,6 +196,7 @@ class MainController extends Controller
         $id = !empty($request->id) ? $request->id : null;
         $method = $request['method'];
         $transaction_id = !empty($request->params["id"]) ? $request->params["id"] : null;
+        $time = !empty($request->params["time"]) ? $request->params["time"] : null;
         $amount = !empty($request->params["amount"]) ? $request->params["amount"] : 0;
         $user = !empty($request->params["account"]) ? User::query()->where('id', (int)$request->params["account"]["user_id"])->get()->pluck("id") : null;
         $account_phone = !empty($request->params["account"]) ? $request->params["account"] : null;
@@ -209,7 +210,7 @@ class MainController extends Controller
         if (!empty($id) and !empty($user) and $amount == 1000 and $method == "CreateTransaction") {
             return response()->json([
                 "result" => [
-                    "create_time" => 1399114284039,
+                    "create_time" => $time,
                     "transaction" => $transaction_id,
                     "state" => 1
                 ]
@@ -218,7 +219,17 @@ class MainController extends Controller
         if (!empty($id) and !empty($request->params["id"]) and $method == "PerformTransaction") {
             return response()->json([
                 "result" => [
-                    "perform_time" => 1399114284039,
+                    "perform_time" => $time,
+                    "transaction" => $transaction_id,
+                    "state" => 2
+                ]
+            ]);
+        }
+        if($method == "CheckTransaction"){
+            return response()->json([
+                "result" => [
+                    "create_time" => $time,
+                    "perform_time" => $time + 5,
                     "transaction" => $transaction_id,
                     "state" => 2
                 ]
@@ -227,7 +238,7 @@ class MainController extends Controller
         if (!empty($id) and !empty($user) and $amount == 1000 and $method == "CancelTransaction") {
             return response()->json([
                 "result" => [
-                    "cancel_time" => 1399114284039,
+                    "cancel_time" => $time,
                     "transaction" => $transaction_id,
                     "state" => -2
                 ]
