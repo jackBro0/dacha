@@ -8,6 +8,7 @@ use App\Models\Dacha;
 use App\Models\RentDacha;
 use App\Models\User;
 use App\Models\UserPaymentHistory;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -190,14 +191,49 @@ class MainController extends Controller
         );
     }
 
-    public function paymeAuth(Request $request)
+    public function paymeAuth(Request $request): \Illuminate\Http\JsonResponse
     {
-        $id = $request->id;
-        $amount = $request->params["amount"];
-        $user = !empty($request->params["account"])? User::query()->where('id', (int)$request->params["account"]["user_id"])->get()->pluck("id") : null;
-        $account_phone = $request->params["account"];
-        $transaction_id = !empty($request->params["id"]) ? $request->params["id"]: null;
-        if (empty($user)) {
+        $id = !empty($request->id) ? $request->id : null;
+        $method = $request['method'];
+        $transaction_id = !empty($request->params["id"]) ? $request->params["id"] : null;
+        $amount = !empty($request->params["amount"]) ? $request->params["amount"] : 0;
+        $user = !empty($request->params["account"]) ? User::query()->where('id', (int)$request->params["account"]["user_id"])->get()->pluck("id") : null;
+        $account_phone = !empty($request->params["account"]) ? $request->params["account"] : null;
+        if (!empty($id) and !empty($user) and $amount == 1000 and $method == "CheckPerformTransaction") {
+            return response()->json([
+                "result" => [
+                    "allow" => true
+                ]
+            ]);
+        }
+        if (!empty($id) and !empty($user) and $amount == 1000 and $method == "CreateTransaction") {
+            return response()->json([
+                "result" => [
+                    "create_time" => 1399114284039,
+                    "transaction" => $transaction_id,
+                    "state" => 1
+                ]
+            ]);
+        }
+        if (!empty($id) and !empty($request->params["id"]) and $method == "PerformTransaction") {
+            return response()->json([
+                "result" => [
+                    "perform_time" => 1399114284039,
+                    "transaction" => $transaction_id,
+                    "state" => 2
+                ]
+            ]);
+        }
+        if (!empty($id) and !empty($user) and $amount == 1000 and $method == "CancelTransaction") {
+            return response()->json([
+                "result" => [
+                    "cancel_time" => 1399114284039,
+                    "transaction" => $transaction_id,
+                    "state" => -2
+                ]
+            ]);
+        }
+        if (empty($user) and empty($request->params["id"])) {
             return response()->json([
                 'error' => [
                     "code" => -32504,
