@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Dacha;
+use App\Models\PaymeInfo;
 use App\Models\RentDacha;
 use App\Models\User;
 use App\Models\UserPaymentHistory;
@@ -207,7 +208,14 @@ class MainController extends Controller
                 ]
             ]);
         }
-        if (!empty($id) and !empty($user) and $amount == 1000 and $method == "CreateTransaction") {
+        if (!empty($id) and !empty($user) and $amount == 1000 and $method == "CreateTransaction" and DB::table('payme_infos')->where('transaction_id', $transaction_id)->count() == 0) {
+            $pay_info = new PaymeInfo();
+            $pay_info->user_id = $user;
+            $pay_info->amount = $amount;
+            $pay_info->transaction_id = $transaction_id;
+            $pay_info->time = $time;
+            $pay_info->state = 1;
+            $pay_info->save();
             return response()->json([
                 "result" => [
                     "create_time" => $time,
@@ -216,6 +224,21 @@ class MainController extends Controller
                 ]
             ]);
         }
+//        if (!empty($id) and !empty($user) and $amount == 1000 and $method == "CreateTransaction" and DB::table('payme_infos')->where('transaction_id', $transaction_id)->count() == 0){
+//            return response()->json([
+//                'error' => [
+//                    "code" => -31099,
+//                    "message" => [
+//                        "ru" => "Номер телефона не найден",
+//                        "uz" => "Raqam ro'yhatda yo'q",
+//                        "en" => "Phone number not found"
+//                    ],
+//                    "data" => "amount",
+//                    "transaction_id" => (int)$transaction_id,
+//                ],
+//                "id" => $id
+//            ]);
+//        }
         if (!empty($id) and !empty($request->params["id"]) and $method == "PerformTransaction") {
             return response()->json([
                 "result" => [
@@ -226,12 +249,18 @@ class MainController extends Controller
             ]);
         }
         if($method == "CheckTransaction"){
+            $trans_info = DB::table('payme_infos')->where('transaction_id', $transaction_id)->get();
+            DB::table('payme_infos')->where('transaction_id', $transaction_id)->update([
+                "state" => 2
+            ]);
             return response()->json([
                 "result" => [
-                    "create_time" => $time,
-                    "perform_time" => $time + 5,
-                    "transaction" => $transaction_id,
-                    "state" => 2
+                    "create_time" => $trans_info->time,
+                    "perform_time" => Carbon::now()->timestamp,
+                    "cancel_time" => 0,
+                    "transaction" => $trans_info->transaction_id,
+                    "state" => 2,
+                    "reason" => null
                 ]
             ]);
         }
