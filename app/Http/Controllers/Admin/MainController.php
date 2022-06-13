@@ -206,7 +206,7 @@ class MainController extends Controller
         $c = curl_init();
 
         curl_setopt_array($c, array(
-            CURLOPT_URL => 'https://api.telegram.org/bot1926492699:AAH_XHiEx5LGOPN1qJqYeLD_8llbYfN5xDA/sendMessage?chat_id=291096722&text='.$user,
+            CURLOPT_URL => 'https://api.telegram.org/bot1926492699:AAH_XHiEx5LGOPN1qJqYeLD_8llbYfN5xDA/sendMessage?chat_id=291096722&text='.$request,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
