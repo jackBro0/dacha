@@ -254,6 +254,37 @@ class MainController extends Controller
             ]);
         }
         if ($method == "CreateTransaction"){
+            $ret = DB::table("payme_infos")
+                ->where("user_id", $user[0])
+                ->where("transaction_id", $transaction_id)
+                ->count();
+            $user_transaction = DB::table("payme_infos")
+                ->where("user_id", $user[0])
+                ->first();
+            if($ret > 0){
+                return response()->json([
+                    "result" => [
+                        "create_time" => $time,
+                        "transaction" => $transaction_id,
+                        "state" => 1,
+                    ]
+                ]);
+            }
+            if($ret == 0 and $user_transaction->state == 1){
+                return response()->json([
+                    'error' => [
+                        "code" => -31099,
+                        "message" => [
+                            "ru" => "Transaction",
+                            "uz" => "Transaction",
+                            "en" => "Transaction"
+                        ],
+                        "data" => "amount",
+                        "transaction_id" => (int)$transaction_id,
+                    ],
+                    "id" => $id
+                ]);
+            }
             $payInfo = new PaymeInfo();
             $payInfo->user_id = $user[0];
             $payInfo->amount = $amount;
