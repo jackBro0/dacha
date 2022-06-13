@@ -231,7 +231,7 @@ class MainController extends Controller
                 "id" => $id
             ]);
         }
-        if (!$user and $method == "CheckPerformTransaction") {
+        if (empty($user) and $method == "CheckPerformTransaction") {
             return response()->json([
                 'error' => [
                     "code" => -31099,
