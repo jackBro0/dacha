@@ -200,7 +200,7 @@ class MainController extends Controller
         $transaction_id = !empty($request->params["id"]) ? $request->params["id"] : null;
         $time = !empty($request->params["time"]) ? $request->params["time"] : null;
         $amount = !empty($request->params["amount"]) ? $request->params["amount"] : 0;
-        $user = !empty($request->params["account"]) ? User::query()->where('id', (int)$request->params["account"]["user_id"])->get()->pluck("id") : null;
+        $user = !empty($request->params["account"]) ? User::query()->where('id', $request->params["account"]["user_id"])->get()->pluck("id") : null;
         $account_phone = !empty($request->params["account"]) ? $request->params["account"] : null;
 
         if (!$user) {
