@@ -201,6 +201,7 @@ class MainController extends Controller
         $time = !empty($request->params["time"]) ? $request->params["time"] : null;
         $amount = !empty($request->params["amount"]) ? $request->params["amount"] : 0;
         $user = !empty($request->params["account"]) ? User::query()->where('id', $request->params["account"]["user_id"])->get()->pluck("id") : null;
+        $user_get = !empty($request->params["account"]) ? User::query()->where('id', $request->params["account"]["user_id"])->first() : null;
         $account_phone = !empty($request->params["account"]) ? $request->params["account"] : null;
 
 //        $c = curl_init();
@@ -221,7 +222,7 @@ class MainController extends Controller
 //        curl_close($c);
 
 //        dd($request->params["account"]["user_id"]);
-        if (!$user->count()) {
+        if (!$user_get) {
             return response()->json([
                 'error' => [
                     "code" => -32504,
