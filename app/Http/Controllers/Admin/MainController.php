@@ -10,6 +10,7 @@ use App\Models\RentDacha;
 use App\Models\User;
 use App\Models\UserPaymentHistory;
 use Carbon\Carbon;
+use DateTime;
 use http\Env\Response;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -265,21 +266,21 @@ class MainController extends Controller
                 "id" => $id
             ]);
         }
-        if (!$user and $method == "CheckPerformTransaction") {
-            return response()->json([
-                'error' => [
-                    "code" => -31099,
-                    "message" => [
-                        "ru" => "пользовател не найден",
-                        "uz" => "foydalanuvchi topilmadi",
-                        "en" => "user not found"
-                    ],
-                    "data" => "amount",
-                    "transaction_id" => (int)$transaction_id,
-                ],
-                "id" => $id
-            ]);
-        }
+//        if (!$user and $method == "CheckPerformTransaction") {
+//            return response()->json([
+//                'error' => [
+//                    "code" => -31099,
+//                    "message" => [
+//                        "ru" => "пользовател не найден",
+//                        "uz" => "foydalanuvchi topilmadi",
+//                        "en" => "user not found"
+//                    ],
+//                    "data" => "amount",
+//                    "transaction_id" => (int)$transaction_id,
+//                ],
+//                "id" => $id
+//            ]);
+//        }
         if ($method == "CheckPerformTransaction" and $user) {
             return response()->json([
                 "result" => [
@@ -287,6 +288,32 @@ class MainController extends Controller
                 ]
             ]);
         }
+
+        if($method == "CheckTransaction"){
+            $user_transaction = DB::table("payme_infos")
+                ->where("transaction_id", $transaction_id)
+                ->first();
+            DB::table("payme_infos")
+                ->where("transaction_id", $transaction_id)
+                ->update([
+                    "state" => 2
+                ]);
+            $now = DateTime::createFromFormat('U.u', number_format(microtime(true), 6, '.', '')
+            $now_us = (int)$now->format('Uu');
+            if($user_transaction->state == 1){
+                return response()->json([
+                    "result" => [
+                        "create_time" => $user_transaction->time,
+                        "perform_time" => $now_us,
+                        "cancel_time" => 0,
+                        "transaction" => $transaction_id,
+                        "state" => $user_transaction->state,
+                        "reason" => null
+                    ]
+                ]);
+            }
+        }
+
         if ($method == "CreateTransaction") {
             $ret = DB::table("payme_infos")
                 ->where("user_id", $user[0])
