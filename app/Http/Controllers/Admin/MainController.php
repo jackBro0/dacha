@@ -201,80 +201,8 @@ class MainController extends Controller
         $amount = !empty($request->params["amount"]) ? $request->params["amount"] : 0;
         $user = !empty($request->params["account"]) ? User::query()->where('id', (int)$request->params["account"]["user_id"])->get()->pluck("id") : null;
         $account_phone = !empty($request->params["account"]) ? $request->params["account"] : null;
-        if (!empty($id) and !empty($user) and $amount == 1000 and $method == "CheckPerformTransaction") {
-            return response()->json([
-                "result" => [
-                    "allow" => true
-                ]
-            ]);
-        }
-        if (!empty($id) and !empty($user) and $amount == 1000 and $method == "CreateTransaction" and DB::table('payme_infos')->where('transaction_id', $transaction_id)->count() == 0) {
-            $pay_info = new PaymeInfo();
-            $pay_info->user_id = $user;
-            $pay_info->amount = $amount;
-            $pay_info->transaction_id = $transaction_id;
-            $pay_info->time = $time;
-            $pay_info->state = 1;
-            $pay_info->save();
-            return response()->json([
-                "result" => [
-                    "create_time" => $time,
-                    "transaction" => $transaction_id,
-                    "state" => 1
-                ]
-            ]);
-        }
-//        if (!empty($id) and !empty($user) and $amount == 1000 and $method == "CreateTransaction" and DB::table('payme_infos')->where('transaction_id', $transaction_id)->count() == 0){
-//            return response()->json([
-//                'error' => [
-//                    "code" => -31099,
-//                    "message" => [
-//                        "ru" => "Номер телефона не найден",
-//                        "uz" => "Raqam ro'yhatda yo'q",
-//                        "en" => "Phone number not found"
-//                    ],
-//                    "data" => "amount",
-//                    "transaction_id" => (int)$transaction_id,
-//                ],
-//                "id" => $id
-//            ]);
-//        }
-        if (!empty($id) and !empty($request->params["id"]) and $method == "PerformTransaction") {
-            return response()->json([
-                "result" => [
-                    "perform_time" => $time,
-                    "transaction" => $transaction_id,
-                    "state" => 2
-                ]
-            ]);
-        }
-        if($method == "CheckTransaction"){
-            $trans_info = DB::table('payme_infos')->where('transaction_id', $transaction_id)->first();
-            $date = \DateTime::createFromFormat('U.u', number_format(microtime(true), 6, '.', ''))->format('Uv');
-            DB::table('payme_infos')->where('transaction_id', $transaction_id)->update([
-                "state" => 2
-            ]);
-            return response()->json([
-                "result" => [
-                    "create_time" => $trans_info->time,
-                    "perform_time" => (int)$date,
-                    "cancel_time" => 0,
-                    "transaction" => $trans_info->transaction_id,
-                    "state" => 2,
-                    "reason" => null
-                ]
-            ]);
-        }
-        if (!empty($id) and !empty($user) and $amount == 1000 and $method == "CancelTransaction") {
-            return response()->json([
-                "result" => [
-                    "cancel_time" => $time,
-                    "transaction" => $transaction_id,
-                    "state" => -2
-                ]
-            ]);
-        }
-        if (empty($user) and empty($request->params["id"])) {
+
+        if (empty($user)) {
             return response()->json([
                 'error' => [
                     "code" => -32504,
