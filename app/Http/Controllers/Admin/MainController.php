@@ -203,7 +203,7 @@ class MainController extends Controller
         $user = !empty($request->params["account"]) ? User::query()->where('id', (int)$request->params["account"]["user_id"])->get()->pluck("id") : null;
         $account_phone = !empty($request->params["account"]) ? $request->params["account"] : null;
 
-        if (empty($user)) {
+        if (!$user) {
             return response()->json([
                 'error' => [
                     "code" => -32504,
@@ -231,7 +231,7 @@ class MainController extends Controller
                 "id" => $id
             ]);
         }
-        if (empty($user) and $method == "CheckPerformTransaction") {
+        if (!$user and $method == "CheckPerformTransaction") {
             return response()->json([
                 'error' => [
                     "code" => -31099,
