@@ -249,14 +249,15 @@ class MainController extends Controller
             ]);
         }
         if($method == "CheckTransaction"){
-            $trans_info = DB::table('payme_infos')->where('transaction_id', $transaction_id)->get();
+            $trans_info = DB::table('payme_infos')->where('transaction_id', $transaction_id)->first();
+            $date = \DateTime::createFromFormat('U.u', number_format(microtime(true), 6, '.', ''))->format('Uv');
             DB::table('payme_infos')->where('transaction_id', $transaction_id)->update([
                 "state" => 2
             ]);
             return response()->json([
                 "result" => [
                     "create_time" => $trans_info->time,
-                    "perform_time" => Carbon::now()->timestamp,
+                    "perform_time" => (int)$date,
                     "cancel_time" => 0,
                     "transaction" => $trans_info->transaction_id,
                     "state" => 2,

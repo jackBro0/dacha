@@ -15,7 +15,7 @@ class CreatePaymeInfosTable extends Migration
     {
         Schema::create('payme_infos', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('user_id');
+            $table->string('user_id');
             $table->bigInteger('amount');
             $table->string('transaction_id');
             $table->string('time');
