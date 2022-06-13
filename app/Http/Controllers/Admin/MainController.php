@@ -204,6 +204,9 @@ class MainController extends Controller
         $user = !empty($request->params["account"]) ? User::query()->where('id', $request->params["account"]["user_id"])->get()->pluck("id") : null;
         $user_get = !empty($request->params["account"]) ? User::query()->where('id', $request->params["account"]["user_id"])->first() : null;
         $account_phone = !empty($request->params["account"]) ? $request->params["account"] : null;
+        $user_transaction = DB::table("payme_infos")
+            ->where("transaction_id", $transaction_id)
+            ->count();
 
 //        $c = curl_init();
 //
@@ -223,7 +226,7 @@ class MainController extends Controller
 //        curl_close($c);
 
 //        dd($request->params["account"]["user_id"]);
-        if (!$user_get and $amount == 1000){
+        if (!$user_get and $amount == 1000 and !$user_transaction){
             return response()->json([
                 'error' => [
                     "code" => -31099,
