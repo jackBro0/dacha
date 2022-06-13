@@ -10,6 +10,7 @@ use App\Models\RentDacha;
 use App\Models\User;
 use App\Models\UserPaymentHistory;
 use Carbon\Carbon;
+use http\Env\Response;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -243,6 +244,13 @@ class MainController extends Controller
                     "transaction_id" => (int)$transaction_id,
                 ],
                 "id" => $id
+            ]);
+        }
+        if ($method == "CheckPerformTransaction"){
+            return response()->json([
+                "result" => [
+                    "allow" => true
+                ]
             ]);
         }
     }
