@@ -224,7 +224,7 @@ class MainController extends Controller
         }
         return response()->json([
             "1" => $user_get,
-            "2" => $user_transaction,
+            "2" => $transaction_id,
         ]);
         if (!$user_get and !$user_transaction) {
             return response()->json([
