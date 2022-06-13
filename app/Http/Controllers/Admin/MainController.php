@@ -310,10 +310,11 @@ class MainController extends Controller
                         "create_time" => (int)$user_transaction->time,
                         "perform_time" => 0,
                         "cancel_time" => 0,
-                        "transaction" => $user_transaction->id,
+                        "transaction" => "$user_transaction->id",
                         "state" => $user_transaction->state,
                         "reason" => null
-                    ]
+                    ],
+                    "error" => null
                 ]);
             }
         }
