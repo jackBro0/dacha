@@ -226,6 +226,7 @@ class MainController extends Controller
 //        curl_close($c);
 
 //        dd($request->params["account"]["user_id"]);
+//        dd($user_transaction);
         if (!$user_get and $amount == 1000 and !$user_transaction){
             return response()->json([
                 'error' => [
@@ -255,7 +256,7 @@ class MainController extends Controller
                 "id" => $id
             ]);
         }
-        if ($amount != 1000) {
+        if ($amount != 1000 and !$user_transaction) {
             return response()->json([
                 'error' => [
                     "code" => -31001,
