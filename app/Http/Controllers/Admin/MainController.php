@@ -307,7 +307,7 @@ class MainController extends Controller
             if($user_transaction->state == 1){
                 return response()->json([
                     "result" => [
-                        "create_time" => $user_transaction->time,
+                        "create_time" => (int)$user_transaction->time,
                         "perform_time" => $now_us,
                         "cancel_time" => 0,
                         "transaction" => $transaction_id,
@@ -326,6 +326,7 @@ class MainController extends Controller
             $user_transaction = DB::table("payme_infos")
                 ->where("user_id", $user[0])
                 ->first();
+//            dd($ret);
             if ($ret > 0) {
                 return response()->json([
                     "result" => [
@@ -335,7 +336,7 @@ class MainController extends Controller
                     ]
                 ]);
             }
-            if (!empty($user_transaction->state) and $ret == 0 and $user_transaction->state == 1) {
+            if (!empty($user_transaction->state) and !$ret and $user_transaction->state) {
                 return response()->json([
                     'error' => [
                         "code" => -31099,
