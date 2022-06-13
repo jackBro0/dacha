@@ -298,7 +298,7 @@ class MainController extends Controller
                 ->update([
                     "state" => 2
                 ]);
-            $now = DateTime::createFromFormat('U.u', number_format(microtime(true), 6, '.', '');
+            $now = DateTime::createFromFormat('U.u', number_format(microtime(true), 6, '.', ''));
             $now_us = (int)$now->format('Uu');
             if($user_transaction->state == 1){
                 return response()->json([
