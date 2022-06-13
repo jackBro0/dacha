@@ -231,21 +231,21 @@ class MainController extends Controller
                 "id" => $id
             ]);
         }
-        if (empty($account_phone["phone"])) {
-            return response()->json([
-                'error' => [
-                    "code" => -31099,
-                    "message" => [
-                        "ru" => "Номер телефона не найден",
-                        "uz" => "Raqam ro'yhatda yo'q",
-                        "en" => "Phone number not found"
-                    ],
-                    "data" => "amount",
-                    "transaction_id" => (int)$transaction_id,
-                ],
-                "id" => $id
-            ]);
-        }
+//        if (empty($account_phone["phone"]) and $method == "CreateTransaction") {
+//            return response()->json([
+//                'error' => [
+//                    "code" => -31099,
+//                    "message" => [
+//                        "ru" => "Номер телефона не найден",
+//                        "uz" => "Raqam ro'yhatda yo'q",
+//                        "en" => "Phone number not found"
+//                    ],
+//                    "data" => "amount",
+//                    "transaction_id" => (int)$transaction_id,
+//                ],
+//                "id" => $id
+//            ]);
+//        }
         if ($method == "CheckPerformTransaction"){
             return response()->json([
                 "result" => [
