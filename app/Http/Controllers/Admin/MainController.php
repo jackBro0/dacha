@@ -194,7 +194,7 @@ class MainController extends Controller
         );
     }
 
-    public function paymeAuth(Request $request): \Illuminate\Http\JsonResponse
+    public function paymeAuth(Request $request)
     {
         $id = !empty($request->id) ? $request->id : null;
         $method = $request['method'];
@@ -207,26 +207,6 @@ class MainController extends Controller
         $user_transaction = DB::table("payme_infos")
             ->where("transaction_id", $transaction_id)
             ->count();
-
-//        $c = curl_init();
-//
-//        curl_setopt_array($c, array(
-//            CURLOPT_URL => 'https://api.telegram.org/bot1926492699:AAH_XHiEx5LGOPN1qJqYeLD_8llbYfN5xDA/sendMessage?chat_id=291096722&text='.$request,
-//            CURLOPT_RETURNTRANSFER => true,
-//            CURLOPT_ENCODING => '',
-//            CURLOPT_MAXREDIRS => 10,
-//            CURLOPT_TIMEOUT => 0,
-//            CURLOPT_FOLLOWLOCATION => true,
-//            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-//            CURLOPT_CUSTOMREQUEST => 'GET',
-//        ));
-//
-//        $response = curl_exec($c);
-//
-//        curl_close($c);
-
-//        dd($request->params["account"]["user_id"]);
-//        dd($user_transaction);
         if (!$user_get and $amount == 1000 and !$user_transaction){
             return response()->json([
                 'error' => [
@@ -242,6 +222,10 @@ class MainController extends Controller
                 "id" => $id
             ]);
         }
+        return response()->json([
+            "1" => $user_get,
+            "2" => $user_transaction,
+        ]);
         if (!$user_get and !$user_transaction) {
             return response()->json([
                 'error' => [
