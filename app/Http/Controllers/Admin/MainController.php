@@ -222,10 +222,7 @@ class MainController extends Controller
                 "id" => $id
             ]);
         }
-        return response()->json([
-            "1" => $user_get,
-            "2" => $request->params["id"],
-        ]);
+
         if (!$user_get and !$user_transaction) {
             return response()->json([
                 'error' => [
