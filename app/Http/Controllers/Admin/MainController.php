@@ -344,28 +344,24 @@ class MainController extends Controller
             ]);
         }
         if($method == "CheckTransaction"){
-            $state = DB::table("payme_infos")
-                ->where("transaction_id", $transaction_id)
-                ->update([
-                    "state" => 2
-                ]);
+//            $state = DB::table("payme_infos")
+//                ->where("transaction_id", $transaction_id)
+//                ->update([
+//                    "state" => 2
+//                ]);
             $user_transaction = DB::table("payme_infos")
                 ->where("transaction_id", $transaction_id)
                 ->first();
 //            dd($user_transaction->state);
             $now = DateTime::createFromFormat('U.u', number_format(microtime(true), 6, '.', ''));
             $now_us = (int)$now->format('Uv');
-            if($user_transaction->state == 2){
+            if($user_transaction->state == 1){
                 return response()->json([
                     "result" => [
-                        "create_time" => (int)$user_transaction->time,
-                        "perform_time" => 0,
-                        "cancel_time" => 0,
-                        "transaction" => "$user_transaction->id",
-                        "state" => $user_transaction->state,
-                        "reason" => null
-                    ],
-                    "error" => null
+                        "create_time" => $time,
+                        "transaction" => $transaction_id,
+                        "state" => 1,
+                    ]
                 ]);
             }
         }
