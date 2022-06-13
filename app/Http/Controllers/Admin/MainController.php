@@ -316,7 +316,7 @@ class MainController extends Controller
             if (!empty($user_transaction->state) and !$ret and $user_transaction->state) {
                 return response()->json([
                     'result' => [
-                        "create_time" => $user_transaction->time,
+                        "create_time" => (int)$user_transaction->time,
                         "transaction" => $user_transaction->transaction_id,
                         "state" => $user_transaction->state,
                         "receivers" => null
