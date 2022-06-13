@@ -303,7 +303,7 @@ class MainController extends Controller
                     "state" => 2
                 ]);
             $now = DateTime::createFromFormat('U.u', number_format(microtime(true), 6, '.', ''));
-            $now_us = (int)$now->format('Uu');
+            $now_us = (int)$now->format('Uv');
             if($user_transaction->state == 1){
                 return response()->json([
                     "result" => [
