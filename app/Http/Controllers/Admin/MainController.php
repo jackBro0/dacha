@@ -308,9 +308,9 @@ class MainController extends Controller
                 return response()->json([
                     "result" => [
                         "create_time" => (int)$user_transaction->time,
-                        "perform_time" => (int)$user_transaction->time,
+                        "perform_time" => 0,
                         "cancel_time" => 0,
-                        "transaction" => $transaction_id,
+                        "transaction" => $user_transaction->id,
                         "state" => $user_transaction->state,
                         "reason" => null
                     ]
