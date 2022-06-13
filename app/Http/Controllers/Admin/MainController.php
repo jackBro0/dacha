@@ -358,7 +358,7 @@ class MainController extends Controller
             if($user_transaction->state == 1){
                 return response()->json([
                     "result" => [
-                        "create_time" => $time,
+                        "create_time" => $user_transaction->time,
                         "transaction" => $transaction_id,
                         "state" => 1,
                     ]
