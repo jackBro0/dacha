@@ -222,6 +222,21 @@ class MainController extends Controller
 //        curl_close($c);
 
 //        dd($request->params["account"]["user_id"]);
+        if (!$user_get and $amount == 1000){
+            return response()->json([
+                'error' => [
+                    "code" => -31099,
+                    "message" => [
+                        "ru" => "пользовател не найден",
+                        "uz" => "foydalanuvchi topilmadi",
+                        "en" => "user not found"
+                    ],
+                    "data" => "amount",
+                    "transaction_id" => (int)$transaction_id,
+                ],
+                "id" => $id
+            ]);
+        }
         if (!$user_get) {
             return response()->json([
                 'error' => [
