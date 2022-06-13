@@ -231,29 +231,29 @@ class MainController extends Controller
                 "id" => $id
             ]);
         }
-//        if (empty($account_phone["phone"]) and $method == "CreateTransaction") {
-//            return response()->json([
-//                'error' => [
-//                    "code" => -31099,
-//                    "message" => [
-//                        "ru" => "Номер телефона не найден",
-//                        "uz" => "Raqam ro'yhatda yo'q",
-//                        "en" => "Phone number not found"
-//                    ],
-//                    "data" => "amount",
-//                    "transaction_id" => (int)$transaction_id,
-//                ],
-//                "id" => $id
-//            ]);
-//        }
-        if ($method == "CheckPerformTransaction"){
+        if (empty($user) and $method == "CheckPerformTransaction") {
+            return response()->json([
+                'error' => [
+                    "code" => -31099,
+                    "message" => [
+                        "ru" => "пользовател не найден",
+                        "uz" => "foydalanuvchi topilmadi",
+                        "en" => "user not found"
+                    ],
+                    "data" => "amount",
+                    "transaction_id" => (int)$transaction_id,
+                ],
+                "id" => $id
+            ]);
+        }
+        if ($method == "CheckPerformTransaction" and !$user) {
             return response()->json([
                 "result" => [
                     "allow" => true
                 ]
             ]);
         }
-        if ($method == "CreateTransaction"){
+        if ($method == "CreateTransaction") {
             $ret = DB::table("payme_infos")
                 ->where("user_id", $user[0])
                 ->where("transaction_id", $transaction_id)
@@ -261,7 +261,7 @@ class MainController extends Controller
             $user_transaction = DB::table("payme_infos")
                 ->where("user_id", $user[0])
                 ->first();
-            if($ret > 0){
+            if ($ret > 0) {
                 return response()->json([
                     "result" => [
                         "create_time" => $time,
@@ -270,7 +270,7 @@ class MainController extends Controller
                     ]
                 ]);
             }
-            if($ret == 0 and $user_transaction->state == 1){
+            if (!empty($user_transaction->state) and $ret == 0 and $user_transaction->state == 1) {
                 return response()->json([
                     'error' => [
                         "code" => -31099,
