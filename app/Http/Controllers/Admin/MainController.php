@@ -241,7 +241,7 @@ class MainController extends Controller
                 "id" => $id
             ]);
         }
-        if (!$user_get) {
+        if (!$user_get and !$user_transaction) {
             return response()->json([
                 'error' => [
                     "code" => -32504,
