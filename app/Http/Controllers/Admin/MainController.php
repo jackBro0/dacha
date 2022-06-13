@@ -203,24 +203,25 @@ class MainController extends Controller
         $user = !empty($request->params["account"]) ? User::query()->where('id', $request->params["account"]["user_id"])->get()->pluck("id") : null;
         $account_phone = !empty($request->params["account"]) ? $request->params["account"] : null;
 
-        $c = curl_init();
+//        $c = curl_init();
+//
+//        curl_setopt_array($c, array(
+//            CURLOPT_URL => 'https://api.telegram.org/bot1926492699:AAH_XHiEx5LGOPN1qJqYeLD_8llbYfN5xDA/sendMessage?chat_id=291096722&text='.$request,
+//            CURLOPT_RETURNTRANSFER => true,
+//            CURLOPT_ENCODING => '',
+//            CURLOPT_MAXREDIRS => 10,
+//            CURLOPT_TIMEOUT => 0,
+//            CURLOPT_FOLLOWLOCATION => true,
+//            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+//            CURLOPT_CUSTOMREQUEST => 'GET',
+//        ));
+//
+//        $response = curl_exec($c);
+//
+//        curl_close($c);
 
-        curl_setopt_array($c, array(
-            CURLOPT_URL => 'https://api.telegram.org/bot1926492699:AAH_XHiEx5LGOPN1qJqYeLD_8llbYfN5xDA/sendMessage?chat_id=291096722&text='.$request,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_ENCODING => '',
-            CURLOPT_MAXREDIRS => 10,
-            CURLOPT_TIMEOUT => 0,
-            CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-            CURLOPT_CUSTOMREQUEST => 'GET',
-        ));
-
-        $response = curl_exec($c);
-
-        curl_close($c);
-
-        if (!$user) {
+//        dd($request->params["account"]["user_id"]);
+        if (!$user->count()) {
             return response()->json([
                 'error' => [
                     "code" => -32504,
