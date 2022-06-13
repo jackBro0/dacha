@@ -253,5 +253,21 @@ class MainController extends Controller
                 ]
             ]);
         }
+        if ($method == "CreateTransaction"){
+            $payInfo = new PaymeInfo();
+            $payInfo->user_id = $user[0];
+            $payInfo->amount = $amount;
+            $payInfo->transaction_id = $transaction_id;
+            $payInfo->time = $time;
+            $payInfo->state = 1;
+            $payInfo->save();
+            return response()->json([
+                "result" => [
+                    "create_time" => $time,
+                    "transaction" => $transaction_id,
+                    "state" => 1,
+                ]
+            ]);
+        }
     }
 }
