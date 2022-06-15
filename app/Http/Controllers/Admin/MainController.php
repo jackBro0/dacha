@@ -325,7 +325,7 @@ class MainController extends Controller
             $now_us = (int)$now->format('Uv');
             $status = DB::table("payme_infos")->where("transaction_id", $transaction_id)->update([
                 "state" => 2,
-                "preform_time" => $now_us
+                "perform_time" => $now_us
             ]);
             $user_transaction = DB::table("payme_infos")
                 ->where("transaction_id", $transaction_id)
@@ -333,7 +333,7 @@ class MainController extends Controller
 
             return response()->json([
                 "result" => [
-                    "perform_time" => $user_transaction->preform_time,
+                    "perform_time" => $user_transaction->perform_time,
                     "transaction" => $transaction_id,
                     "state" => $user_transaction->state
                 ]

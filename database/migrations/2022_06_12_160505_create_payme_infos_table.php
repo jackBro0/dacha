@@ -19,6 +19,7 @@ class CreatePaymeInfosTable extends Migration
             $table->bigInteger('amount');
             $table->string('transaction_id');
             $table->string('time');
+            $table->float('perform_time');
             $table->integer('state');
             $table->timestamps();
             $table->softDeletes();
