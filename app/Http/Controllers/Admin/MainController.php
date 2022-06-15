@@ -200,6 +200,7 @@ class MainController extends Controller
         $method = $request['method'];
         $transaction_id = !empty($request->params["id"]) ? $request->params["id"] : null;
         $time = !empty($request->params["time"]) ? $request->params["time"] : null;
+        $reason = !empty($request->params["reason"]) ? $request->params["reason"] : null;
         $amount = !empty($request->params["amount"]) ? $request->params["amount"] : 0;
         $user = !empty($request->params["account"]) ? User::query()->where('id', $request->params["account"]["user_id"])->get()->pluck("id") : null;
         $user_get = !empty($request->params["account"]) ? User::query()->where('id', $request->params["account"]["user_id"])->first() : null;
@@ -352,6 +353,25 @@ class MainController extends Controller
             ]);
         }
 
+        if($reason){
+            $now = DateTime::createFromFormat('U.u', number_format(microtime(true), 6, '.', ''));
+            $now_us = (int)$now->format('Uv');
+            $status = DB::table("payme_infos")->where("transaction_id", $transaction_id)->update([
+                "state" => -2,
+                "cancel_time" => $now_us
+            ]);
+            $user_transaction = DB::table("payme_infos")
+                ->where("transaction_id", $transaction_id)
+                ->first();
+            return response()->json([
+                "result" => [
+                    "cancel_time" => (int)$user_transaction->cancel_time,
+                    "transaction" => $transaction_id,
+                    "state" => $user_transaction->state
+                ]
+            ]);
+        }
+
         if($method == "CheckTransaction"){
             $user_transaction = DB::table("payme_infos")
                 ->where("transaction_id", $transaction_id)
@@ -383,6 +403,17 @@ class MainController extends Controller
                     "error" => null
                 ]);
             }
+            return response()->json([
+                "result" => [
+                    "create_time" => (int)$user_transaction->time,
+                    "perform_time" => (int)$user_transaction->perform_time,
+                    "cancel_time" => (int)$user_transaction->cancel_time,
+                    "transaction" => $transaction_id,
+                    "state" => $user_transaction->state,
+                    "reason" => null
+                ],
+                "error" => null
+            ]);
         }
     }
 }

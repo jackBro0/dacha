@@ -20,6 +20,7 @@ class CreatePaymeInfosTable extends Migration
             $table->string('transaction_id')->nullable();
             $table->string('time')->nullable();
             $table->string('perform_time')->nullable();
+            $table->string('cancel_time')->nullable();
             $table->integer('state')->nullable();
             $table->timestamps();
             $table->softDeletes();
