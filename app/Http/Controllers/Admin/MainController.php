@@ -354,6 +354,18 @@ class MainController extends Controller
         }
 
         if($reason){
+            $user_transaction = DB::table("payme_infos")
+                ->where("transaction_id", $transaction_id)
+                ->first();
+            if($user_transaction->state == -2){
+                return response()->json([
+                    "result" => [
+                        "cancel_time" => (int)$user_transaction->cancel_time,
+                        "transaction" => $transaction_id,
+                        "state" => $user_transaction->state
+                    ]
+                ]);
+            }
             $now = DateTime::createFromFormat('U.u', number_format(microtime(true), 6, '.', ''));
             $now_us = (int)$now->format('Uv');
             $status = DB::table("payme_infos")->where("transaction_id", $transaction_id)->update([
@@ -410,7 +422,7 @@ class MainController extends Controller
                     "cancel_time" => (int)$user_transaction->cancel_time,
                     "transaction" => $transaction_id,
                     "state" => $user_transaction->state,
-                    "reason" => null
+                    "reason" => 5
                 ],
                 "error" => null
             ]);
