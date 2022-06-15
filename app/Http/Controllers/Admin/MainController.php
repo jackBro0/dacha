@@ -333,7 +333,7 @@ class MainController extends Controller
 
             return response()->json([
                 "result" => [
-                    "perform_time" => $user_transaction->perform_time,
+                    "perform_time" => (int)$user_transaction->perform_time,
                     "transaction" => $transaction_id,
                     "state" => $user_transaction->state
                 ]
