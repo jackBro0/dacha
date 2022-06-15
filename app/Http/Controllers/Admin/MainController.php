@@ -320,7 +320,7 @@ class MainController extends Controller
             ]);
         }
 
-        if($method = "PerformTransaction"){
+        if($method == "PerformTransaction"){
             $now = DateTime::createFromFormat('U.u', number_format(microtime(true), 6, '.', ''));
             $now_us = (int)$now->format('Uv');
             $status = DB::table("payme_infos")->where("transaction_id", $transaction_id)->update([
