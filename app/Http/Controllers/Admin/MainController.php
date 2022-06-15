@@ -321,6 +321,18 @@ class MainController extends Controller
         }
 
         if($method == "PerformTransaction"){
+            $user_transaction = DB::table("payme_infos")
+                ->where("transaction_id", $transaction_id)
+                ->first();
+            if($user_transaction->state == 2){
+                return response()->json([
+                    "result" => [
+                        "perform_time" => (int)$user_transaction->perform_time,
+                        "transaction" => $transaction_id,
+                        "state" => $user_transaction->state
+                    ]
+                ]);
+            }
             $now = DateTime::createFromFormat('U.u', number_format(microtime(true), 6, '.', ''));
             $now_us = (int)$now->format('Uv');
             $status = DB::table("payme_infos")->where("transaction_id", $transaction_id)->update([
@@ -362,7 +374,7 @@ class MainController extends Controller
                 return response()->json([
                     "result" => [
                         "create_time" => (int)$user_transaction->time,
-                        "perform_time" => $user_transaction->perform_time,
+                        "perform_time" => (int)$user_transaction->perform_time,
                         "cancel_time" => 0,
                         "transaction" => $transaction_id,
                         "state" => $user_transaction->state,
