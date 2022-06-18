@@ -15,11 +15,13 @@ class CreatePaymeInfosTable extends Migration
     {
         Schema::create('payme_infos', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
-            $table->bigInteger('amount');
-            $table->string('transaction_id');
-            $table->string('time');
-            $table->integer('state');
+            $table->string('user_id')->nullable();
+            $table->bigInteger('amount')->nullable();
+            $table->string('transaction_id')->nullable();
+            $table->string('time')->nullable();
+            $table->string('perform_time')->nullable();
+            $table->string('cancel_time')->nullable();
+            $table->integer('state')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
