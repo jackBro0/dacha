@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 
 class FavouriteController extends Controller
 {
-    public function addToFavourite(Request $request, int $dacha_id)
+    public function addToFavourite(Request $request, $dacha_id)
     {
         $favourite = UserFavourite::query()->create(
             [
