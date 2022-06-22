@@ -9,14 +9,22 @@ use Illuminate\Support\Facades\Auth;
 
 class FavouriteController extends Controller
 {
-    public function addToFavourite(Request $request, int $dacha_id)
+    public function addToFavourite($dacha_id)
     {
-        $favourite = UserFavourite::query()->create(
-            [
-                'user_id' => Auth::id(),
-                'dacha_id' => $dacha_id,
-            ]
-        );
+        $dacha = Dacha::query()->findOrFail($dacha_id);
+
+        $favourite = UserFavourite::query()
+            ->where('user_id', Auth::id())
+            ->where('dacha_id', $dacha->id)->first();
+
+        if (!$favourite) {
+            $favourite = UserFavourite::query()->create(
+                [
+                    'user_id' => Auth::id(),
+                    'dacha_id' => $dacha->id,
+                ]
+            );
+        }
         return true;
     }
 
@@ -24,7 +32,7 @@ class FavouriteController extends Controller
     {
         $dachaIds = UserFavourite::query()
             ->where('user_id', Auth::id())
-            ->get('id')->toArray();
+            ->get('dacha_id')->toArray();
 
         $list = Dacha::query()
             ->whereIn('id', $dachaIds)
