@@ -36,7 +36,7 @@ class FavouriteController extends Controller
 
         $list = Dacha::query()
             ->whereIn('id', $dachaIds)
-            ->with('images')
+            ->with('images', 'comforts')
             ->get();
 
         return response()->json(
