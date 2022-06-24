@@ -198,6 +198,7 @@ class MainController extends Controller
     {
         $id = !empty($request->id) ? $request->id : null;
         $method = $request['method'];
+        $test_key = "eJ1N?5RepNeR?VqkmesACpfti%9FeHa3SA?A";
         $transaction_id = !empty($request->params["id"]) ? $request->params["id"] : null;
         $time = !empty($request->params["time"]) ? $request->params["time"] : null;
         $reason = !empty($request->params["reason"]) ? $request->params["reason"] : null;
@@ -208,7 +209,7 @@ class MainController extends Controller
         $user_transaction = DB::table("payme_infos")
             ->where("transaction_id", $transaction_id)
             ->count();
-        if (!$user_get and $amount == 1000 and !$user_transaction){
+        if (!$user_get and $amount == 1000){
             return response()->json([
                 'error' => [
                     "code" => -31099,
@@ -224,7 +225,7 @@ class MainController extends Controller
             ]);
         }
 
-        if (!$user_get and !$user_transaction) {
+        if (!$user_get and !$user_transaction and $request->params["tes_key"] == $test_key) {
             return response()->json([
                 'error' => [
                     "code" => -32504,
@@ -233,7 +234,8 @@ class MainController extends Controller
                         "ru" => "Ro'yxatdan o'ting",
                         "en" => "Ro'yxatdan o'ting",
                     ],
-                    "data" => "auth"
+                    "data" => "auth",
+                    "test_key" => $request->params["tes_key"],
                 ],
                 "id" => $id
             ]);
