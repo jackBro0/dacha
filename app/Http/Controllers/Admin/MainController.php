@@ -209,13 +209,12 @@ class MainController extends Controller
             ->where("transaction_id", $transaction_id)
             ->count();
         $rr = $request->headers;
-        $test_key = 0;
-        foreach ($rr as $key => $r){
+        $test_key = '';
+        foreach ($rr as $r){
             if ($r[0] == "eJ1N?5RepNeR?VqkmesACpfti%9FeHa3SA?A"){
                 $test_key = "eJ1N?5RepNeR?VqkmesACpfti%9FeHa3SA?A";
             };
         }
-
         if (!$user_get and !$user_transaction and $test_key != "eJ1N?5RepNeR?VqkmesACpfti%9FeHa3SA?A") {
             return response()->json([
                 'error' => [
@@ -225,8 +224,7 @@ class MainController extends Controller
                         "ru" => "Ro'yxatdan o'ting",
                         "en" => "Ro'yxatdan o'ting",
                     ],
-                    "data" => "auth",
-                    "test_key" => $request->params["tes_key"],
+                    "data" => "auth"
                 ],
                 "id" => $id
             ]);
