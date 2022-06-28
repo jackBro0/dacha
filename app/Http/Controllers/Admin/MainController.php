@@ -198,7 +198,6 @@ class MainController extends Controller
     {
         $id = !empty($request->id) ? $request->id : null;
         $method = $request['method'];
-        $test_key = "eJ1N?5RepNeR?VqkmesACpfti%9FeHa3SA?A";
         $transaction_id = !empty($request->params["id"]) ? $request->params["id"] : null;
         $time = !empty($request->params["time"]) ? $request->params["time"] : null;
         $reason = !empty($request->params["reason"]) ? $request->params["reason"] : null;
@@ -209,7 +208,31 @@ class MainController extends Controller
         $user_transaction = DB::table("payme_infos")
             ->where("transaction_id", $transaction_id)
             ->count();
-        if (!$user_get and $amount == 1000){
+        $rr = $request->headers;
+        $test_key = 0;
+        foreach ($rr as $key => $r){
+            if ($r[0] == "eJ1N?5RepNeR?VqkmesACpfti%9FeHa3SA?A"){
+                $test_key = "eJ1N?5RepNeR?VqkmesACpfti%9FeHa3SA?A";
+            };
+        }
+
+        if (!$user_get and !$user_transaction and $test_key != "eJ1N?5RepNeR?VqkmesACpfti%9FeHa3SA?A") {
+            return response()->json([
+                'error' => [
+                    "code" => -32504,
+                    "message" => [
+                        "uz" => "Ro'yxatdan o'ting",
+                        "ru" => "Ro'yxatdan o'ting",
+                        "en" => "Ro'yxatdan o'ting",
+                    ],
+                    "data" => "auth",
+                    "test_key" => $request->params["tes_key"],
+                ],
+                "id" => $id
+            ]);
+        }
+
+        if (!$user_get and $amount == 1000) {
             return response()->json([
                 'error' => [
                     "code" => -31099,
@@ -225,21 +248,6 @@ class MainController extends Controller
             ]);
         }
 
-        if (!$user_get and !$user_transaction and $request->params["tes_key"] == $test_key) {
-            return response()->json([
-                'error' => [
-                    "code" => -32504,
-                    "message" => [
-                        "uz" => "Ro'yxatdan o'ting",
-                        "ru" => "Ro'yxatdan o'ting",
-                        "en" => "Ro'yxatdan o'ting",
-                    ],
-                    "data" => "auth",
-                    "test_key" => $request->params["tes_key"],
-                ],
-                "id" => $id
-            ]);
-        }
         if ($amount != 1000 and !$user_transaction) {
             return response()->json([
                 'error' => [
@@ -276,7 +284,6 @@ class MainController extends Controller
                 ]
             ]);
         }
-
 
 
         if ($method == "CreateTransaction") {
@@ -323,11 +330,11 @@ class MainController extends Controller
             ]);
         }
 
-        if($method == "PerformTransaction"){
+        if ($method == "PerformTransaction") {
             $user_transaction = DB::table("payme_infos")
                 ->where("transaction_id", $transaction_id)
                 ->first();
-            if($user_transaction->state == 2){
+            if ($user_transaction->state == 2) {
                 return response()->json([
                     "result" => [
                         "perform_time" => (int)$user_transaction->perform_time,
@@ -355,11 +362,11 @@ class MainController extends Controller
             ]);
         }
 
-        if($reason){
+        if ($reason) {
             $user_transaction = DB::table("payme_infos")
                 ->where("transaction_id", $transaction_id)
                 ->first();
-            if($user_transaction->state == -2){
+            if ($user_transaction->state == -2) {
                 return response()->json([
                     "result" => [
                         "cancel_time" => (int)$user_transaction->cancel_time,
@@ -386,12 +393,12 @@ class MainController extends Controller
             ]);
         }
 
-        if($method == "CheckTransaction"){
+        if ($method == "CheckTransaction") {
             $user_transaction = DB::table("payme_infos")
                 ->where("transaction_id", $transaction_id)
                 ->first();
 
-            if($user_transaction->state == 1){
+            if ($user_transaction->state == 1) {
                 return response()->json([
                     "result" => [
                         "create_time" => (int)$user_transaction->time,
@@ -404,7 +411,7 @@ class MainController extends Controller
                     "error" => null
                 ]);
             }
-            if ($user_transaction->state == 2){
+            if ($user_transaction->state == 2) {
                 return response()->json([
                     "result" => [
                         "create_time" => (int)$user_transaction->time,
