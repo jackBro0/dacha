@@ -230,7 +230,7 @@ class MainController extends Controller
             ]);
         }
 
-        if (!$user_get and $amount == 1000) {
+        if ((!$user_get and $amount != 1000 and $method != "CheckTransaction" and $user_transaction == 0) or (!$user_get and $amount == 1000 and $method != "CheckTransaction" and $user_transaction == 0)) {
             return response()->json([
                 'error' => [
                     "code" => -31099,
@@ -293,6 +293,8 @@ class MainController extends Controller
                 ->where("user_id", $user[0])
                 ->first();
 //            dd($ret);
+//            dd($transaction_id, $user_transaction->transaction_id, $ret_count);
+
             if ($ret > 0) {
                 return response()->json([
                     "result" => [
@@ -304,12 +306,22 @@ class MainController extends Controller
             }
             if (!empty($user_transaction->state) and !$ret and $user_transaction->state) {
                 return response()->json([
-                    'result' => [
-                        "create_time" => (int)$user_transaction->time,
-                        "transaction" => $user_transaction->transaction_id,
-                        "state" => $user_transaction->state,
-                        "receivers" => null
-                    ]
+                    'error' => [
+                        "code" => -31050,
+                        "message" => [
+                            "uz" => "ID",
+                            "ru" => "ID",
+                            "en" => "ID",
+                        ],
+                        "current_id" => $transaction_id
+                    ],
+                    "saved_id" => $user_transaction->transaction_id
+//                    'result' => [
+//                        "create_time" => (int)$user_transaction->time,
+//                        "transaction" => $user_transaction->transaction_id,
+//                        "state" => $user_transaction->state,
+//                        "receivers" => null
+//                    ]
                 ]);
             }
             $payInfo = new PaymeInfo();
@@ -326,6 +338,7 @@ class MainController extends Controller
                     "state" => 1,
                 ]
             ]);
+
         }
 
         if ($method == "PerformTransaction") {
@@ -364,7 +377,7 @@ class MainController extends Controller
             $user_transaction = DB::table("payme_infos")
                 ->where("transaction_id", $transaction_id)
                 ->first();
-            if ($user_transaction->state == -2) {
+            if ($user_transaction->state == -1) {
                 return response()->json([
                     "result" => [
                         "cancel_time" => (int)$user_transaction->cancel_time,
@@ -376,7 +389,7 @@ class MainController extends Controller
             $now = DateTime::createFromFormat('U.u', number_format(microtime(true), 6, '.', ''));
             $now_us = (int)$now->format('Uv');
             $status = DB::table("payme_infos")->where("transaction_id", $transaction_id)->update([
-                "state" => -2,
+                "state" => -1,
                 "cancel_time" => $now_us
             ]);
             $user_transaction = DB::table("payme_infos")
@@ -429,7 +442,7 @@ class MainController extends Controller
                     "cancel_time" => (int)$user_transaction->cancel_time,
                     "transaction" => $transaction_id,
                     "state" => $user_transaction->state,
-                    "reason" => 5
+                    "reason" => 3
                 ],
                 "error" => null
             ]);
