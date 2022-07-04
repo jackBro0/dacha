@@ -230,7 +230,7 @@ class MainController extends Controller
             ]);
         }
 
-        if ((!$user_get and $amount != 1000 and $method != "CheckTransaction" and $user_transaction == 0) or (!$user_get and $amount == 1000 and $method != "CheckTransaction" and $user_transaction == 0)) {
+        if ((!$user_get and $amount != 100000 and $method != "CheckTransaction" and $user_transaction == 0) or (!$user_get and $amount == 10000 and $method != "CheckTransaction" and $user_transaction == 0)) {
             return response()->json([
                 'error' => [
                     "code" => -31099,
@@ -246,14 +246,14 @@ class MainController extends Controller
             ]);
         }
 
-        if ($amount != 1000 and !$user_transaction) {
+        if ($amount != 100000 and !$user_transaction) {
             return response()->json([
                 'error' => [
                     "code" => -31001,
                     "message" => [
-                        "uz" => "To'lov summasi xato kirirtildi",
-                        "ru" => "To'lov summasi xato kirirtildi",
-                        "en" => "To'lov summasi xato kirirtildi",
+                        "uz" => "To'lov summasi xato kirirtildi!!!",
+                        "ru" => "To'lov summasi xato kirirtildi!!!",
+                        "en" => "To'lov summasi xato kirirtildi!!!",
                     ],
                     "data" => "amount"
                 ],
