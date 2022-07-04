@@ -196,41 +196,71 @@ class MainController extends Controller
 
     public function paymeAuth(Request $request)
     {
-//        $id = !empty($request->id) ? $request->id : null;
-//        $method = $request['method'];
-//        $transaction_id = !empty($request->params["id"]) ? $request->params["id"] : null;
-//        $time = !empty($request->params["time"]) ? $request->params["time"] : null;
-//        $reason = !empty($request->params["reason"]) ? $request->params["reason"] : null;
-//        $amount = !empty($request->params["amount"]) ? $request->params["amount"] : 0;
-//        $user = !empty($request->params["account"]) ? User::query()->where('id', $request->params["account"]["user_id"])->get()->pluck("id") : null;
-//        $user_get = !empty($request->params["account"]) ? User::query()->where('id', $request->params["account"]["user_id"])->first() : null;
-//        $account_phone = !empty($request->params["account"]) ? $request->params["account"] : null;
-//        $user_transaction = DB::table("payme_infos")
-//            ->where("transaction_id", $transaction_id)
-//            ->count();
-//        $rr = $request->headers;
-//        $test_key = '';
-//        foreach ($rr as $r){
-//            if ($r[0] == "eJ1N?5RepNeR?VqkmesACpfti%9FeHa3SA?A"){
-//                $test_key = "eJ1N?5RepNeR?VqkmesACpfti%9FeHa3SA?A";
-//            };
-//        }
-//        if (!$user_get and !$user_transaction and $test_key != "eJ1N?5RepNeR?VqkmesACpfti%9FeHa3SA?A") {
-//            return response()->json([
-//                'error' => [
-//                    "code" => -32504,
-//                    "message" => [
-//                        "uz" => "Ro'yxatdan o'ting",
-//                        "ru" => "Ro'yxatdan o'ting",
-//                        "en" => "Ro'yxatdan o'ting",
-//                    ],
-//                    "data" => "auth"
-//                ],
-//                "id" => $id
-//            ]);
-//        }
-//
-//        if ((!$user_get and $amount != 1000 and $method != "CheckTransaction" and $user_transaction == 0) or (!$user_get and $amount == 1000 and $method != "CheckTransaction" and $user_transaction == 0)) {
+        $id = !empty($request->id) ? $request->id : null;
+        $method = $request['method'];
+        $transaction_id = !empty($request->params["id"]) ? $request->params["id"] : null;
+        $time = !empty($request->params["time"]) ? $request->params["time"] : null;
+        $reason = !empty($request->params["reason"]) ? $request->params["reason"] : null;
+        $amount = !empty($request->params["amount"]) ? $request->params["amount"] : 0;
+        $user = !empty($request->params["account"]) ? User::query()->where('id', $request->params["account"]["user_id"])->get()->pluck("id") : null;
+        $user_get = !empty($request->params["account"]) ? User::query()->where('id', $request->params["account"]["user_id"])->first() : null;
+        $account_phone = !empty($request->params["account"]) ? $request->params["account"] : null;
+        $user_transaction = DB::table("payme_infos")
+            ->where("transaction_id", $transaction_id)
+            ->count();
+        $rr = $request->headers;
+        $test_key = '';
+        foreach ($rr as $r){
+            if ($r[0] == "eJ1N?5RepNeR?VqkmesACpfti%9FeHa3SA?A"){
+                $test_key = "eJ1N?5RepNeR?VqkmesACpfti%9FeHa3SA?A";
+            };
+        }
+        if (!$user_get and !$user_transaction and $test_key != "eJ1N?5RepNeR?VqkmesACpfti%9FeHa3SA?A") {
+            return response()->json([
+                'error' => [
+                    "code" => -32504,
+                    "message" => [
+                        "uz" => "Ro'yxatdan o'ting",
+                        "ru" => "Ro'yxatdan o'ting",
+                        "en" => "Ro'yxatdan o'ting",
+                    ],
+                    "data" => "auth"
+                ],
+                "id" => $id
+            ]);
+        }
+
+        if ((!$user_get and $amount != 1000 and $method != "CheckTransaction" and $user_transaction == 0) or (!$user_get and $amount == 1000 and $method != "CheckTransaction" and $user_transaction == 0)) {
+            return response()->json([
+                'error' => [
+                    "code" => -31099,
+                    "message" => [
+                        "ru" => "пользовател не найден",
+                        "uz" => "foydalanuvchi topilmadi",
+                        "en" => "user not found"
+                    ],
+                    "data" => "amount",
+                    "transaction_id" => (int)$transaction_id,
+                ],
+                "id" => $id
+            ]);
+        }
+
+        if ($amount != 1000 and !$user_transaction) {
+            return response()->json([
+                'error' => [
+                    "code" => -31001,
+                    "message" => [
+                        "uz" => "To'lov summasi xato kirirtildi",
+                        "ru" => "To'lov summasi xato kirirtildi",
+                        "en" => "To'lov summasi xato kirirtildi",
+                    ],
+                    "data" => "amount"
+                ],
+                "id" => $id
+            ]);
+        }
+//        if (!$user and $method == "CheckPerformTransaction") {
 //            return response()->json([
 //                'error' => [
 //                    "code" => -31099,
@@ -245,207 +275,177 @@ class MainController extends Controller
 //                "id" => $id
 //            ]);
 //        }
-//
-//        if ($amount != 1000 and !$user_transaction) {
-//            return response()->json([
-//                'error' => [
-//                    "code" => -31001,
-//                    "message" => [
-//                        "uz" => "To'lov summasi xato kirirtildi",
-//                        "ru" => "To'lov summasi xato kirirtildi",
-//                        "en" => "To'lov summasi xato kirirtildi",
-//                    ],
-//                    "data" => "amount"
-//                ],
-//                "id" => $id
-//            ]);
-//        }
-////        if (!$user and $method == "CheckPerformTransaction") {
-////            return response()->json([
-////                'error' => [
-////                    "code" => -31099,
-////                    "message" => [
-////                        "ru" => "пользовател не найден",
-////                        "uz" => "foydalanuvchi topilmadi",
-////                        "en" => "user not found"
-////                    ],
-////                    "data" => "amount",
-////                    "transaction_id" => (int)$transaction_id,
-////                ],
-////                "id" => $id
-////            ]);
-////        }
-//        if ($method == "CheckPerformTransaction" and $user) {
-//            return response()->json([
-//                "result" => [
-//                    "allow" => true
-//                ]
-//            ]);
-//        }
-//
-//
-//        if ($method == "CreateTransaction") {
-//            $ret = DB::table("payme_infos")
-//                ->where("user_id", $user[0])
-//                ->where("transaction_id", $transaction_id)
-//                ->count();
-//            $user_transaction = DB::table("payme_infos")
-//                ->where("user_id", $user[0])
-//                ->first();
-////            dd($ret);
-////            dd($transaction_id, $user_transaction->transaction_id, $ret_count);
-//
-//            if ($ret > 0) {
-//                return response()->json([
-//                    "result" => [
-//                        "create_time" => $time,
-//                        "transaction" => $transaction_id,
-//                        "state" => 1,
-//                    ]
-//                ]);
-//            }
-//            if (!empty($user_transaction->state) and !$ret and $user_transaction->state) {
-//                return response()->json([
-//                    'error' => [
-//                        "code" => -31050,
-//                        "message" => [
-//                            "uz" => "ID",
-//                            "ru" => "ID",
-//                            "en" => "ID",
-//                        ],
-//                        "current_id" => $transaction_id
-//                    ],
-//                    "saved_id" => $user_transaction->transaction_id
-////                    'result' => [
-////                        "create_time" => (int)$user_transaction->time,
-////                        "transaction" => $user_transaction->transaction_id,
-////                        "state" => $user_transaction->state,
-////                        "receivers" => null
-////                    ]
-//                ]);
-//            }
-//            $payInfo = new PaymeInfo();
-//            $payInfo->user_id = $user[0];
-//            $payInfo->amount = $amount;
-//            $payInfo->transaction_id = $transaction_id;
-//            $payInfo->time = $time;
-//            $payInfo->state = 1;
-//            $payInfo->save();
-//            return response()->json([
-//                "result" => [
-//                    "create_time" => $time,
-//                    "transaction" => $transaction_id,
-//                    "state" => 1,
-//                ]
-//            ]);
-//
-//        }
-//
-//        if ($method == "PerformTransaction") {
-//            $user_transaction = DB::table("payme_infos")
-//                ->where("transaction_id", $transaction_id)
-//                ->first();
-//            if ($user_transaction->state == 2) {
-//                return response()->json([
-//                    "result" => [
-//                        "perform_time" => (int)$user_transaction->perform_time,
-//                        "transaction" => $transaction_id,
-//                        "state" => $user_transaction->state
-//                    ]
-//                ]);
-//            }
-//            $now = DateTime::createFromFormat('U.u', number_format(microtime(true), 6, '.', ''));
-//            $now_us = (int)$now->format('Uv');
-//            $status = DB::table("payme_infos")->where("transaction_id", $transaction_id)->update([
-//                "state" => 2,
-//                "perform_time" => $now_us
-//            ]);
-//            $user_transaction = DB::table("payme_infos")
-//                ->where("transaction_id", $transaction_id)
-//                ->first();
-//
-//            return response()->json([
-//                "result" => [
-//                    "perform_time" => (int)$user_transaction->perform_time,
-//                    "transaction" => $transaction_id,
-//                    "state" => $user_transaction->state
-//                ]
-//            ]);
-//        }
-//
-//        if ($reason) {
-//            $user_transaction = DB::table("payme_infos")
-//                ->where("transaction_id", $transaction_id)
-//                ->first();
-//            if ($user_transaction->state == -1) {
-//                return response()->json([
-//                    "result" => [
-//                        "cancel_time" => (int)$user_transaction->cancel_time,
-//                        "transaction" => $transaction_id,
-//                        "state" => $user_transaction->state
-//                    ]
-//                ]);
-//            }
-//            $now = DateTime::createFromFormat('U.u', number_format(microtime(true), 6, '.', ''));
-//            $now_us = (int)$now->format('Uv');
-//            $status = DB::table("payme_infos")->where("transaction_id", $transaction_id)->update([
-//                "state" => -1,
-//                "cancel_time" => $now_us
-//            ]);
-//            $user_transaction = DB::table("payme_infos")
-//                ->where("transaction_id", $transaction_id)
-//                ->first();
-//            return response()->json([
-//                "result" => [
-//                    "cancel_time" => (int)$user_transaction->cancel_time,
-//                    "transaction" => $transaction_id,
-//                    "state" => $user_transaction->state
-//                ]
-//            ]);
-//        }
-//
-//        if ($method == "CheckTransaction") {
-//            $user_transaction = DB::table("payme_infos")
-//                ->where("transaction_id", $transaction_id)
-//                ->first();
-//
-//            if ($user_transaction->state == 1) {
-//                return response()->json([
-//                    "result" => [
+        if ($method == "CheckPerformTransaction" and $user) {
+            return response()->json([
+                "result" => [
+                    "allow" => true
+                ]
+            ]);
+        }
+
+
+        if ($method == "CreateTransaction") {
+            $ret = DB::table("payme_infos")
+                ->where("user_id", $user[0])
+                ->where("transaction_id", $transaction_id)
+                ->count();
+            $user_transaction = DB::table("payme_infos")
+                ->where("user_id", $user[0])
+                ->first();
+//            dd($ret);
+//            dd($transaction_id, $user_transaction->transaction_id, $ret_count);
+
+            if ($ret > 0) {
+                return response()->json([
+                    "result" => [
+                        "create_time" => $time,
+                        "transaction" => $transaction_id,
+                        "state" => 1,
+                    ]
+                ]);
+            }
+            if (!empty($user_transaction->state) and !$ret and $user_transaction->state) {
+                return response()->json([
+                    'error' => [
+                        "code" => -31050,
+                        "message" => [
+                            "uz" => "ID",
+                            "ru" => "ID",
+                            "en" => "ID",
+                        ],
+                        "current_id" => $transaction_id
+                    ],
+                    "saved_id" => $user_transaction->transaction_id
+//                    'result' => [
 //                        "create_time" => (int)$user_transaction->time,
-//                        "perform_time" => 0,
-//                        "cancel_time" => 0,
-//                        "transaction" => $transaction_id,
-//                        "state" => 1,
-//                        "reason" => null
-//                    ],
-//                    "error" => null
-//                ]);
-//            }
-//            if ($user_transaction->state == 2) {
-//                return response()->json([
-//                    "result" => [
-//                        "create_time" => (int)$user_transaction->time,
-//                        "perform_time" => (int)$user_transaction->perform_time,
-//                        "cancel_time" => 0,
-//                        "transaction" => $transaction_id,
+//                        "transaction" => $user_transaction->transaction_id,
 //                        "state" => $user_transaction->state,
-//                        "reason" => null
-//                    ],
-//                    "error" => null
-//                ]);
-//            }
-//            return response()->json([
-//                "result" => [
-//                    "create_time" => (int)$user_transaction->time,
-//                    "perform_time" => (int)$user_transaction->perform_time,
-//                    "cancel_time" => (int)$user_transaction->cancel_time,
-//                    "transaction" => $transaction_id,
-//                    "state" => $user_transaction->state,
-//                    "reason" => 3
-//                ],
-//                "error" => null
-//            ]);
-//        }
+//                        "receivers" => null
+//                    ]
+                ]);
+            }
+            $payInfo = new PaymeInfo();
+            $payInfo->user_id = $user[0];
+            $payInfo->amount = $amount;
+            $payInfo->transaction_id = $transaction_id;
+            $payInfo->time = $time;
+            $payInfo->state = 1;
+            $payInfo->save();
+            return response()->json([
+                "result" => [
+                    "create_time" => $time,
+                    "transaction" => $transaction_id,
+                    "state" => 1,
+                ]
+            ]);
+
+        }
+
+        if ($method == "PerformTransaction") {
+            $user_transaction = DB::table("payme_infos")
+                ->where("transaction_id", $transaction_id)
+                ->first();
+            if ($user_transaction->state == 2) {
+                return response()->json([
+                    "result" => [
+                        "perform_time" => (int)$user_transaction->perform_time,
+                        "transaction" => $transaction_id,
+                        "state" => $user_transaction->state
+                    ]
+                ]);
+            }
+            $now = DateTime::createFromFormat('U.u', number_format(microtime(true), 6, '.', ''));
+            $now_us = (int)$now->format('Uv');
+            $status = DB::table("payme_infos")->where("transaction_id", $transaction_id)->update([
+                "state" => 2,
+                "perform_time" => $now_us
+            ]);
+            $user_transaction = DB::table("payme_infos")
+                ->where("transaction_id", $transaction_id)
+                ->first();
+
+            return response()->json([
+                "result" => [
+                    "perform_time" => (int)$user_transaction->perform_time,
+                    "transaction" => $transaction_id,
+                    "state" => $user_transaction->state
+                ]
+            ]);
+        }
+
+        if ($reason) {
+            $user_transaction = DB::table("payme_infos")
+                ->where("transaction_id", $transaction_id)
+                ->first();
+            if ($user_transaction->state == -1) {
+                return response()->json([
+                    "result" => [
+                        "cancel_time" => (int)$user_transaction->cancel_time,
+                        "transaction" => $transaction_id,
+                        "state" => $user_transaction->state
+                    ]
+                ]);
+            }
+            $now = DateTime::createFromFormat('U.u', number_format(microtime(true), 6, '.', ''));
+            $now_us = (int)$now->format('Uv');
+            $status = DB::table("payme_infos")->where("transaction_id", $transaction_id)->update([
+                "state" => -1,
+                "cancel_time" => $now_us
+            ]);
+            $user_transaction = DB::table("payme_infos")
+                ->where("transaction_id", $transaction_id)
+                ->first();
+            return response()->json([
+                "result" => [
+                    "cancel_time" => (int)$user_transaction->cancel_time,
+                    "transaction" => $transaction_id,
+                    "state" => $user_transaction->state
+                ]
+            ]);
+        }
+
+        if ($method == "CheckTransaction") {
+            $user_transaction = DB::table("payme_infos")
+                ->where("transaction_id", $transaction_id)
+                ->first();
+
+            if ($user_transaction->state == 1) {
+                return response()->json([
+                    "result" => [
+                        "create_time" => (int)$user_transaction->time,
+                        "perform_time" => 0,
+                        "cancel_time" => 0,
+                        "transaction" => $transaction_id,
+                        "state" => 1,
+                        "reason" => null
+                    ],
+                    "error" => null
+                ]);
+            }
+            if ($user_transaction->state == 2) {
+                return response()->json([
+                    "result" => [
+                        "create_time" => (int)$user_transaction->time,
+                        "perform_time" => (int)$user_transaction->perform_time,
+                        "cancel_time" => 0,
+                        "transaction" => $transaction_id,
+                        "state" => $user_transaction->state,
+                        "reason" => null
+                    ],
+                    "error" => null
+                ]);
+            }
+            return response()->json([
+                "result" => [
+                    "create_time" => (int)$user_transaction->time,
+                    "perform_time" => (int)$user_transaction->perform_time,
+                    "cancel_time" => (int)$user_transaction->cancel_time,
+                    "transaction" => $transaction_id,
+                    "state" => $user_transaction->state,
+                    "reason" => 3
+                ],
+                "error" => null
+            ]);
+        }
     }
 }
