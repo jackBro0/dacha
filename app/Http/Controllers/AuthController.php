@@ -6,7 +6,9 @@ use App\Models\User;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use function Symfony\Component\VarDumper\Dumper\esc;
 
 class AuthController extends Controller
 {
@@ -86,14 +88,17 @@ class AuthController extends Controller
         if ($validator->fails()) {
             return response()->json($validator->messages(), 422);
         }
-//        $request->validate([
-//            'phone' => 'required|numeric|digits:12',
-//            'name' => 'required',
-//        ]);
 
         $user = Auth::user();
+        if(!empty($request->image_path)){
+            $file = $request->file('photo');
+            $file_path = "storage/" . Storage::disk('public')->put("users", $file);
+        } else {
+            $file_path = $user->photo;
+        }
         $user->phone = $request->phone;
         $user->name = $request->name;
+        $user->photo = $file_path;
         $user->update();
         return response()->json([
             'user' => Auth::user()
