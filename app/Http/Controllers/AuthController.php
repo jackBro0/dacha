@@ -81,6 +81,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'phone' => 'required|numeric|digits:12',
             'name' => 'required',
+            'photo' => 'mimes:jpeg,jpg,png,gif',
         ]);
         if ($validator->fails()) {
             return response()->json($validator->messages(), 422);
