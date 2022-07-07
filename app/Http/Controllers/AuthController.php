@@ -90,7 +90,7 @@ class AuthController extends Controller
         }
 
         $user = Auth::user();
-        if(!empty($request->image_path)){
+        if(!empty($request->photo)){
             $file = $request->file('photo');
             $file_path = "storage/" . Storage::disk('public')->put("users", $file);
         } else {
