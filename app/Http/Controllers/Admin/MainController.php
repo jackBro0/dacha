@@ -458,6 +458,12 @@ class MainController extends Controller
         $userid = $request->userid;
         $user = User::query()->find($userid);
 
+        if ($amount != 100000 or !$user) {
+            return response([
+                'status' => false
+            ]);
+        }
+
         PaymentUser::query()->create(
             [
                 'user_id' => $user->id,
@@ -466,11 +472,6 @@ class MainController extends Controller
                 'payment_type' => PaymentUser::APELSIN
             ]
         );
-        if ($amount != 100000 or !$user) {
-            return response([
-                'status' => false
-            ]);
-        }
 
         $user->payment_status = 1;
         $user->save();
