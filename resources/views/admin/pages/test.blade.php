@@ -50,6 +50,7 @@
 {{--                                                                // В JSON будут поля amount (сумма оплаты Пользователя) и transactionId (уникальный--}}
 {{--                                                                айди транзакции)--}}
                                             <input type="hidden" name="amount" value="100000"/>
+                                            <input type="hidden" name="userid" value="1"/>
 {{--                                                                    <input type="hidden" name="" value=""/>--}}
 {{--                                                                    <input type="hidden" name="" value=""/>--}}
 {{--                                                                    ...--}}
@@ -81,7 +82,7 @@
             </div>
         </div>
         <iframe
-            src="https://payment.apelsin.uz?cash=f81c68ccf43c462e8334d22b2cb04ce9&description=Пополнение%20баланса&amount=100000" style="width: 800px; height: 800px"></iframe>
+            src="https://payment.apelsin.uz?cash=f81c68ccf43c462e8334d22b2cb04ce9&description=Пополнение%20баланса&amount=100000&userid=1" style="width: 800px; height: 800px"></iframe>
     </div>
 
 @endsection
