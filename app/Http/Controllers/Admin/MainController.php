@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Dacha;
 use App\Models\PaymeInfo;
+use App\Models\PaymentUser;
 use App\Models\RentDacha;
 use App\Models\User;
 use App\Models\UserPaymentHistory;
@@ -67,7 +68,7 @@ class MainController extends Controller
 //        $response = curl_exec($c);
 //
 //        curl_close($c);
-        Storage::put('file.txt', 'Your name');
+//        Storage::put('file.txt', 'Your name');
         logger("Prepare: {$request}");
         $click_trans_id = $request->click_trans_id;
         $service_id = $request->service_id;
@@ -210,8 +211,8 @@ class MainController extends Controller
             ->count();
         $rr = $request->headers;
         $test_key = '';
-        foreach ($rr as $r){
-            if ($r[0] == "eJ1N?5RepNeR?VqkmesACpfti%9FeHa3SA?A"){
+        foreach ($rr as $r) {
+            if ($r[0] == "eJ1N?5RepNeR?VqkmesACpfti%9FeHa3SA?A") {
                 $test_key = "eJ1N?5RepNeR?VqkmesACpfti%9FeHa3SA?A";
             };
         }
@@ -447,5 +448,35 @@ class MainController extends Controller
                 "error" => null
             ]);
         }
+    }
+
+    public function apelsinEndpoint(Request $request)
+    {
+        logger("Prepare: {$request}");
+        $transactionId = $request->transactionId;
+        $amount = $request->amount;
+        $userid = $request->userid;
+        $user = User::query()->find($userid);
+
+        PaymentUser::query()->create(
+            [
+                'user_id' => $user->id,
+                'transaction_id' => $transactionId,
+                'amount' => $amount,
+                'payment_type' => PaymentUser::APELSIN
+            ]
+        );
+        if ($amount != 100000 or !$user) {
+            return response([
+                'status' => false
+            ]);
+        }
+
+        $user->payment_status = 1;
+        $user->save();
+        return response([
+            'status' => true
+        ]);
+
     }
 }

@@ -7,8 +7,8 @@
             <div class="toggle">
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
-        {{--        @include('admin.templates.topbar')--}}
-        <!--user image-->
+            {{--        @include('admin.templates.topbar')--}}
+            <!--user image-->
             <div class="user">
                 <img src="/assets/img/user.png" alt="">
             </div>
@@ -34,35 +34,36 @@
                     </form>
                 </div>
                 <div>
-                    <form method="GET" action="https://oplata.kapitalbank.uz">
-{{--                                            // Обязательные поля--}}
-                        <input type="hidden" name="cash" value="f81c68ccf43c462e8334d22b2cb04ce9"/>
-{{--                                            // уникальный Cash ID (выдается Апельсином)--}}
-                        <input type="hidden" name="redirectUrl" value="https://work.bingo99.uz/test"/>
-{{--                                            // URL для отправки на сайт после оплаты--}}
-                        <input type="hidden" name="description" value="TEST"/>
-{{--                                            // фраза, который выйдет на экране оплаты у Пользователя, например «Пополнение--}}
-{{--                                            платежа на www._______.uz»--}}
-{{--                                            // Предусматривается установка дополнительных полей для Клиента. После--}}
-{{--                                            проведения платежа, данные по полям будут отправляться на ваш биллинг URL в формате--}}
-{{--                                            JSON.--}}
-{{--                                            // В JSON не будет required/optional полей--}}
-{{--                                            // В JSON будут поля amount (сумма оплаты Пользователя) и transactionId (уникальный--}}
-{{--                                            айди транзакции)--}}
-                        <input type="hidden" name="amount" value="1000"/>
-                                                <input type="hidden" name="" value=""/>
-                                                <input type="hidden" name="" value=""/>
-{{--                                                ...--}}
-                        <button type="submit"
-                                style="cursor: pointer;
-border: 1px solid #ebebeb; border-radius: 6px;
-background: linear-gradient(to top, #f1f2f2, white);
-width: 100px; height: 54px; display: flex;
-align-items: center; justify-content: center;">
-                            <img style="width: 100px; height: 42px;" src="https://oplata.kapitalbank.uz/images/apelsin-v1.png">
-                        </button>
-                    </form>
+                                        <form method="GET" action="https://payment.apelsin.uz">
+{{--                                                                // Обязательные поля--}}
+                                            <input type="hidden" name="cash" value="f81c68ccf43c462e8334d22b2cb04ce9"/>
+{{--                                                                // уникальный Cash ID (выдается Апельсином)--}}
+                                            <input type="hidden" name="redirectUrl" value="https://work.bingo99.uz/test"/>
+{{--                                                                // URL для отправки на сайт после оплаты--}}
+                                            <input type="hidden" name="description" value="TEST"/>
+{{--                                                                // фраза, который выйдет на экране оплаты у Пользователя, например «Пополнение--}}
+{{--                                                                платежа на www._______.uz»--}}
+{{--                                                                // Предусматривается установка дополнительных полей для Клиента. После--}}
+{{--                                                                проведения платежа, данные по полям будут отправляться на ваш биллинг URL в формате--}}
+{{--                                                                JSON.--}}
+{{--                                                                // В JSON не будет required/optional полей--}}
+{{--                                                                // В JSON будут поля amount (сумма оплаты Пользователя) и transactionId (уникальный--}}
+{{--                                                                айди транзакции)--}}
+                                            <input type="hidden" name="amount" value="100000"/>
+{{--                                                                    <input type="hidden" name="" value=""/>--}}
+{{--                                                                    <input type="hidden" name="" value=""/>--}}
+{{--                                                                    ...--}}
+                                            <button type="submit"
+                                                    style="cursor: pointer;
+                    border: 1px solid #ebebeb; border-radius: 6px;
+                    background: linear-gradient(to top, #f1f2f2, white);
+                    width: 100px; height: 54px; display: flex;
+                    align-items: center; justify-content: center;">
+                                                <img style="width: 100px; height: 42px;" src="https://oplata.kapitalbank.uz/images/apelsin-v1.png">
+                                            </button>
+                                        </form>
                 </div>
+
                 <div>
                     <body onload="Paycom.Button('#form-payme', '#button-container')">
                     <form id="form-payme" method="POST" action="https://checkout.paycom.uz/">
@@ -79,7 +80,10 @@ align-items: center; justify-content: center;">
                 </div>
             </div>
         </div>
+        <iframe
+            src="https://payment.apelsin.uz?cash=f81c68ccf43c462e8334d22b2cb04ce9&description=Пополнение%20баланса&amount=100000" style="width: 800px; height: 800px"></iframe>
     </div>
+
 @endsection
 
 @section('css')

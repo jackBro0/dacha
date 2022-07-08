@@ -43,6 +43,7 @@ Route::get('top-rated', [DachaController::class, 'topRated']);
 Route::get('/favourites', [DachaController::class, 'dachaByArray']);
 Route::get('/comfort', [DachaController::class, 'comfortList']);
 
+Route::post('apelsin/endpoint', [\App\Http\Controllers\Admin\MainController::class, 'apelsinEndpoint']);
 Route::post('click/return', [\App\Http\Controllers\Admin\MainController::class, 'clickComplete']);
 Route::post('click/prepare', [\App\Http\Controllers\Admin\MainController::class, 'clickPrepare']);
 Route::post('payme/auth', [\App\Http\Controllers\Admin\MainController::class, 'paymeAuth']);
